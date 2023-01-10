@@ -20,7 +20,7 @@ public class TermsAndConditionsDTO {
 
     private UUID termsAndConditionsId;
 
-    private LocalDateTime acceptanceDate;
+    private String acceptanceDate;
 
     private String link;
 
