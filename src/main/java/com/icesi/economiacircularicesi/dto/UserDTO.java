@@ -41,10 +41,8 @@ public class UserDTO {
     @NotNull(message = "Registration date may not be null")
     private String registrationDate;
 
-    /*
     @NotNull(message = "Terms and conditions history may not be empty")
     @NotEmpty
     private List<TermsAndConditionsDTO> termsAndConditionsHistory;
-    */
 
 }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <!-- Refer to https://docs.liquibase.com/change-types/community/create-table.html -->
+
+    <changeSet id="51185cea-08a1-4b62-b2e8-3e7d70510f23" author="nicolas.penagos" failOnError="true">
+        <createTable tableName="terms_and_conditions">
+            <column name="terms_and_conditions_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+            <column name="link" type="varchar(255)" />
+            <column name="registration_date" type="date" />
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
+

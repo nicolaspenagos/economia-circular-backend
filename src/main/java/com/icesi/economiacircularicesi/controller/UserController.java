@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 
 @RestController
 @AllArgsConstructor
@@ -18,6 +19,14 @@ public class UserController implements UserAPI {
 
     @Override
     public UserDTO createUser(@Valid UserDTO userDTO) {
+
         return userMapper.fromUser(userService.createUser(userMapper.fromDTO(userDTO)));
+    }
+
+    public void validateTermsAndConditionsAcceptanceDate(String date){
+        LocalDateTime acceptanceDate = LocalDateTime.parse(date);
+        LocalDateTime now = LocalDateTime.now();
+
+
     }
 }

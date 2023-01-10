@@ -1,5 +1,6 @@
 package com.icesi.economiacircularicesi.controller;
 
+import com.icesi.economiacircularicesi.dto.TermsAndConditionsDTO;
 import com.icesi.economiacircularicesi.dto.UserDTO;
 import com.icesi.economiacircularicesi.mapper.UserMapper;
 import com.icesi.economiacircularicesi.mapper.UserMapperImpl;
@@ -7,6 +8,8 @@ import com.icesi.economiacircularicesi.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import static org.mockito.Mockito.*;
@@ -19,6 +22,9 @@ public class UserAPITest {
     private UserDTO dummyUserDTO;
 
     public void setupScenary(){
+        TermsAndConditionsDTO termsAndConditionsDTO = new TermsAndConditionsDTO(UUID.randomUUID(), null, "link");
+        List<TermsAndConditionsDTO> list = new ArrayList<>();
+        list.add(termsAndConditionsDTO);
         dummyUserDTO = new UserDTO(
                 UUID.randomUUID(),
                 "nicolas.penagosm98@gmail.com",
@@ -27,7 +33,9 @@ public class UserAPITest {
                 "Student",
                 "Education",
                 "Services",
-                "2020-08-05T05:00:00.000"
+                "2020-08-05T05:00:00.000",
+                list
+
         );
 
 

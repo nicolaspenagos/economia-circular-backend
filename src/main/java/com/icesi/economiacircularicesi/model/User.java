@@ -20,7 +20,6 @@ public class User {
 
     @Id
     private UUID userId;
-
     private String email;
     private String name;
     private String lastname;
@@ -29,15 +28,18 @@ public class User {
     private String macrosector;
     private LocalDateTime registrationDate;
 
-    /*
     @OneToMany(mappedBy = "user", targetEntity = TermsAndConditions.class)
     private List<TermsAndConditions> termsAndConditionsHistory;
-    */
-
 
     @PrePersist
-    public void generateId(){
+    public void generateIds() {
         this.userId = UUID.randomUUID();
+        generateTermsAndConditionsId(); //TODO Remove this method and find a way to make the @PrePersist annotation of the TermsAndConditions class works instead
     }
+
+    public void generateTermsAndConditionsId() {
+        this.termsAndConditionsHistory.get(0).setTermsAndConditionsId(UUID.randomUUID());
+    }
+
 }
 
