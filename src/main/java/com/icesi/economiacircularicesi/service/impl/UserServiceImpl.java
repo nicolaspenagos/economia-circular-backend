@@ -1,11 +1,14 @@
 package com.icesi.economiacircularicesi.service.impl;
 
+import com.icesi.economiacircularicesi.constant.UserErrorCode;
 import com.icesi.economiacircularicesi.model.TermsAndConditions;
 import com.icesi.economiacircularicesi.model.User;
 import com.icesi.economiacircularicesi.repository.TermsAndConditionsRepository;
 import com.icesi.economiacircularicesi.repository.UserRepository;
 import com.icesi.economiacircularicesi.service.UserService;
+import com.icesi.economiacircularicesi.utils.UserExceptionUtils;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +25,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(User user) {
+        validateUniqueEmail(user.getEmail());
         User savedUser = userRepository.save(user);
         saveTermsAndConditions(savedUser.getUserId(), user.getTermsAndConditionsHistory());
         return savedUser;
@@ -37,6 +41,13 @@ public class UserServiceImpl implements UserService {
             userRef.setUserId(userId);
             currentTC.setUser(userRef);
             termsAndConditionsRepository.save(currentTC);
+        }
+    }
+
+    private void validateUniqueEmail(String email){
+        for(User currentUser: getUsers()){
+            if(currentUser.getEmail().equals(email))
+                UserExceptionUtils.throwUserException(HttpStatus.BAD_REQUEST, UserErrorCode.CODE_04_DUPLICATED_EMAIL);
         }
     }
 

@@ -66,47 +66,47 @@ public class UserControllerTest {
     public void invalidEmailTestNoAt(){
         setupScenary();
         dummyUserDTO.setEmail("jhon.doeemail.com");
-        verifyUserExceptionThrown(UserErrorCode.CODE_03_INVALID_EMAIL, dummyUserDTO);
+        verifyCreateUserExceptionThrown(UserErrorCode.CODE_03_INVALID_EMAIL, dummyUserDTO);
     }
 
     @Test
     public void invalidEmailTestNoLocalPart(){
         setupScenary();
         dummyUserDTO.setEmail("@email.com");
-        verifyUserExceptionThrown(UserErrorCode.CODE_03_INVALID_EMAIL, dummyUserDTO);
+        verifyCreateUserExceptionThrown(UserErrorCode.CODE_03_INVALID_EMAIL, dummyUserDTO);
     }
     @Test
     public void invalidEmailTestNoDomain(){
         setupScenary();
         dummyUserDTO.setEmail("jhon.doe@");
-        verifyUserExceptionThrown(UserErrorCode.CODE_03_INVALID_EMAIL, dummyUserDTO);
+        verifyCreateUserExceptionThrown(UserErrorCode.CODE_03_INVALID_EMAIL, dummyUserDTO);
     }
 
     @Test
     public void impossibleRegistrationDateTest(){
         setupScenary();
         dummyUserDTO.setRegistrationDate(generateFutureDate().toString());
-        verifyUserExceptionThrown(UserErrorCode.CODE_01_IMPOSSIBLE_DATE, dummyUserDTO);
+        verifyCreateUserExceptionThrown(UserErrorCode.CODE_01_IMPOSSIBLE_DATE, dummyUserDTO);
     }
 
     @Test
     public void wrongRegistrationDateFormatTest(){
         setupScenary();
         dummyUserDTO.setRegistrationDate("Tuesday, January 10, 2023");
-        verifyUserExceptionThrown(UserErrorCode.CODE_02_WRONG_DATE_FORMAT, dummyUserDTO);
+        verifyCreateUserExceptionThrown(UserErrorCode.CODE_02_WRONG_DATE_FORMAT, dummyUserDTO);
     }
     @Test
     public void impossibleTAndCAcceptanceTest(){
         setupScenary();
         dummyUserDTO.getTermsAndConditionsHistory().get(0).setAcceptanceDate(generateFutureDate().toString());
-        verifyUserExceptionThrown(UserErrorCode.CODE_01_IMPOSSIBLE_DATE, dummyUserDTO);
+        verifyCreateUserExceptionThrown(UserErrorCode.CODE_01_IMPOSSIBLE_DATE, dummyUserDTO);
     }
 
     @Test
     public void wrongTAndCAcceptanceFormatTest(){
         setupScenary();
         dummyUserDTO.getTermsAndConditionsHistory().get(0).setAcceptanceDate("Tuesday, January 10, 2023");
-        verifyUserExceptionThrown(UserErrorCode.CODE_02_WRONG_DATE_FORMAT, dummyUserDTO);
+        verifyCreateUserExceptionThrown(UserErrorCode.CODE_02_WRONG_DATE_FORMAT, dummyUserDTO);
     }
 
     @Test
@@ -115,7 +115,7 @@ public class UserControllerTest {
         verify(userService, times(1)).getUsers();
     }
 
-    public void verifyUserExceptionThrown( UserErrorCode expectedCode, UserDTO userDTO) {
+    private void verifyCreateUserExceptionThrown(UserErrorCode expectedCode, UserDTO userDTO) {
 
         // Check if the corresponding exception is thrown when we are trying to
         // create a user containing an invalid attribute

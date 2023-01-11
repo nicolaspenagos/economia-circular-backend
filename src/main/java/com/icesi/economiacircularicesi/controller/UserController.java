@@ -41,7 +41,7 @@ public class UserController implements UserAPI {
     }
 
 
-    public void validateDate(String date){
+    private void validateDate(String date){
         try{
             LocalDateTime localDateTime = LocalDateTime.parse(date);
             if(localDateTime.isAfter(LocalDateTime.now())){
@@ -52,7 +52,7 @@ public class UserController implements UserAPI {
         }
     }
 
-    public void validateEmail(String email){
+    private void validateEmail(String email){
         if(!email.matches(Regex.REGEX_EMAIL_PATTERN))
             UserExceptionUtils.throwUserException(HttpStatus.BAD_REQUEST, UserErrorCode.CODE_03_INVALID_EMAIL);
     }
