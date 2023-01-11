@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @AllArgsConstructor
@@ -36,6 +38,13 @@ public class UserController implements UserAPI {
         return userMapper.fromUser(userService.createUser(userMapper.fromDTO(userDTO)));
 
     }
+
+    @Override
+    public List<UserDTO> getUsers() {
+
+        return userService.getUsers().stream().map(userMapper::fromUser).collect(Collectors.toList());
+    }
+
 
     public void validateDate(String date){
 

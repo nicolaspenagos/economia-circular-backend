@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -18,10 +19,13 @@ import java.util.UUID;
 public class TermsAndConditions {
 
     @Id
+    @Type(type = "org.hibernate.type.PostgresUUIDType")
     private UUID termsAndConditionsId;
 
+    @Column(name = "acceptance_date")
     private LocalDateTime acceptanceDate;
 
+    @Column(name = "link")
     private String link;
 
     @ManyToOne(targetEntity = User.class)

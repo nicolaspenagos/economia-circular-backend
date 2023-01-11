@@ -5,13 +5,13 @@
     <!-- Refer to https://docs.liquibase.com/change-types/community/create-table.html -->
 
     <changeSet id="33d4e9bc-7210-47c3-9617-c56ab7c0750p" author="nicolas.penagos" failOnError="true">
-        <createTable tableName="user">
+        <createTable tableName="users">
             <column name="user_id" type="UUID">
                 <constraints nullable="false" primaryKey="true" />
             </column>
             <column name="email" type="varchar(255)" />
             <column name="name" type="varchar(255)" />
-            <column name="last_name" type="varchar(255)" />
+            <column name="lastname" type="varchar(255)" />
             <column name="position" type="varchar(255)" />
             <column name="sector" type="varchar(255)" />
             <column name="macrosector" type="varchar(255)" />
