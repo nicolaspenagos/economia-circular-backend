@@ -29,9 +29,11 @@ public class UserControllerTest {
     private UserDTO dummyUserDTO;
 
     public void setupScenary(){
+
         TermsAndConditionsDTO termsAndConditionsDTO = new TermsAndConditionsDTO(UUID.randomUUID(), "2020-08-05T05:00:00.000", "www.link.com");
         List<TermsAndConditionsDTO> termsAndCondsList = new ArrayList<>();
         termsAndCondsList.add(termsAndConditionsDTO);
+
         dummyUserDTO = new UserDTO(
                 UUID.randomUUID(),
                 "jhon.doe@email.com",
@@ -82,37 +84,35 @@ public class UserControllerTest {
 
     @Test
     public void impossibleRegistrationDateTest(){
-
         setupScenary();
         dummyUserDTO.setRegistrationDate(generateFutureDate().toString());
         verifyUserExceptionThrown(UserErrorCode.CODE_01_IMPOSSIBLE_DATE, dummyUserDTO);
-
     }
 
     @Test
     public void wrongRegistrationDateFormatTest(){
-
         setupScenary();
         dummyUserDTO.setRegistrationDate("Tuesday, January 10, 2023");
         verifyUserExceptionThrown(UserErrorCode.CODE_02_WRONG_DATE_FORMAT, dummyUserDTO);
-
     }
     @Test
     public void impossibleTAndCAcceptanceTest(){
-
         setupScenary();
         dummyUserDTO.getTermsAndConditionsHistory().get(0).setAcceptanceDate(generateFutureDate().toString());
         verifyUserExceptionThrown(UserErrorCode.CODE_01_IMPOSSIBLE_DATE, dummyUserDTO);
-
     }
 
     @Test
     public void wrongTAndCAcceptanceFormatTest(){
-
         setupScenary();
         dummyUserDTO.getTermsAndConditionsHistory().get(0).setAcceptanceDate("Tuesday, January 10, 2023");
         verifyUserExceptionThrown(UserErrorCode.CODE_02_WRONG_DATE_FORMAT, dummyUserDTO);
+    }
 
+    @Test
+    public void getUsersTest(){
+        userController.getUsers();
+        verify(userService, times(1)).getUsers();
     }
 
     public void verifyUserExceptionThrown( UserErrorCode expectedCode, UserDTO userDTO) {
