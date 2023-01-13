@@ -39,7 +39,7 @@ public class User {
     @Column(name = "registration_date")
     private LocalDateTime registrationDate;
 
-
+    //TODO Add organization property
 
     @OneToMany(mappedBy = "user", targetEntity = TermsAndConditions.class)
     private List<TermsAndConditions> termsAndConditionsHistory;

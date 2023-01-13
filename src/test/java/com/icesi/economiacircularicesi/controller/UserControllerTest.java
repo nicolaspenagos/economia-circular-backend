@@ -7,6 +7,8 @@ import com.icesi.economiacircularicesi.error.exception.UserException;
 import com.icesi.economiacircularicesi.mapper.UserMapper;
 import com.icesi.economiacircularicesi.mapper.UserMapperImpl;
 import com.icesi.economiacircularicesi.service.UserService;
+import com.icesi.economiacircularicesi.testConstants.BaseTermsAndCondsAcceptance;
+import com.icesi.economiacircularicesi.testConstants.BaseUser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
@@ -30,19 +32,19 @@ public class UserControllerTest {
 
     public void setupScenary(){
 
-        TermsAndConditionsDTO termsAndConditionsDTO = new TermsAndConditionsDTO(UUID.randomUUID(), "2020-08-05T05:00:00.000", "www.link.com");
+        TermsAndConditionsDTO termsAndConditionsDTO = new TermsAndConditionsDTO(UUID.fromString(BaseTermsAndCondsAcceptance.UUID.value), BaseTermsAndCondsAcceptance.DATE.value, BaseTermsAndCondsAcceptance.LINK.value);
         List<TermsAndConditionsDTO> termsAndCondsList = new ArrayList<>();
         termsAndCondsList.add(termsAndConditionsDTO);
 
         dummyUserDTO = new UserDTO(
-                UUID.randomUUID(),
-                "jhon.doe@email.com",
-                "Jhon",
-                "Doe",
-                "Student",
-                "Education",
-                "Services",
-                "2020-08-05T05:00:00.000",
+                UUID.fromString(BaseUser.UUID.value),
+                BaseUser.EMAIL.value,
+                BaseUser.NAME.value,
+                BaseUser.LASTNAME.value,
+                BaseUser.POSITION.value,
+                BaseUser.SECTOR.value,
+                BaseUser.MACROSECTOR.value,
+                BaseUser.DATE.value,
                 termsAndCondsList
         );
 

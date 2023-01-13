@@ -1,0 +1,16 @@
+{
+  "email":"jhon.doe@email.com",
+  "name":"Jhon",
+  "lastname":"Doe",
+  "position":"Student",
+  "sector":"Education",
+  "macrosector":"Services",
+  "registrationDate":"2022-02-02T05:00:00",
+  "termsAndConditionsHistory": [
+    {
+      "termsAndConditionsId":"86ca9a2a-85e0-445d-8330-f8482ce014dc",
+      "acceptanceDate":"2022-02-02T05:00:00",
+      "link":"www.link.com"
+    }
+  ]
+}
