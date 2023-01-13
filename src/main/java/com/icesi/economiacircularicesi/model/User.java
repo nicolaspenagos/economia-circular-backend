@@ -46,14 +46,9 @@ public class User {
     private List<TermsAndConditions> termsAndConditionsHistory;
 
     @PrePersist
-    public void generateIds() {
-        this.userId = UUID.randomUUID();
-        generateTermsAndConditionsId(); //TODO Remove this method and find a way to make the @PrePersist annotation of the TermsAndConditions class works instead
-    }
+    public void generateId() {this.userId = UUID.randomUUID();}
 
-    public void generateTermsAndConditionsId() {
-        this.termsAndConditionsHistory.get(0).setTermsAndConditionsId(UUID.randomUUID());
-    }
+
 
 }
 
