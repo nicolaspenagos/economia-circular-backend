@@ -1,7 +1,6 @@
-package com.icesi.economiacircularicesi.testConstants;
+package com.icesi.economiacircularicesi.constants;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 
 @AllArgsConstructor
 public enum BaseTermsAndCondsAcceptance {

@@ -27,11 +27,11 @@ public class UserServiceTest {
     private UserRepository userRepository;
     private TermsAndConditionsRepository termsAndConditionsRepository;
     private UserServiceImpl userService;
-    private User dummyUser;
+    private User baseUser;
 
     public void setupScenary(){
 
-        dummyUser = new User(
+        baseUser = new User(
                 UUID.randomUUID(),
                 "jhon.doe@email.com",
                 "Jhon",
@@ -47,13 +47,13 @@ public class UserServiceTest {
                 UUID.randomUUID(),
                 LocalDateTime.parse("2020-08-05T05:00:00.000"),
                 "www.link.com",
-                dummyUser
+                baseUser
         );
 
         List<TermsAndConditions> termsAndCondsList = new ArrayList<>();
         termsAndCondsList.add(termsAndConditions);
 
-        dummyUser.setTermsAndConditionsHistory(termsAndCondsList);
+        baseUser.setTermsAndConditionsHistory(termsAndCondsList);
 
     }
 
@@ -67,10 +67,10 @@ public class UserServiceTest {
     @Test
     public void createUserTest(){
         setupScenary();
-        when(userRepository.save(dummyUser)).thenReturn(dummyUser);
-        userService.createUser(dummyUser);
-        verify(userRepository, times(1)).save(dummyUser);
-        verify(termsAndConditionsRepository, times(1)).save(dummyUser.getTermsAndConditionsHistory().get(0));
+        when(userRepository.save(baseUser)).thenReturn(baseUser);
+        userService.createUser(baseUser);
+        verify(userRepository, times(1)).save(baseUser);
+        verify(termsAndConditionsRepository, times(1)).save(baseUser.getTermsAndConditionsHistory().get(0));
     }
 
     @Test
@@ -83,10 +83,10 @@ public class UserServiceTest {
     public void duplicatedEmailTest(){
         setupScenary();
 
-        List<User> dummyUsers = new ArrayList<>();
-        dummyUsers.add(dummyUser);
-        when(userService.getUsers()).thenReturn(dummyUsers);
-        verifyCreateUserExceptionThrown(UserErrorCode.CODE_04_DUPLICATED_EMAIL ,dummyUser);
+        List<User> baseUsers = new ArrayList<>();
+        baseUsers.add(baseUser);
+        when(userService.getUsers()).thenReturn(baseUsers);
+        verifyCreateUserExceptionThrown(UserErrorCode.CODE_04_DUPLICATED_EMAIL ,baseUser);
 
     }
 

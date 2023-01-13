@@ -9,7 +9,8 @@
             <column name="user_id" type="UUID">
                 <constraints nullable="false" primaryKey="true" />
             </column>
-            <column name="email" type="varchar(255)" />
+            <column name="email" type="varchar(255)" >
+             </column>
             <column name="name" type="varchar(255)" />
             <column name="lastname" type="varchar(255)" />
             <column name="position" type="varchar(255)" />
