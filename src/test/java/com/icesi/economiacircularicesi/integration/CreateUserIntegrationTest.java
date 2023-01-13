@@ -8,7 +8,9 @@ import com.icesi.economiacircularicesi.mapper.UserMapper;
 import com.icesi.economiacircularicesi.mapper.UserMapperImpl;
 import com.icesi.economiacircularicesi.model.User;
 import lombok.SneakyThrows;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +29,6 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.List;
-
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.icesi.economiacircularicesi.dto.UserDTO;
@@ -41,7 +40,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
@@ -87,6 +85,7 @@ public class CreateUserIntegrationTest {
     }
 
     @SneakyThrows
+    @Order(2)
     @Test
     public void CreateValidUserIntegrationTest() {
 
@@ -106,6 +105,7 @@ public class CreateUserIntegrationTest {
         assertThat(userDTO, hasProperty("position", is(BaseUser.POSITION.value)));
         assertThat(userDTO, hasProperty("sector", is(BaseUser.SECTOR.value)));
         assertThat(userDTO, hasProperty("macrosector", is(BaseUser.MACROSECTOR.value)));
+        assertThat(userDTO, Matchers.hasProperty("organization", is(BaseUser.ORGANIZATION.value)));
         assertThat(userDTO, hasProperty("registrationDate", is(BaseUser.DATE.value)));
 
         assertThat(termsAndConditionsDTO, hasProperty("acceptanceDate", is(BaseTermsAndCondsAcceptance.DATE.value)));
