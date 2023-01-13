@@ -13,6 +13,7 @@ public enum BaseUser {
     POSITION("Student"),
     SECTOR("Education"),
     MACROSECTOR("Services"),
+    ORGANIZATION("Icesi"),
     DATE("2022-02-02T05:00:00");
 
     public final String value;

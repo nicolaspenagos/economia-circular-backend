@@ -45,6 +45,7 @@ public class UserControllerTest {
                 BaseUser.POSITION.value,
                 BaseUser.SECTOR.value,
                 BaseUser.MACROSECTOR.value,
+                BaseUser.ORGANIZATION.value,
                 BaseUser.DATE.value,
                 termsAndCondsList
         );

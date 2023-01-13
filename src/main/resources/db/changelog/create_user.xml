@@ -16,6 +16,7 @@
             <column name="position" type="varchar(255)" />
             <column name="sector" type="varchar(255)" />
             <column name="macrosector" type="varchar(255)" />
+            <column name="organization" type="varchar(255)" />
             <column name="registration_date" type="date" />
         </createTable>
     </changeSet>

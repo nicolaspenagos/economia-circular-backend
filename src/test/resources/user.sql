@@ -1,1 +1,1 @@
-INSERT INTO "USERS" (user_id, email, name, lastname, position, sector, macrosector, registration_date) VALUES ('4f4c1918-64d9-4913-a703-69de09073ba3','jhon.doe1@email.com', 'Jhon', 'Doe', 'Student', 'Education', 'Services', '2004-12-31')
+INSERT INTO "USERS" (user_id, email, name, lastname, position, sector, macrosector, organization, registration_date) VALUES ('4f4c1918-64d9-4913-a703-69de09073ba3','jhon.doe1@email.com', 'Jhon', 'Doe', 'Student', 'Education', 'Services', 'Icesi','2004-12-31')

@@ -1,6 +1,7 @@
 package com.icesi.economiacircularicesi.service;
 
 import com.icesi.economiacircularicesi.constant.UserErrorCode;
+import com.icesi.economiacircularicesi.constants.BaseUser;
 import com.icesi.economiacircularicesi.dto.UserDTO;
 import com.icesi.economiacircularicesi.error.exception.UserException;
 import com.icesi.economiacircularicesi.model.TermsAndConditions;
@@ -32,14 +33,15 @@ public class UserServiceTest {
     public void setupScenary(){
 
         baseUser = new User(
-                UUID.randomUUID(),
-                "jhon.doe@email.com",
-                "Jhon",
-                "Doe",
-                "Student",
-                "Education",
-                "Services",
-                LocalDateTime.parse("2020-08-05T05:00:00.000"),
+                UUID.fromString(BaseUser.UUID.value),
+                BaseUser.EMAIL.value,
+                BaseUser.NAME.value,
+                BaseUser.LASTNAME.value,
+                BaseUser.POSITION.value,
+                BaseUser.SECTOR.value,
+                BaseUser.MACROSECTOR.value,
+                BaseUser.ORGANIZATION.value,
+                LocalDateTime.parse(BaseUser.DATE.value),
                 null
         );
 

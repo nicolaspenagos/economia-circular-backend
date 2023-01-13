@@ -36,10 +36,11 @@ public class User {
     @Column(name = "macrosector")
     private String macrosector;
 
+    @Column(name = "organization")
+    private String organization;
+
     @Column(name = "registration_date")
     private LocalDateTime registrationDate;
-
-    //TODO Add organization property
 
     @OneToMany(mappedBy = "user", targetEntity = TermsAndConditions.class)
     private List<TermsAndConditions> termsAndConditionsHistory;

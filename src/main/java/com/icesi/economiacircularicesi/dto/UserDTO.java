@@ -38,6 +38,9 @@ public class UserDTO {
     @NotBlank(message = "Macrosector may not be blank")
     private String macrosector;
 
+    @NotBlank(message = "Macrosector may not be blank")
+    private String organization;
+
     @NotNull(message = "Registration date may not be null")
     private String registrationDate;
 
