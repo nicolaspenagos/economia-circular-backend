@@ -23,7 +23,7 @@ public class UserSecurityConfig  extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    //TODO understand the below code, I just add it to test the passwordEncoder avoiding 401 Unauthorised
+    //TODO understand the code below, I just add it to test the passwordEncoder avoiding 401 Unauthorised
     @Autowired
     DataSource dataSource;
 

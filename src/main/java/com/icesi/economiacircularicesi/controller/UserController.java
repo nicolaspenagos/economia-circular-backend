@@ -4,6 +4,7 @@ import com.icesi.economiacircularicesi.api.UserAPI;
 import com.icesi.economiacircularicesi.constant.Regex;
 import com.icesi.economiacircularicesi.constant.UserErrorCode;
 import com.icesi.economiacircularicesi.dto.UserDTO;
+import com.icesi.economiacircularicesi.dto.UserNoPassDTO;
 import com.icesi.economiacircularicesi.mapper.UserMapper;
 import com.icesi.economiacircularicesi.service.UserService;
 import com.icesi.economiacircularicesi.utils.UserExceptionUtils;
@@ -36,8 +37,8 @@ public class UserController implements UserAPI {
     }
 
     @Override
-    public List<UserDTO> getUsers() {
-        return userService.getUsers().stream().map(userMapper::fromUser).collect(Collectors.toList());
+    public List<UserNoPassDTO> getUsers() {
+        return userService.getUsers().stream().map(userMapper::fromUserToNoPass).collect(Collectors.toList());
     }
 
 
