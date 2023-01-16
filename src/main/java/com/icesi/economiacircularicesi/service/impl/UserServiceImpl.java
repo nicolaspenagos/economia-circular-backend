@@ -8,7 +8,10 @@ import com.icesi.economiacircularicesi.repository.UserRepository;
 import com.icesi.economiacircularicesi.service.UserService;
 import com.icesi.economiacircularicesi.utils.UserExceptionUtils;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,12 +25,16 @@ public class UserServiceImpl implements UserService {
 
     public final UserRepository userRepository;
     public final TermsAndConditionsRepository termsAndConditionsRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public User createUser(User user) {
         validateUniqueEmail(user.getEmail());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         User savedUser = userRepository.save(user);
         saveTermsAndConditions(savedUser.getUserId(), user.getTermsAndConditionsHistory());
+
         return savedUser;
     }
     @Override
