@@ -40,6 +40,7 @@ public class UserControllerTest {
         baseUserDTO = new UserDTO(
                 UUID.fromString(BaseUser.UUID.value),
                 BaseUser.EMAIL.value,
+                BaseUser.PASSWORD.value,
                 BaseUser.NAME.value,
                 BaseUser.LASTNAME.value,
                 BaseUser.POSITION.value,

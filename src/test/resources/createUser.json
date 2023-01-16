@@ -1,5 +1,6 @@
 {
   "email":"jhon.doe@email.com",
+  "password": "Password123",
   "name":"Jhon",
   "lastname":"Doe",
   "position":"Student",

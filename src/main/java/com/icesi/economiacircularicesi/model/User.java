@@ -23,16 +23,25 @@ public class User {
     @Type(type = "org.hibernate.type.PostgresUUIDType")
     @Column(name = "user_id")
     private UUID userId;
+
     @Column(name = "email")
     private String email;
+
+    @Column(name = "password")
+    private String password;
+
     @Column(name = "name")
     private String name;
+
     @Column(name = "lastname")
     private String lastname;
+
     @Column(name = "position")
     private String position;
+
     @Column(name = "sector")
     private String sector;
+
     @Column(name = "macrosector")
     private String macrosector;
 

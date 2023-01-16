@@ -10,6 +10,7 @@ public enum BaseUser {
     NAME("Jhon"),
     LASTNAME("Doe"),
     EMAIL("jhon.doe@email.com"),
+    PASSWORD("Password123"),
     POSITION("Student"),
     SECTOR("Education"),
     MACROSECTOR("Services"),
