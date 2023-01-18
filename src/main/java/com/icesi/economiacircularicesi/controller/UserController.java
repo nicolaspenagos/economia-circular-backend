@@ -10,6 +10,7 @@ import com.icesi.economiacircularicesi.service.UserService;
 import com.icesi.economiacircularicesi.utils.UserExceptionUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -45,6 +46,11 @@ public class UserController implements UserAPI {
     @Override
     public UserNoPassDTO getUser(UUID userId) {
         return userMapper.fromUserToNoPass(userService.getUser(userId));
+    }
+
+    @Override
+    public ResponseEntity<UUID> deleteUser(UUID userId) {
+        return userService.deleteUser(userId);
     }
 
     private void validateDate(String date){
