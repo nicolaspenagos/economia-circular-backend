@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.icesi.economiacircularicesi.constants.BaseTermsAndCondsAcceptance;
 import com.icesi.economiacircularicesi.constants.BaseUser;
 import com.icesi.economiacircularicesi.dto.TermsAndConditionsDTO;
+import com.icesi.economiacircularicesi.dto.UserNoPassDTO;
 import lombok.SneakyThrows;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -54,7 +55,6 @@ public class GetUsersIntegrationTest {
     }
 
     @SneakyThrows
-    @Order(1)
     @Test
     public void getUsersIntegrationTest(){
 
@@ -63,16 +63,16 @@ public class GetUsersIntegrationTest {
                         .content("")).andExpect(status().isOk())
                 .andReturn();
 
-        UserDTO[] userDTOs = objectMapper.readValue(result.getResponse().getContentAsString(), UserDTO[].class);
+        UserNoPassDTO[] userDTOs = objectMapper.readValue(result.getResponse().getContentAsString(), UserNoPassDTO[].class);
 
-        UserDTO jhon = userDTOs[0];
-        UserDTO nicolas = userDTOs[1];
+        UserNoPassDTO jhon = userDTOs[0];
+        UserNoPassDTO nicolas = userDTOs[1];
 
         TermsAndConditionsDTO jhonTC = jhon.getTermsAndConditionsHistory().get(0);
         assertEquals(1, jhon.getTermsAndConditionsHistory().size());
 
         assertNotNull(jhon);
-        assertTrue(jhon instanceof UserDTO);
+        assertTrue(jhon instanceof UserNoPassDTO);
         assertThat(jhon, Matchers.hasProperty("email", is("jhon.doe1@email.com")));
         assertThat(jhon, Matchers.hasProperty("name", is(BaseUser.NAME.value)));
         assertThat(jhon, Matchers.hasProperty("lastname", is(BaseUser.LASTNAME.value)));
@@ -89,7 +89,7 @@ public class GetUsersIntegrationTest {
         assertEquals(1, nicolas.getTermsAndConditionsHistory().size());
 
         assertNotNull(nicolas);
-        assertTrue(nicolas instanceof UserDTO);
+        assertTrue(nicolas instanceof UserNoPassDTO);
         assertThat(nicolas, Matchers.hasProperty("email", is("nicolas@email.com")));
         assertThat(nicolas, Matchers.hasProperty("name", is("Nicolas")));
         assertThat(nicolas, Matchers.hasProperty("lastname", is("Penagos")));

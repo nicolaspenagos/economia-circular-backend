@@ -30,8 +30,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(User user) {
+
         validateUniqueEmail(user.getEmail());
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword())); //Encrypt the password using Bcrypt encrypted hash
         User savedUser = userRepository.save(user);
         saveTermsAndConditions(savedUser.getUserId(), user.getTermsAndConditionsHistory());
 
@@ -39,23 +40,34 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public List<User> getUsers() {
+
         return StreamSupport.stream(userRepository.findAll().spliterator(), false).collect(Collectors.toList());
+
+    }
+
+    @Override
+    public User getUser(UUID userId) {
+        return userRepository.findById(userId).orElse(null);
     }
 
     private void saveTermsAndConditions(UUID userId, List<TermsAndConditions> termsAndConditionsList){
+
         for(TermsAndConditions currentTC:termsAndConditionsList){
             User userRef = new User();
             userRef.setUserId(userId);
             currentTC.setUser(userRef);
             termsAndConditionsRepository.save(currentTC);
         }
+
     }
 
     private void validateUniqueEmail(String email){
+
         for(User currentUser: getUsers()){
             if(currentUser.getEmail().equals(email))
                 UserExceptionUtils.throwUserException(HttpStatus.BAD_REQUEST, UserErrorCode.CODE_04_DUPLICATED_EMAIL);
         }
+
     }
 
 }

@@ -8,6 +8,7 @@ import com.icesi.economiacircularicesi.mapper.UserMapper;
 import com.icesi.economiacircularicesi.mapper.UserMapperImpl;
 import com.icesi.economiacircularicesi.model.User;
 import lombok.SneakyThrows;
+import lombok.val;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
@@ -18,6 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -50,6 +52,10 @@ public class CreateUserIntegrationTest {
     private MockMvc mockMvc;
     @Autowired
     private WebApplicationContext webApplicationContext;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     private ObjectMapper objectMapper;
     private UserMapper userMapper;
 
@@ -100,6 +106,7 @@ public class CreateUserIntegrationTest {
         assertNotNull(userDTO);
         assertTrue(userDTO instanceof UserDTO);
         assertThat(userDTO, hasProperty("email", is(BaseUser.EMAIL.value)));
+        assertTrue(passwordEncoder.matches(BaseUser.PASSWORD.value, userDTO.getPassword()));
         assertThat(userDTO, hasProperty("name", is(BaseUser.NAME.value)));
         assertThat(userDTO, hasProperty("lastname", is(BaseUser.LASTNAME.value)));
         assertThat(userDTO, hasProperty("position", is(BaseUser.POSITION.value)));
@@ -238,8 +245,5 @@ public class CreateUserIntegrationTest {
         verifyUserError(UserErrorCode.CODE_04_DUPLICATED_EMAIL, userError);
 
     }
-
-
-
 
 }

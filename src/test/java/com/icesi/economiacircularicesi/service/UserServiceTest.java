@@ -11,7 +11,9 @@ import com.icesi.economiacircularicesi.repository.UserRepository;
 import com.icesi.economiacircularicesi.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -29,6 +31,8 @@ public class UserServiceTest {
     private TermsAndConditionsRepository termsAndConditionsRepository;
     private UserServiceImpl userService;
     private User baseUser;
+
+    private PasswordEncoder passwordEncoder;
 
     public void setupScenary(){
 
@@ -62,18 +66,24 @@ public class UserServiceTest {
 
     @BeforeEach
     private void init(){
+
         userRepository = mock(UserRepository.class);
         termsAndConditionsRepository = mock(TermsAndConditionsRepository.class);
-        userService = new UserServiceImpl(userRepository, termsAndConditionsRepository);
+        passwordEncoder = mock(PasswordEncoder.class);
+        userService = new UserServiceImpl(userRepository, termsAndConditionsRepository, passwordEncoder);
+
     }
 
     @Test
     public void createUserTest(){
+
         setupScenary();
         when(userRepository.save(baseUser)).thenReturn(baseUser);
         userService.createUser(baseUser);
         verify(userRepository, times(1)).save(baseUser);
         verify(termsAndConditionsRepository, times(1)).save(baseUser.getTermsAndConditionsHistory().get(0));
+        verify(passwordEncoder, times(1)).encode(BaseUser.PASSWORD.value);
+
     }
 
     @Test
@@ -83,7 +93,14 @@ public class UserServiceTest {
     }
 
     @Test
+    public void getUserTest(){
+        userService.getUser(UUID.fromString(BaseUser.UUID.value));
+        verify(userRepository, times(1)).findById(UUID.fromString(BaseUser.UUID.value));
+    }
+
+    @Test
     public void duplicatedEmailTest(){
+
         setupScenary();
 
         List<User> baseUsers = new ArrayList<>();

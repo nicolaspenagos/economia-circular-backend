@@ -16,6 +16,7 @@ import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
@@ -41,6 +42,10 @@ public class UserController implements UserAPI {
         return userService.getUsers().stream().map(userMapper::fromUserToNoPass).collect(Collectors.toList());
     }
 
+    @Override
+    public UserNoPassDTO getUser(UUID userId) {
+        return userMapper.fromUserToNoPass(userService.getUser(userId));
+    }
 
     private void validateDate(String date){
         try{
