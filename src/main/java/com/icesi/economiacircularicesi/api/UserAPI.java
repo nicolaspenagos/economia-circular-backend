@@ -20,4 +20,8 @@ public interface UserAPI {
     @DeleteMapping("/{userId}") //TODO What should deleteUser return? is this ok?
     public ResponseEntity<UUID> deleteUser(@PathVariable UUID userId);
 
+    //TODO PATCH update users terms and conds
+
+
+
 }

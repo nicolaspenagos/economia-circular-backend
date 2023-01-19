@@ -6,10 +6,8 @@ import com.icesi.economiacircularicesi.constants.BaseUser;
 import com.icesi.economiacircularicesi.dto.TermsAndConditionsDTO;
 import com.icesi.economiacircularicesi.dto.UserNoPassDTO;
 import lombok.SneakyThrows;
-import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,16 +20,10 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-import com.icesi.economiacircularicesi.dto.UserDTO;
 
-import java.time.LocalDateTime;
-import java.util.Arrays;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.data.repository.util.ClassUtils.hasProperty;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 

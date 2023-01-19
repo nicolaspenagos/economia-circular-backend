@@ -126,6 +126,12 @@ public class UserControllerTest {
         verify(userService, times(1)).getUser(UUID.fromString(BaseUser.UUID.value));
     }
 
+    @Test
+    public void deleteUserTest(){
+        userController.deleteUser(UUID.fromString(BaseUser.UUID.value));
+        verify(userService, times(1)).deleteUser(UUID.fromString(BaseUser.UUID.value));
+    }
+
     private void verifyCreateUserExceptionThrown(UserErrorCode expectedCode, UserDTO userDTO) {
 
         // Check if the corresponding exception is thrown when we are trying to

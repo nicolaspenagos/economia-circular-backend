@@ -6,9 +6,7 @@ import com.icesi.economiacircularicesi.error.exception.UserError;
 import com.icesi.economiacircularicesi.constants.BaseTermsAndCondsAcceptance;
 import com.icesi.economiacircularicesi.mapper.UserMapper;
 import com.icesi.economiacircularicesi.mapper.UserMapperImpl;
-import com.icesi.economiacircularicesi.model.User;
 import lombok.SneakyThrows;
-import lombok.val;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
@@ -37,6 +35,7 @@ import com.icesi.economiacircularicesi.dto.UserDTO;
 import com.icesi.economiacircularicesi.constants.BaseUser;
 
 import static com.icesi.economiacircularicesi.utils.TestUtils.generateFutureDate;
+import static com.icesi.economiacircularicesi.utils.TestUtils.verifyUserError;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasProperty;
@@ -81,17 +80,9 @@ public class CreateUserIntegrationTest {
         }
     }
 
-    public void verifyUserError(UserErrorCode correctCode, UserError userError) {
 
-        assertNotNull(userError);
-        assertEquals(correctCode.getMessage(), userError.getMessage());
-        assertEquals(correctCode, userError.getCode());
-        System.out.println(correctCode.getMessage()+"\n" + userError.getMessage());
-
-    }
 
     @SneakyThrows
-    @Order(2)
     @Test
     public void CreateValidUserIntegrationTest() {
 
@@ -123,7 +114,6 @@ public class CreateUserIntegrationTest {
     /*
      * CONTROLLER VALIDATIONS
      */
-
     @SneakyThrows
     @Test
     public void invalidEmailNoAtIntegrationTest() {

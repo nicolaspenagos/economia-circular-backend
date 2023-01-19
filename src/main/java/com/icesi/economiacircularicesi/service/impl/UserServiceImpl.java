@@ -11,7 +11,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -40,11 +39,10 @@ public class UserServiceImpl implements UserService {
 
         return savedUser;
     }
+
     @Override
     public List<User> getUsers() {
-
         return StreamSupport.stream(userRepository.findAll().spliterator(), false).collect(Collectors.toList());
-
     }
 
     @Override
@@ -58,26 +56,27 @@ public class UserServiceImpl implements UserService {
 
         Optional.ofNullable(getUser(userId))
                 .ifPresentOrElse(
-                        (user)->deleteUserAndRelations(user),
-                        ()->{
+                        (user) -> deleteUserAndRelations(user),
+                        () -> {
                             UserExceptionUtils.throwUserException(HttpStatus.BAD_REQUEST, UserErrorCode.CODE_05_USER_NOT_FOUND);
                         }
-        );
+                );
 
         return new ResponseEntity<>(userId, HttpStatus.OK);
     }
 
-    private void deleteUserAndRelations(User user){
-        for(TermsAndConditions currentTC:user.getTermsAndConditionsHistory()){
+    private void deleteUserAndRelations(User user) {
+
+        for (TermsAndConditions currentTC : user.getTermsAndConditionsHistory()) {
             termsAndConditionsRepository.delete(currentTC);
         }
         userRepository.delete(user);
     }
 
 
-    private void saveTermsAndConditions(UUID userId, List<TermsAndConditions> termsAndConditionsList){
+    private void saveTermsAndConditions(UUID userId, List<TermsAndConditions> termsAndConditionsList) {
 
-        for(TermsAndConditions currentTC:termsAndConditionsList){
+        for (TermsAndConditions currentTC : termsAndConditionsList) {
             User userRef = new User();
             userRef.setUserId(userId);
             currentTC.setUser(userRef);
@@ -86,10 +85,10 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    private void validateUniqueEmail(String email){
+    private void validateUniqueEmail(String email) {
 
-        for(User currentUser: getUsers()){
-            if(currentUser.getEmail().equals(email))
+        for (User currentUser : getUsers()) {
+            if (currentUser.getEmail().equals(email))
                 UserExceptionUtils.throwUserException(HttpStatus.BAD_REQUEST, UserErrorCode.CODE_04_DUPLICATED_EMAIL);
         }
 

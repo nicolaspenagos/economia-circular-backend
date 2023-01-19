@@ -18,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -96,6 +97,41 @@ public class UserServiceTest {
     public void getUserTest(){
         userService.getUser(UUID.fromString(BaseUser.UUID.value));
         verify(userRepository, times(1)).findById(UUID.fromString(BaseUser.UUID.value));
+    }
+
+    @Test
+    public void deleteUserTest(){
+
+        setupScenary();
+        when(userRepository.findById(baseUser.getUserId())).thenReturn(Optional.of(baseUser));
+
+        userService.deleteUser(baseUser.getUserId());
+
+        verify(termsAndConditionsRepository, times(1)).delete(baseUser.getTermsAndConditionsHistory().get(0));
+        verify(userRepository, times(baseUser.getTermsAndConditionsHistory().size())).delete(baseUser);
+
+    }
+
+    @Test
+    public void userNotFoundDeleteTest(){
+
+        setupScenary();
+        when(userRepository.findById(baseUser.getUserId())).thenReturn(Optional.ofNullable(null));
+
+        try{
+
+            userService.deleteUser(baseUser.getUserId());
+            fail();
+
+        }catch (UserException exception){
+
+            assertEquals(HttpStatus.BAD_REQUEST, exception.getHttpStatus());
+            assertNotNull(exception.getError());
+            assertEquals(UserErrorCode.CODE_05_USER_NOT_FOUND.getMessage(), exception.getError().getMessage());
+            assertEquals(UserErrorCode.CODE_05_USER_NOT_FOUND, exception.getError().getCode());
+
+        }
+
     }
 
     @Test
