@@ -29,12 +29,12 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.icesi.economiacircularicesi.dto.UserDTO;
 import com.icesi.economiacircularicesi.constants.BaseUser;
 
-import static com.icesi.economiacircularicesi.utils.TestUtils.generateFutureDate;
 import static com.icesi.economiacircularicesi.utils.TestUtils.verifyUserError;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -165,7 +165,7 @@ public class CreateUserIntegrationTest {
     public void impossibleRegistrationDateTest(){
 
         UserDTO baseUserDTO = baseUser();
-        baseUserDTO.setRegistrationDate(generateFutureDate().toString());
+        baseUserDTO.setRegistrationDate(LocalDateTime.now().plusDays(1).toString());
         String body = objectMapper.writeValueAsString(baseUserDTO);
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isBadRequest()).andReturn();
@@ -195,7 +195,7 @@ public class CreateUserIntegrationTest {
     public void impossibleTAndCAcceptanceIntegrationTest(){
 
         UserDTO baseUserDTO = baseUser();
-        baseUserDTO.getTermsAndConditionsHistory().get(0).setAcceptanceDate(generateFutureDate().toString());
+        baseUserDTO.getTermsAndConditionsHistory().get(0).setAcceptanceDate(LocalDateTime.now().plusDays(1).toString());
         String body = objectMapper.writeValueAsString(baseUserDTO);
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isBadRequest()).andReturn();

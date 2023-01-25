@@ -13,14 +13,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static com.icesi.economiacircularicesi.utils.TestUtils.generateFutureDate;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -90,7 +87,7 @@ public class UserControllerTest {
     @Test
     public void impossibleRegistrationDateTest(){
         setupScenary();
-        baseUserDTO.setRegistrationDate(generateFutureDate().toString());
+        baseUserDTO.setRegistrationDate(LocalDateTime.now().plusDays(1).toString());
         verifyCreateUserExceptionThrown(UserErrorCode.CODE_01_IMPOSSIBLE_DATE, baseUserDTO);
     }
 
@@ -103,7 +100,7 @@ public class UserControllerTest {
     @Test
     public void impossibleTAndCAcceptanceTest(){
         setupScenary();
-        baseUserDTO.getTermsAndConditionsHistory().get(0).setAcceptanceDate(generateFutureDate().toString());
+        baseUserDTO.getTermsAndConditionsHistory().get(0).setAcceptanceDate(LocalDateTime.now().plusDays(1).toString());
         verifyCreateUserExceptionThrown(UserErrorCode.CODE_01_IMPOSSIBLE_DATE, baseUserDTO);
     }
 

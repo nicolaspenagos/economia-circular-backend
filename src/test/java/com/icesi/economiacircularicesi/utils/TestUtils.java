@@ -11,13 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class TestUtils {
-
-    public static LocalDateTime generateFutureDate(){
-        long currentTime = System.currentTimeMillis();
-        long futureTime = currentTime + 1000L;
-        return LocalDateTime.ofInstant(Instant.ofEpochMilli(futureTime), ZoneId.systemDefault());
-    }
-
     public static void verifyUserError(UserErrorCode correctCode, UserError userError) {
 
         assertNotNull(userError);
