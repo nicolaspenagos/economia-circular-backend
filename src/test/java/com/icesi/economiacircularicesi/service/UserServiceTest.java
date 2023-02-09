@@ -4,6 +4,8 @@ import com.icesi.economiacircularicesi.constant.UserErrorCode;
 import com.icesi.economiacircularicesi.constants.BaseUser;
 import com.icesi.economiacircularicesi.dto.UserDTO;
 import com.icesi.economiacircularicesi.error.exception.UserException;
+import com.icesi.economiacircularicesi.mapper.UserMapper;
+import com.icesi.economiacircularicesi.mapper.UserMapperImpl;
 import com.icesi.economiacircularicesi.model.TermsAndConditions;
 import com.icesi.economiacircularicesi.model.User;
 import com.icesi.economiacircularicesi.repository.TermsAndConditionsRepository;
@@ -28,6 +30,7 @@ import static org.mockito.Mockito.mock;
 
 public class UserServiceTest {
 
+    private UserMapper userMapper;
     private UserRepository userRepository;
     private TermsAndConditionsRepository termsAndConditionsRepository;
     private UserServiceImpl userService;
@@ -68,10 +71,11 @@ public class UserServiceTest {
     @BeforeEach
     private void init(){
 
+        userMapper = new UserMapperImpl();
         userRepository = mock(UserRepository.class);
         termsAndConditionsRepository = mock(TermsAndConditionsRepository.class);
         passwordEncoder = mock(PasswordEncoder.class);
-        userService = new UserServiceImpl(userRepository, termsAndConditionsRepository, passwordEncoder);
+        userService = new UserServiceImpl(userRepository, termsAndConditionsRepository, userMapper, passwordEncoder);
 
     }
 

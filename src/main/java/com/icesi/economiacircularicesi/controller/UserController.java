@@ -3,9 +3,11 @@ package com.icesi.economiacircularicesi.controller;
 import com.icesi.economiacircularicesi.api.UserAPI;
 import com.icesi.economiacircularicesi.constant.Regex;
 import com.icesi.economiacircularicesi.constant.UserErrorCode;
+import com.icesi.economiacircularicesi.dto.TermsAndConditionsDTO;
 import com.icesi.economiacircularicesi.dto.UserDTO;
 import com.icesi.economiacircularicesi.dto.UserNoPassDTO;
 import com.icesi.economiacircularicesi.mapper.UserMapper;
+import com.icesi.economiacircularicesi.model.User;
 import com.icesi.economiacircularicesi.service.UserService;
 import com.icesi.economiacircularicesi.utils.UserExceptionUtils;
 import lombok.AllArgsConstructor;
@@ -17,6 +19,7 @@ import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -53,6 +56,17 @@ public class UserController implements UserAPI {
         return userService.deleteUser(userId);
     }
 
+    @Override
+    public UserNoPassDTO updateUser(UUID userId, UserDTO userDTO) {
+
+        Optional.ofNullable(userDTO.getRegistrationDate()).ifPresent((registrationDate)->validateDate(registrationDate));
+        Optional.ofNullable(userDTO.getEmail()).ifPresent((email)->validateEmail(email));
+        Optional.ofNullable(userDTO.getTermsAndConditionsHistory()).ifPresent((tAndCList)->validateTermsAndCondsListDates(tAndCList));
+
+        return userMapper.fromUserToNoPass(userService.updateUser(userId, userMapper.fromDTO(userDTO)));
+
+    }
+
     private void validateDate(String date){
         try{
             LocalDateTime localDateTime = LocalDateTime.parse(date);
@@ -61,6 +75,12 @@ public class UserController implements UserAPI {
             }
         }catch (DateTimeParseException dateTimeParseException){
             UserExceptionUtils.throwUserException(HttpStatus.BAD_REQUEST, UserErrorCode.CODE_02_WRONG_DATE_FORMAT);
+        }
+    }
+
+    private void validateTermsAndCondsListDates(List<TermsAndConditionsDTO> tAndCList){
+        for(TermsAndConditionsDTO currentTAndC : tAndCList){
+            validateDate(currentTAndC.getAcceptanceDate());
         }
     }
 

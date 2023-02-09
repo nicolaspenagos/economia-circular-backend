@@ -1,6 +1,9 @@
 package com.icesi.economiacircularicesi.service.impl;
 
 import com.icesi.economiacircularicesi.constant.UserErrorCode;
+import com.icesi.economiacircularicesi.error.exception.UserError;
+import com.icesi.economiacircularicesi.error.exception.UserException;
+import com.icesi.economiacircularicesi.mapper.UserMapper;
 import com.icesi.economiacircularicesi.model.TermsAndConditions;
 import com.icesi.economiacircularicesi.model.User;
 import com.icesi.economiacircularicesi.repository.TermsAndConditionsRepository;
@@ -26,6 +29,7 @@ public class UserServiceImpl implements UserService {
 
     public final UserRepository userRepository;
     public final TermsAndConditionsRepository termsAndConditionsRepository;
+    public final UserMapper userMapper;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -33,10 +37,16 @@ public class UserServiceImpl implements UserService {
     public User createUser(User user) {
 
         validateUniqueEmail(user.getEmail());
-        user.setPassword(passwordEncoder.encode(user.getPassword())); //Encrypt the password using Bcrypt encrypted hash
-        User savedUser = userRepository.save(user);
-        saveTermsAndConditions(savedUser.getUserId(), user.getTermsAndConditionsHistory());
+        return prepareAndSaveUser(user);
+    }
 
+    private User prepareAndSaveUser(User user){
+
+        user.setPassword(passwordEncoder.encode(user.getPassword())); //Encrypt the password using Bcrypt encrypted hash
+        System.out.println(user.getTermsAndConditionsHistory().get(0).getLink());
+        User savedUser = userRepository.save(user);
+        System.out.println(savedUser.getTermsAndConditionsHistory().get(0).getLink());
+        saveTermsAndConditions(savedUser.getUserId(), user.getTermsAndConditionsHistory());
         return savedUser;
     }
 
@@ -65,6 +75,15 @@ public class UserServiceImpl implements UserService {
         return new ResponseEntity<>(userId, HttpStatus.OK);
     }
 
+    @Override
+    public User updateUser(UUID userId,User userUpdate) {
+
+        User user = userRepository.findById(userId).orElseThrow(()-> new UserException(HttpStatus.BAD_REQUEST, new UserError(UserErrorCode.CODE_05_USER_NOT_FOUND, UserErrorCode.CODE_05_USER_NOT_FOUND.getMessage())));
+        userMapper.updateUserFromUser(userUpdate, user);
+        System.out.println();
+        return prepareAndSaveUser(user);//TODO Check this
+    }
+
     private void deleteUserAndRelations(User user) {
 
         for (TermsAndConditions currentTC : user.getTermsAndConditionsHistory()) {
@@ -80,6 +99,8 @@ public class UserServiceImpl implements UserService {
             User userRef = new User();
             userRef.setUserId(userId);
             currentTC.setUser(userRef);
+
+
             termsAndConditionsRepository.save(currentTC);
         }
 

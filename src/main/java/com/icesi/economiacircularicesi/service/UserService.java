@@ -12,4 +12,5 @@ public interface UserService {
     public List<User> getUsers();
     public User getUser(UUID userId);
     public ResponseEntity<UUID> deleteUser(UUID userId);
+    public User updateUser(UUID userId, User user);
 }

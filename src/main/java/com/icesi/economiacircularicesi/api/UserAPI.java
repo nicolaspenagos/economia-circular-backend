@@ -21,7 +21,7 @@ public interface UserAPI {
     public ResponseEntity<UUID> deleteUser(@PathVariable UUID userId);
 
     //TODO PATCH update users terms and conds
-
-
+    @PatchMapping("/{userId}")
+    public UserNoPassDTO updateUser(@PathVariable UUID userId, @RequestBody UserDTO userDTO);
 
 }
