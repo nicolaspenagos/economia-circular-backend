@@ -2,7 +2,7 @@ package com.icesi.economiacircularicesi.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.icesi.economiacircularicesi.constant.UserErrorCode;
-import com.icesi.economiacircularicesi.dto.UserDTO;
+import com.icesi.economiacircularicesi.dto.UserDTO.UserDTO;
 import com.icesi.economiacircularicesi.error.exception.UserError;
 import lombok.SneakyThrows;
 import org.springframework.core.io.ClassPathResource;
@@ -11,9 +11,6 @@ import org.springframework.util.FileCopyUtils;
 
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.jupiter.api.Assertions.assertEquals;

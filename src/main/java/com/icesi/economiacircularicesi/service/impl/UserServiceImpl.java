@@ -4,10 +4,10 @@ import com.icesi.economiacircularicesi.constant.UserErrorCode;
 import com.icesi.economiacircularicesi.error.exception.UserError;
 import com.icesi.economiacircularicesi.error.exception.UserException;
 import com.icesi.economiacircularicesi.mapper.UserMapper;
-import com.icesi.economiacircularicesi.model.TermsAndConditions;
-import com.icesi.economiacircularicesi.model.User;
-import com.icesi.economiacircularicesi.repository.TermsAndConditionsRepository;
-import com.icesi.economiacircularicesi.repository.UserRepository;
+import com.icesi.economiacircularicesi.model.User.TermsAndConditions;
+import com.icesi.economiacircularicesi.model.User.User;
+import com.icesi.economiacircularicesi.repository.UserRepository.TermsAndConditionsRepository;
+import com.icesi.economiacircularicesi.repository.UserRepository.UserRepository;
 import com.icesi.economiacircularicesi.service.UserService;
 import com.icesi.economiacircularicesi.utils.UserExceptionUtils;
 import lombok.AllArgsConstructor;
@@ -38,12 +38,25 @@ public class UserServiceImpl implements UserService {
 
         validateUniqueEmail(user.getEmail());
         user.setPassword(passwordEncoder.encode(user.getPassword())); //Encrypt the password using Bcrypt encrypted hash
+
         User savedUser = userRepository.save(user);
         saveTermsAndConditions(savedUser.getUserId(), user.getTermsAndConditionsHistory());
+
         return savedUser;
 
     }
 
+    private void saveTermsAndConditions(UUID userId, List<TermsAndConditions> termsAndConditionsList) {
+
+        for (TermsAndConditions currentTC : termsAndConditionsList) {
+            User userRef = new User();
+            userRef.setUserId(userId);
+            currentTC.setUser(userRef);
+
+            termsAndConditionsRepository.save(currentTC);
+        }
+
+    }
 
 
     @Override
@@ -91,18 +104,6 @@ public class UserServiceImpl implements UserService {
         userRepository.delete(user);
     }
 
-
-    private void saveTermsAndConditions(UUID userId, List<TermsAndConditions> termsAndConditionsList) {
-
-        for (TermsAndConditions currentTC : termsAndConditionsList) {
-            User userRef = new User();
-            userRef.setUserId(userId);
-            currentTC.setUser(userRef);
-
-            termsAndConditionsRepository.save(currentTC);
-        }
-
-    }
 
     private void validateUniqueEmail(String email) {
 

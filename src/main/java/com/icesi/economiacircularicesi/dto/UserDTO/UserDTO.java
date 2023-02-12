@@ -1,4 +1,4 @@
-package com.icesi.economiacircularicesi.dto;
+package com.icesi.economiacircularicesi.dto.UserDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,7 +15,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDTO {
-
 
     private UUID userId;
 

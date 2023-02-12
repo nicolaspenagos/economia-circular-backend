@@ -2,7 +2,7 @@ package com.icesi.economiacircularicesi.integration;
 
 import com.icesi.economiacircularicesi.constant.UserErrorCode;
 import com.icesi.economiacircularicesi.constants.FilePaths;
-import com.icesi.economiacircularicesi.dto.TermsAndConditionsDTO;
+import com.icesi.economiacircularicesi.dto.UserDTO.TermsAndConditionsDTO;
 import com.icesi.economiacircularicesi.error.exception.UserError;
 import com.icesi.economiacircularicesi.constants.BaseTermsAndCondsAcceptance;
 import com.icesi.economiacircularicesi.mapper.UserMapper;
@@ -10,13 +10,10 @@ import com.icesi.economiacircularicesi.mapper.UserMapperImpl;
 import lombok.SneakyThrows;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
@@ -25,20 +22,16 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.icesi.economiacircularicesi.dto.UserDTO;
+import com.icesi.economiacircularicesi.dto.UserDTO.UserDTO;
 import com.icesi.economiacircularicesi.constants.BaseUser;
 
 import static com.icesi.economiacircularicesi.utils.TestUtils.baseUser;
 import static com.icesi.economiacircularicesi.utils.TestUtils.verifyUserError;
-import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;

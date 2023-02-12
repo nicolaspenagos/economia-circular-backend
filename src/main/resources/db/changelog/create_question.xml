@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <!-- Refer to https://docs.liquibase.com/change-types/community/create-table.html -->
+
+    <changeSet id="def7cc01-73a4-43f8-842c-65cbd469cb29" author="nicolas.penagos" failOnError="true">
+        <createTable tableName="questions">
+            <column name="question_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+            <column name="question_order" type="int" />
+            <column name="question_text" type="varchar(255)" />
+            <column name="is_mandatory" type="boolean" />
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

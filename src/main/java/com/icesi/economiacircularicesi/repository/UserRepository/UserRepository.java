@@ -1,6 +1,6 @@
-package com.icesi.economiacircularicesi.repository;
+package com.icesi.economiacircularicesi.repository.UserRepository;
 
-import com.icesi.economiacircularicesi.model.User;
+import com.icesi.economiacircularicesi.model.User.User;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.UUID;

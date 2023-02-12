@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <!-- Refer to https://docs.liquibase.com/change-types/community/create-table.html -->
+
+    <changeSet id="b4ee73d2-cadb-49b1-aa9c-2b789c5742fe" author="nicolas.penagos" failOnError="true">
+        <createTable tableName="question_options">
+            <column name="question_option_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+            <column name="option_order" type="int" />
+            <column name="option_value" type="varchar(255)" />
+            <column name="question_id" type="UUID" >
+                <constraints primaryKey="true" nullable="false" references="questions(question_id)" foreignKeyName="fk-question-option"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
+

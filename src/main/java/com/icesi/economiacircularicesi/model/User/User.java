@@ -1,4 +1,4 @@
-package com.icesi.economiacircularicesi.model;
+package com.icesi.economiacircularicesi.model.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

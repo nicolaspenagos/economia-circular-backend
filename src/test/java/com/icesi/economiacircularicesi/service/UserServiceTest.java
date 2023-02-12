@@ -2,18 +2,16 @@ package com.icesi.economiacircularicesi.service;
 
 import com.icesi.economiacircularicesi.constant.UserErrorCode;
 import com.icesi.economiacircularicesi.constants.BaseUser;
-import com.icesi.economiacircularicesi.dto.UserDTO;
 import com.icesi.economiacircularicesi.error.exception.UserException;
 import com.icesi.economiacircularicesi.mapper.UserMapper;
 import com.icesi.economiacircularicesi.mapper.UserMapperImpl;
-import com.icesi.economiacircularicesi.model.TermsAndConditions;
-import com.icesi.economiacircularicesi.model.User;
-import com.icesi.economiacircularicesi.repository.TermsAndConditionsRepository;
-import com.icesi.economiacircularicesi.repository.UserRepository;
+import com.icesi.economiacircularicesi.model.User.TermsAndConditions;
+import com.icesi.economiacircularicesi.model.User.User;
+import com.icesi.economiacircularicesi.repository.UserRepository.TermsAndConditionsRepository;
+import com.icesi.economiacircularicesi.repository.UserRepository.UserRepository;
 import com.icesi.economiacircularicesi.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
