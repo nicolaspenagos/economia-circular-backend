@@ -27,7 +27,6 @@ import java.util.UUID;
 
 import static com.icesi.economiacircularicesi.utils.TestUtils.baseUser;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
