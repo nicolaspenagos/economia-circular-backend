@@ -37,18 +37,14 @@ public class UserServiceImpl implements UserService {
     public User createUser(User user) {
 
         validateUniqueEmail(user.getEmail());
-        return prepareAndSaveUser(user);
-    }
-
-    private User prepareAndSaveUser(User user){
-
         user.setPassword(passwordEncoder.encode(user.getPassword())); //Encrypt the password using Bcrypt encrypted hash
-        System.out.println(user.getTermsAndConditionsHistory().get(0).getLink());
         User savedUser = userRepository.save(user);
-        System.out.println(savedUser.getTermsAndConditionsHistory().get(0).getLink());
         saveTermsAndConditions(savedUser.getUserId(), user.getTermsAndConditionsHistory());
         return savedUser;
+
     }
+
+
 
     @Override
     public List<User> getUsers() {
@@ -79,9 +75,12 @@ public class UserServiceImpl implements UserService {
     public User updateUser(UUID userId,User userUpdate) {
 
         User user = userRepository.findById(userId).orElseThrow(()-> new UserException(HttpStatus.BAD_REQUEST, new UserError(UserErrorCode.CODE_05_USER_NOT_FOUND, UserErrorCode.CODE_05_USER_NOT_FOUND.getMessage())));
+
         userMapper.updateUserFromUser(userUpdate, user);
-        System.out.println();
-        return prepareAndSaveUser(user);//TODO Check this
+
+        saveTermsAndConditions(user.getUserId(), user.getTermsAndConditionsHistory());
+
+        return userRepository.save(user);//TODO Check this
     }
 
     private void deleteUserAndRelations(User user) {
@@ -99,7 +98,6 @@ public class UserServiceImpl implements UserService {
             User userRef = new User();
             userRef.setUserId(userId);
             currentTC.setUser(userRef);
-
 
             termsAndConditionsRepository.save(currentTC);
         }

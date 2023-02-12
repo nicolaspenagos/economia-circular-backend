@@ -71,7 +71,7 @@ public class UserServiceTest {
     @BeforeEach
     private void init(){
 
-        userMapper = new UserMapperImpl();
+        userMapper = mock(UserMapperImpl.class) ;
         userRepository = mock(UserRepository.class);
         termsAndConditionsRepository = mock(TermsAndConditionsRepository.class);
         passwordEncoder = mock(PasswordEncoder.class);
@@ -88,6 +88,21 @@ public class UserServiceTest {
         verify(userRepository, times(1)).save(baseUser);
         verify(termsAndConditionsRepository, times(1)).save(baseUser.getTermsAndConditionsHistory().get(0));
         verify(passwordEncoder, times(1)).encode(BaseUser.PASSWORD.value);
+
+    }
+
+    @Test
+    public void updateUserTest(){
+
+        setupScenary();
+        when(userRepository.findById(baseUser.getUserId())).thenReturn(Optional.ofNullable(baseUser));
+        doNothing().when(userMapper).updateUserFromUser(any(), any());
+
+        userService.updateUser(baseUser.getUserId(), baseUser);
+
+        verify(userRepository,times(1)).findById(baseUser.getUserId());
+        verify(userRepository, times(1)).save(baseUser);
+        verify(termsAndConditionsRepository, times(1)).save(any());
 
     }
 

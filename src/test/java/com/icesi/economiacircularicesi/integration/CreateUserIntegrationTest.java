@@ -1,6 +1,7 @@
 package com.icesi.economiacircularicesi.integration;
 
 import com.icesi.economiacircularicesi.constant.UserErrorCode;
+import com.icesi.economiacircularicesi.constants.FilePaths;
 import com.icesi.economiacircularicesi.dto.TermsAndConditionsDTO;
 import com.icesi.economiacircularicesi.error.exception.UserError;
 import com.icesi.economiacircularicesi.constants.BaseTermsAndCondsAcceptance;
@@ -35,6 +36,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.icesi.economiacircularicesi.dto.UserDTO;
 import com.icesi.economiacircularicesi.constants.BaseUser;
 
+import static com.icesi.economiacircularicesi.utils.TestUtils.baseUser;
 import static com.icesi.economiacircularicesi.utils.TestUtils.verifyUserError;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -67,26 +69,10 @@ public class CreateUserIntegrationTest {
     }
 
     @SneakyThrows
-    private UserDTO baseUser() {
-        String body = parseResourceToString("CreateUser.json");
-        return objectMapper.readValue(body, UserDTO.class);
-    }
-
-    @SneakyThrows
-    private String parseResourceToString(String classpath) {
-        Resource resource = new ClassPathResource(classpath);
-        try (Reader reader = new InputStreamReader(resource.getInputStream(), UTF_8)) {
-            return FileCopyUtils.copyToString(reader);
-        }
-    }
-
-
-
-    @SneakyThrows
     @Test
     public void CreateValidUserIntegrationTest() {
 
-        UserDTO user = baseUser();
+        UserDTO user = baseUser(FilePaths.USER_JSON, objectMapper);
         String body = objectMapper.writeValueAsString(user);
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isOk()).andReturn();
@@ -118,7 +104,7 @@ public class CreateUserIntegrationTest {
     @Test
     public void invalidEmailNoAtIntegrationTest() {
 
-        UserDTO baseUserDTO = baseUser();
+        UserDTO baseUserDTO = baseUser(FilePaths.USER_JSON, objectMapper);
         baseUserDTO.setEmail("jhon.doeemail.com");
         String body = objectMapper.writeValueAsString(baseUserDTO);
 
@@ -133,7 +119,7 @@ public class CreateUserIntegrationTest {
     @Test
     public void invalidEmailNoLocalPartIntegrationTest() {
 
-        UserDTO baseUserDTO = baseUser();
+        UserDTO baseUserDTO = baseUser(FilePaths.USER_JSON, objectMapper);
         baseUserDTO.setEmail("@email.com");
         String body = objectMapper.writeValueAsString(baseUserDTO);
 
@@ -149,7 +135,7 @@ public class CreateUserIntegrationTest {
     @Test
     public void invalidEmailNoDomainIntegrationTest(){
 
-        UserDTO baseUserDTO = baseUser();
+        UserDTO baseUserDTO = baseUser(FilePaths.USER_JSON, objectMapper);
         baseUserDTO.setEmail("jhon.doe@");
         String body = objectMapper.writeValueAsString(baseUserDTO);
 
@@ -164,7 +150,7 @@ public class CreateUserIntegrationTest {
     @Test
     public void impossibleRegistrationDateTest(){
 
-        UserDTO baseUserDTO = baseUser();
+        UserDTO baseUserDTO = baseUser(FilePaths.USER_JSON, objectMapper);
         baseUserDTO.setRegistrationDate(LocalDateTime.now().plusDays(1).toString());
         String body = objectMapper.writeValueAsString(baseUserDTO);
 
@@ -179,7 +165,7 @@ public class CreateUserIntegrationTest {
     @Test
     public void wrongRegistrationDateIntegrationTest(){
 
-        UserDTO baseUserDTO = baseUser();
+        UserDTO baseUserDTO = baseUser(FilePaths.USER_JSON, objectMapper);
         baseUserDTO.setRegistrationDate("Tuesday, January 10, 2023");
         String body = objectMapper.writeValueAsString(baseUserDTO);
 
@@ -194,7 +180,7 @@ public class CreateUserIntegrationTest {
     @Test
     public void impossibleTAndCAcceptanceIntegrationTest(){
 
-        UserDTO baseUserDTO = baseUser();
+        UserDTO baseUserDTO = baseUser(FilePaths.USER_JSON, objectMapper);
         baseUserDTO.getTermsAndConditionsHistory().get(0).setAcceptanceDate(LocalDateTime.now().plusDays(1).toString());
         String body = objectMapper.writeValueAsString(baseUserDTO);
 
@@ -208,7 +194,7 @@ public class CreateUserIntegrationTest {
     @Test
     public void wrongTAndCAcceptanceFormatIntegrationTest(){
 
-        UserDTO baseUserDTO = baseUser();
+        UserDTO baseUserDTO = baseUser(FilePaths.USER_JSON, objectMapper);
         baseUserDTO.getTermsAndConditionsHistory().get(0).setAcceptanceDate("Tuesday, January 10, 2023");
         String body = objectMapper.writeValueAsString(baseUserDTO);
 
@@ -225,7 +211,7 @@ public class CreateUserIntegrationTest {
     @Test
     public void duplicatedEmailIntegrationTest(){
 
-        UserDTO baseUserDTO = baseUser();
+        UserDTO baseUserDTO = baseUser(FilePaths.USER_JSON, objectMapper);
         baseUserDTO.setEmail("jhon.doe1@email.com");
         String body = objectMapper.writeValueAsString(baseUserDTO);
 
