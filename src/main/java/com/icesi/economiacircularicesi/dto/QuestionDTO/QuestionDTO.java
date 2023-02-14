@@ -1,5 +1,6 @@
 package com.icesi.economiacircularicesi.dto.QuestionDTO;
 
+import com.icesi.economiacircularicesi.model.Question.QuestionType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,14 +27,14 @@ public class QuestionDTO {
     @NotBlank(message = "Question text may not be blank")
     private String questionText;
 
-    @NotNull
+    @NotNull(message = "IsMandatory must not be null")
     private boolean isMandatory;
 
+    @NotNull(message = "Type must not be null")
+    private QuestionType type;
 
-    /*
-    @NotNull
-    private QuestionTypeDTO type;
-*/
+    @NotBlank(message = "Activity may not be blank")
+    private String activity;
 
     @NotNull
     @NotEmpty(message = "Options may not be empty")

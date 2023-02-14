@@ -3,7 +3,7 @@ package com.icesi.economiacircularicesi.controller;
 import com.icesi.economiacircularicesi.constant.UserErrorCode;
 import com.icesi.economiacircularicesi.dto.UserDTO.TermsAndConditionsDTO;
 import com.icesi.economiacircularicesi.dto.UserDTO.UserDTO;
-import com.icesi.economiacircularicesi.error.exception.UserException;
+import com.icesi.economiacircularicesi.error.exception.UserError.UserException;
 import com.icesi.economiacircularicesi.mapper.UserMapper;
 import com.icesi.economiacircularicesi.mapper.UserMapperImpl;
 import com.icesi.economiacircularicesi.service.UserService;
@@ -68,47 +68,47 @@ public class UserControllerTest {
     public void invalidEmailTestNoAt(){
         setupScenary();
         baseUserDTO.setEmail("jhon.doeemail.com");
-        verifyCreateUserExceptionThrown(UserErrorCode.CODE_03_INVALID_EMAIL, baseUserDTO);
+        verifyCreateUserExceptionThrown(UserErrorCode.CODE_U03_INVALID_EMAIL, baseUserDTO);
     }
 
     @Test
     public void invalidEmailTestNoLocalPart(){
         setupScenary();
         baseUserDTO.setEmail("@email.com");
-        verifyCreateUserExceptionThrown(UserErrorCode.CODE_03_INVALID_EMAIL, baseUserDTO);
+        verifyCreateUserExceptionThrown(UserErrorCode.CODE_U03_INVALID_EMAIL, baseUserDTO);
     }
     @Test
     public void invalidEmailTestNoDomain(){
         setupScenary();
         baseUserDTO.setEmail("jhon.doe@");
-        verifyCreateUserExceptionThrown(UserErrorCode.CODE_03_INVALID_EMAIL, baseUserDTO);
+        verifyCreateUserExceptionThrown(UserErrorCode.CODE_U03_INVALID_EMAIL, baseUserDTO);
     }
 
     @Test
     public void impossibleRegistrationDateTest(){
         setupScenary();
         baseUserDTO.setRegistrationDate(LocalDateTime.now().plusDays(1).toString());
-        verifyCreateUserExceptionThrown(UserErrorCode.CODE_01_IMPOSSIBLE_DATE, baseUserDTO);
+        verifyCreateUserExceptionThrown(UserErrorCode.CODE_U01_IMPOSSIBLE_DATE, baseUserDTO);
     }
 
     @Test
     public void wrongRegistrationDateFormatTest(){
         setupScenary();
         baseUserDTO.setRegistrationDate("Tuesday, January 10, 2023");
-        verifyCreateUserExceptionThrown(UserErrorCode.CODE_02_WRONG_DATE_FORMAT, baseUserDTO);
+        verifyCreateUserExceptionThrown(UserErrorCode.CODE_U02_WRONG_DATE_FORMAT, baseUserDTO);
     }
     @Test
     public void impossibleTAndCAcceptanceTest(){
         setupScenary();
         baseUserDTO.getTermsAndConditionsHistory().get(0).setAcceptanceDate(LocalDateTime.now().plusDays(1).toString());
-        verifyCreateUserExceptionThrown(UserErrorCode.CODE_01_IMPOSSIBLE_DATE, baseUserDTO);
+        verifyCreateUserExceptionThrown(UserErrorCode.CODE_U01_IMPOSSIBLE_DATE, baseUserDTO);
     }
 
     @Test
     public void wrongTAndCAcceptanceFormatTest(){
         setupScenary();
         baseUserDTO.getTermsAndConditionsHistory().get(0).setAcceptanceDate("Tuesday, January 10, 2023");
-        verifyCreateUserExceptionThrown(UserErrorCode.CODE_02_WRONG_DATE_FORMAT, baseUserDTO);
+        verifyCreateUserExceptionThrown(UserErrorCode.CODE_U02_WRONG_DATE_FORMAT, baseUserDTO);
     }
 
     @Test

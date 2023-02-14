@@ -1,4 +1,4 @@
-package com.icesi.economiacircularicesi.integration;
+package com.icesi.economiacircularicesi.integration.UserAPI;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.icesi.economiacircularicesi.constants.BaseTermsAndCondsAcceptance;

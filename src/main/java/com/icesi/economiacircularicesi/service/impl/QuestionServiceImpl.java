@@ -4,7 +4,6 @@ import com.icesi.economiacircularicesi.model.Question.Question;
 import com.icesi.economiacircularicesi.model.Question.QuestionOption;
 import com.icesi.economiacircularicesi.repository.QuestionRepository.QuestionOptionRepository;
 import com.icesi.economiacircularicesi.repository.QuestionRepository.QuestionRepository;
-import com.icesi.economiacircularicesi.repository.QuestionRepository.QuestionTypeRepository;
 import com.icesi.economiacircularicesi.service.QuestionService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,7 +18,7 @@ import java.util.stream.StreamSupport;
 public class QuestionServiceImpl implements QuestionService {
 
     private QuestionRepository questionRepository;
-    private QuestionTypeRepository questionTypeRepository;
+
     private QuestionOptionRepository questionOptionRepository;
 
     @Override

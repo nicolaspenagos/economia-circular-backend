@@ -1,8 +1,8 @@
 package com.icesi.economiacircularicesi.utils;
 
 import com.icesi.economiacircularicesi.constant.UserErrorCode;
-import com.icesi.economiacircularicesi.error.exception.UserError;
-import com.icesi.economiacircularicesi.error.exception.UserException;
+import com.icesi.economiacircularicesi.error.exception.UserError.UserError;
+import com.icesi.economiacircularicesi.error.exception.UserError.UserException;
 import org.springframework.http.HttpStatus;
 
 public class UserExceptionUtils {

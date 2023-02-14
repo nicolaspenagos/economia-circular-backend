@@ -1,10 +1,20 @@
 package com.icesi.economiacircularicesi.error;
 
-import com.icesi.economiacircularicesi.error.exception.UserError;
-import com.icesi.economiacircularicesi.error.exception.UserException;
+import com.icesi.economiacircularicesi.constant.ErrorCode;
+import com.icesi.economiacircularicesi.error.exception.GeneralError.GeneralError;
+import com.icesi.economiacircularicesi.error.exception.UserError.UserError;
+import com.icesi.economiacircularicesi.error.exception.UserError.UserException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -12,4 +22,23 @@ public class GlobalExceptionHandler {
     public ResponseEntity<UserError> handleException(UserException userException){
         return new ResponseEntity<>(userException.getError(), userException.getHttpStatus());
     }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<GeneralError> handleException(HttpMessageNotReadableException exception, HttpServletRequest request) {
+        return new ResponseEntity<>(new GeneralError(exception.getClass().getSimpleName(), exception.getMessage()), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException exception) {
+
+        Map<String, String> errors = new HashMap<>();
+        errors.put("code", String.valueOf(ErrorCode.CODE_E01_INVALID_ARGUMENTS));
+        exception.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+        });
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
+
 }

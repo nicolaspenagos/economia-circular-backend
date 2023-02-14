@@ -1,8 +1,8 @@
 package com.icesi.economiacircularicesi.service.impl;
 
 import com.icesi.economiacircularicesi.constant.UserErrorCode;
-import com.icesi.economiacircularicesi.error.exception.UserError;
-import com.icesi.economiacircularicesi.error.exception.UserException;
+import com.icesi.economiacircularicesi.error.exception.UserError.UserError;
+import com.icesi.economiacircularicesi.error.exception.UserError.UserException;
 import com.icesi.economiacircularicesi.mapper.UserMapper;
 import com.icesi.economiacircularicesi.model.User.TermsAndConditions;
 import com.icesi.economiacircularicesi.model.User.User;
@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
                 .ifPresentOrElse(
                         (user) -> deleteUserAndRelations(user),
                         () -> {
-                            UserExceptionUtils.throwUserException(HttpStatus.BAD_REQUEST, UserErrorCode.CODE_05_USER_NOT_FOUND);
+                            UserExceptionUtils.throwUserException(HttpStatus.BAD_REQUEST, UserErrorCode.CODE_U05_USER_NOT_FOUND);
                         }
                 );
 
@@ -87,7 +87,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User updateUser(UUID userId,User userUpdate) {
 
-        User user = userRepository.findById(userId).orElseThrow(()-> new UserException(HttpStatus.BAD_REQUEST, new UserError(UserErrorCode.CODE_05_USER_NOT_FOUND, UserErrorCode.CODE_05_USER_NOT_FOUND.getMessage())));
+        User user = userRepository.findById(userId).orElseThrow(()-> new UserException(HttpStatus.BAD_REQUEST, new UserError(UserErrorCode.CODE_U05_USER_NOT_FOUND, UserErrorCode.CODE_U05_USER_NOT_FOUND.getMessage())));
 
         userMapper.updateUserFromUser(userUpdate, user);
 
@@ -109,7 +109,7 @@ public class UserServiceImpl implements UserService {
 
         for (User currentUser : getUsers()) {
             if (currentUser.getEmail().equals(email))
-                UserExceptionUtils.throwUserException(HttpStatus.BAD_REQUEST, UserErrorCode.CODE_04_DUPLICATED_EMAIL);
+                UserExceptionUtils.throwUserException(HttpStatus.BAD_REQUEST, UserErrorCode.CODE_U04_DUPLICATED_EMAIL);
         }
 
     }

@@ -1,9 +1,9 @@
-package com.icesi.economiacircularicesi.integration;
+package com.icesi.economiacircularicesi.integration.UserAPI;
 
 import com.icesi.economiacircularicesi.constant.UserErrorCode;
 import com.icesi.economiacircularicesi.constants.FilePaths;
 import com.icesi.economiacircularicesi.dto.UserDTO.TermsAndConditionsDTO;
-import com.icesi.economiacircularicesi.error.exception.UserError;
+import com.icesi.economiacircularicesi.error.exception.UserError.UserError;
 import com.icesi.economiacircularicesi.constants.BaseTermsAndCondsAcceptance;
 import com.icesi.economiacircularicesi.mapper.UserMapper;
 import com.icesi.economiacircularicesi.mapper.UserMapperImpl;
@@ -66,8 +66,9 @@ public class CreateUserIntegrationTest {
     public void CreateValidUserIntegrationTest() {
 
         UserDTO user = baseUser(FilePaths.USER_JSON, objectMapper);
+        user.setEmail("test@email.com");//A different email of the base user is set to avoid conflicts with the data inserted in the db by other integration tests
         String body = objectMapper.writeValueAsString(user);
-
+        System.out.println(body);
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isOk()).andReturn();
 
         UserDTO userDTO = objectMapper.readValue(result.getResponse().getContentAsString(), UserDTO.class);
@@ -75,7 +76,7 @@ public class CreateUserIntegrationTest {
 
         assertNotNull(userDTO);
         assertTrue(userDTO instanceof UserDTO);
-        assertThat(userDTO, hasProperty("email", is(BaseUser.EMAIL.value)));
+        assertThat(userDTO, hasProperty("email", is("test@email.com")));
         assertTrue(passwordEncoder.matches(BaseUser.PASSWORD.value, userDTO.getPassword()));
         assertThat(userDTO, hasProperty("name", is(BaseUser.NAME.value)));
         assertThat(userDTO, hasProperty("lastname", is(BaseUser.LASTNAME.value)));
@@ -104,7 +105,7 @@ public class CreateUserIntegrationTest {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isBadRequest()).andReturn();
 
         UserError userError = objectMapper.readValue(result.getResponse().getContentAsString(), UserError.class);
-        verifyUserError(UserErrorCode.CODE_03_INVALID_EMAIL, userError);
+        verifyUserError(UserErrorCode.CODE_U03_INVALID_EMAIL, userError);
 
     }
 
@@ -119,7 +120,7 @@ public class CreateUserIntegrationTest {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isBadRequest()).andReturn();
 
         UserError userError = objectMapper.readValue(result.getResponse().getContentAsString(), UserError.class);
-        verifyUserError(UserErrorCode.CODE_03_INVALID_EMAIL, userError);
+        verifyUserError(UserErrorCode.CODE_U03_INVALID_EMAIL, userError);
 
     }
 
@@ -135,7 +136,7 @@ public class CreateUserIntegrationTest {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isBadRequest()).andReturn();
 
         UserError userError = objectMapper.readValue(result.getResponse().getContentAsString(), UserError.class);
-        verifyUserError(UserErrorCode.CODE_03_INVALID_EMAIL, userError);
+        verifyUserError(UserErrorCode.CODE_U03_INVALID_EMAIL, userError);
 
     }
 
@@ -150,7 +151,7 @@ public class CreateUserIntegrationTest {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isBadRequest()).andReturn();
 
         UserError userError = objectMapper.readValue(result.getResponse().getContentAsString(), UserError.class);
-        verifyUserError(UserErrorCode.CODE_01_IMPOSSIBLE_DATE, userError);
+        verifyUserError(UserErrorCode.CODE_U01_IMPOSSIBLE_DATE, userError);
 
     }
 
@@ -165,7 +166,7 @@ public class CreateUserIntegrationTest {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isBadRequest()).andReturn();
 
         UserError userError = objectMapper.readValue(result.getResponse().getContentAsString(), UserError.class);
-        verifyUserError(UserErrorCode.CODE_02_WRONG_DATE_FORMAT, userError);
+        verifyUserError(UserErrorCode.CODE_U02_WRONG_DATE_FORMAT, userError);
 
     }
 
@@ -180,7 +181,7 @@ public class CreateUserIntegrationTest {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isBadRequest()).andReturn();
 
         UserError userError = objectMapper.readValue(result.getResponse().getContentAsString(), UserError.class);
-        verifyUserError(UserErrorCode.CODE_01_IMPOSSIBLE_DATE, userError);
+        verifyUserError(UserErrorCode.CODE_U01_IMPOSSIBLE_DATE, userError);
     }
 
     @SneakyThrows
@@ -194,7 +195,7 @@ public class CreateUserIntegrationTest {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isBadRequest()).andReturn();
 
         UserError userError = objectMapper.readValue(result.getResponse().getContentAsString(), UserError.class);
-        verifyUserError(UserErrorCode.CODE_02_WRONG_DATE_FORMAT, userError);
+        verifyUserError(UserErrorCode.CODE_U02_WRONG_DATE_FORMAT, userError);
     }
 
     /*
@@ -211,7 +212,7 @@ public class CreateUserIntegrationTest {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isBadRequest()).andReturn();
 
         UserError userError = objectMapper.readValue(result.getResponse().getContentAsString(), UserError.class);
-        verifyUserError(UserErrorCode.CODE_04_DUPLICATED_EMAIL, userError);
+        verifyUserError(UserErrorCode.CODE_U04_DUPLICATED_EMAIL, userError);
 
     }
 

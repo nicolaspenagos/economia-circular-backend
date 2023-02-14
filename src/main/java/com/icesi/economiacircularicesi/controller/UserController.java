@@ -70,10 +70,10 @@ public class UserController implements UserAPI {
         try{
             LocalDateTime localDateTime = LocalDateTime.parse(date);
             if(localDateTime.isAfter(LocalDateTime.now())){
-                UserExceptionUtils.throwUserException(HttpStatus.BAD_REQUEST, UserErrorCode.CODE_01_IMPOSSIBLE_DATE);
+                UserExceptionUtils.throwUserException(HttpStatus.BAD_REQUEST, UserErrorCode.CODE_U01_IMPOSSIBLE_DATE);
             }
         }catch (DateTimeParseException dateTimeParseException){
-            UserExceptionUtils.throwUserException(HttpStatus.BAD_REQUEST, UserErrorCode.CODE_02_WRONG_DATE_FORMAT);
+            UserExceptionUtils.throwUserException(HttpStatus.BAD_REQUEST, UserErrorCode.CODE_U02_WRONG_DATE_FORMAT);
         }
     }
 
@@ -85,7 +85,7 @@ public class UserController implements UserAPI {
 
     private void validateEmail(String email){
         if(!email.matches(Regex.REGEX_EMAIL_PATTERN))
-            UserExceptionUtils.throwUserException(HttpStatus.BAD_REQUEST, UserErrorCode.CODE_03_INVALID_EMAIL);
+            UserExceptionUtils.throwUserException(HttpStatus.BAD_REQUEST, UserErrorCode.CODE_U03_INVALID_EMAIL);
     }
 
 }

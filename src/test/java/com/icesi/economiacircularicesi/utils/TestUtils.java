@@ -3,7 +3,7 @@ package com.icesi.economiacircularicesi.utils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.icesi.economiacircularicesi.constant.UserErrorCode;
 import com.icesi.economiacircularicesi.dto.UserDTO.UserDTO;
-import com.icesi.economiacircularicesi.error.exception.UserError;
+import com.icesi.economiacircularicesi.error.exception.UserError.UserError;
 import lombok.SneakyThrows;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;

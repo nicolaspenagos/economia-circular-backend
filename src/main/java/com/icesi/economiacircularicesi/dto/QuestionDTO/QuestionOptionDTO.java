@@ -17,10 +17,10 @@ public class QuestionOptionDTO {
     private UUID questionOptionId;
 
     @NotNull
-    @Size(min = 1, message = "Order must be positive integers")
+    @Size(min = 1, message = "Order must be a positive integers")
     private int optionOrder;
 
-    @NotBlank(message = "Question text may not be blank")
+    @NotBlank(message = "Option value may not be blank")
     private String optionValue;
 
 }

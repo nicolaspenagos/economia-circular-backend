@@ -1,8 +1,8 @@
-package com.icesi.economiacircularicesi.integration;
+package com.icesi.economiacircularicesi.integration.UserAPI;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.icesi.economiacircularicesi.constant.UserErrorCode;
-import com.icesi.economiacircularicesi.error.exception.UserError;
+import com.icesi.economiacircularicesi.error.exception.UserError.UserError;
 import com.icesi.economiacircularicesi.mapper.UserMapper;
 import com.icesi.economiacircularicesi.mapper.UserMapperImpl;
 import lombok.SneakyThrows;
@@ -64,7 +64,7 @@ public class DeleteUserIntegrationTest {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.delete("/users/"+userId).contentType(MediaType.APPLICATION_JSON).content("")).andExpect(status().isBadRequest()).andReturn();
 
         UserError userError = objectMapper.readValue(result.getResponse().getContentAsString(), UserError.class);
-        verifyUserError(UserErrorCode.CODE_05_USER_NOT_FOUND, userError);
+        verifyUserError(UserErrorCode.CODE_U05_USER_NOT_FOUND, userError);
     }
 
 

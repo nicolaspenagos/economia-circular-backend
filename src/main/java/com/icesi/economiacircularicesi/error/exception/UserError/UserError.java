@@ -1,4 +1,4 @@
-package com.icesi.economiacircularicesi.error.exception;
+package com.icesi.economiacircularicesi.error.exception.UserError;
 
 import com.icesi.economiacircularicesi.constant.UserErrorCode;
 import lombok.AllArgsConstructor;
