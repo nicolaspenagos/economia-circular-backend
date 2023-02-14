@@ -1,15 +1,15 @@
 package com.icesi.economiacircularicesi.service.impl;
 
-import com.icesi.economiacircularicesi.constant.UserErrorCode;
-import com.icesi.economiacircularicesi.error.exception.UserError.UserError;
-import com.icesi.economiacircularicesi.error.exception.UserError.UserException;
+import com.icesi.economiacircularicesi.constant.ErrorCode;
+import com.icesi.economiacircularicesi.error.exception.CustomError.CustomError;
+import com.icesi.economiacircularicesi.error.exception.CustomError.CustomException;
 import com.icesi.economiacircularicesi.mapper.UserMapper;
 import com.icesi.economiacircularicesi.model.User.TermsAndConditions;
 import com.icesi.economiacircularicesi.model.User.User;
 import com.icesi.economiacircularicesi.repository.UserRepository.TermsAndConditionsRepository;
 import com.icesi.economiacircularicesi.repository.UserRepository.UserRepository;
 import com.icesi.economiacircularicesi.service.UserService;
-import com.icesi.economiacircularicesi.utils.UserExceptionUtils;
+import com.icesi.economiacircularicesi.utils.ErrorExceptionUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
                 .ifPresentOrElse(
                         (user) -> deleteUserAndRelations(user),
                         () -> {
-                            UserExceptionUtils.throwUserException(HttpStatus.BAD_REQUEST, UserErrorCode.CODE_U05_USER_NOT_FOUND);
+                            ErrorExceptionUtils.throwCustomException(HttpStatus.BAD_REQUEST, ErrorCode.CODE_U05_USER_NOT_FOUND);
                         }
                 );
 
@@ -87,7 +87,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User updateUser(UUID userId,User userUpdate) {
 
-        User user = userRepository.findById(userId).orElseThrow(()-> new UserException(HttpStatus.BAD_REQUEST, new UserError(UserErrorCode.CODE_U05_USER_NOT_FOUND, UserErrorCode.CODE_U05_USER_NOT_FOUND.getMessage())));
+        User user = userRepository.findById(userId).orElseThrow(()-> new CustomException(HttpStatus.BAD_REQUEST, new CustomError(ErrorCode.CODE_U05_USER_NOT_FOUND, ErrorCode.CODE_U05_USER_NOT_FOUND.getMessage())));
 
         userMapper.updateUserFromUser(userUpdate, user);
 
@@ -102,6 +102,7 @@ public class UserServiceImpl implements UserService {
             termsAndConditionsRepository.delete(currentTC);
         }
         userRepository.delete(user);
+
     }
 
 
@@ -109,7 +110,7 @@ public class UserServiceImpl implements UserService {
 
         for (User currentUser : getUsers()) {
             if (currentUser.getEmail().equals(email))
-                UserExceptionUtils.throwUserException(HttpStatus.BAD_REQUEST, UserErrorCode.CODE_U04_DUPLICATED_EMAIL);
+                ErrorExceptionUtils.throwCustomException(HttpStatus.BAD_REQUEST, ErrorCode.CODE_U04_DUPLICATED_EMAIL);
         }
 
     }

@@ -1,8 +1,8 @@
 package com.icesi.economiacircularicesi.service;
 
-import com.icesi.economiacircularicesi.constant.UserErrorCode;
+import com.icesi.economiacircularicesi.constant.ErrorCode;
 import com.icesi.economiacircularicesi.constants.BaseUser;
-import com.icesi.economiacircularicesi.error.exception.UserError.UserException;
+import com.icesi.economiacircularicesi.error.exception.CustomError.CustomException;
 import com.icesi.economiacircularicesi.mapper.UserMapper;
 import com.icesi.economiacircularicesi.mapper.UserMapperImpl;
 import com.icesi.economiacircularicesi.model.User.TermsAndConditions;
@@ -140,12 +140,12 @@ public class UserServiceTest {
             userService.deleteUser(baseUser.getUserId());
             fail();
 
-        }catch (UserException exception){
+        }catch (CustomException exception){
 
             assertEquals(HttpStatus.BAD_REQUEST, exception.getHttpStatus());
             assertNotNull(exception.getError());
-            assertEquals(UserErrorCode.CODE_U05_USER_NOT_FOUND.getMessage(), exception.getError().getMessage());
-            assertEquals(UserErrorCode.CODE_U05_USER_NOT_FOUND, exception.getError().getCode());
+            assertEquals(ErrorCode.CODE_U05_USER_NOT_FOUND.getMessage(), exception.getError().getMessage());
+            assertEquals(ErrorCode.CODE_U05_USER_NOT_FOUND, exception.getError().getCode());
 
         }
 
@@ -159,18 +159,18 @@ public class UserServiceTest {
         List<User> baseUsers = new ArrayList<>();
         baseUsers.add(baseUser);
         when(userService.getUsers()).thenReturn(baseUsers);
-        verifyCreateUserExceptionThrown(UserErrorCode.CODE_U04_DUPLICATED_EMAIL,baseUser);
+        verifyCreateUserExceptionThrown(ErrorCode.CODE_U04_DUPLICATED_EMAIL,baseUser);
 
     }
 
-    private void verifyCreateUserExceptionThrown(UserErrorCode expectedCode, User user) {
+    private void verifyCreateUserExceptionThrown(ErrorCode expectedCode, User user) {
 
         // Check if the corresponding exception is thrown when we are trying to
         // create a user containing an invalid attribute
         try {
             userService.createUser(user);
             fail();
-        } catch (UserException exception) {
+        } catch (CustomException exception) {
 
             assertEquals(HttpStatus.BAD_REQUEST, exception.getHttpStatus());
             assertNotNull(exception.getError());

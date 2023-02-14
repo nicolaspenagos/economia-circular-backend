@@ -1,9 +1,9 @@
 package com.icesi.economiacircularicesi.integration.UserAPI;
 
-import com.icesi.economiacircularicesi.constant.UserErrorCode;
+import com.icesi.economiacircularicesi.constant.ErrorCode;
 import com.icesi.economiacircularicesi.constants.FilePaths;
 import com.icesi.economiacircularicesi.dto.UserDTO.TermsAndConditionsDTO;
-import com.icesi.economiacircularicesi.error.exception.UserError.UserError;
+import com.icesi.economiacircularicesi.error.exception.CustomError.CustomError;
 import com.icesi.economiacircularicesi.constants.BaseTermsAndCondsAcceptance;
 import com.icesi.economiacircularicesi.mapper.UserMapper;
 import com.icesi.economiacircularicesi.mapper.UserMapperImpl;
@@ -104,8 +104,8 @@ public class CreateUserIntegrationTest {
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isBadRequest()).andReturn();
 
-        UserError userError = objectMapper.readValue(result.getResponse().getContentAsString(), UserError.class);
-        verifyUserError(UserErrorCode.CODE_U03_INVALID_EMAIL, userError);
+        CustomError customError = objectMapper.readValue(result.getResponse().getContentAsString(), CustomError.class);
+        verifyUserError(ErrorCode.CODE_U03_INVALID_EMAIL, customError);
 
     }
 
@@ -119,8 +119,8 @@ public class CreateUserIntegrationTest {
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isBadRequest()).andReturn();
 
-        UserError userError = objectMapper.readValue(result.getResponse().getContentAsString(), UserError.class);
-        verifyUserError(UserErrorCode.CODE_U03_INVALID_EMAIL, userError);
+        CustomError customError = objectMapper.readValue(result.getResponse().getContentAsString(), CustomError.class);
+        verifyUserError(ErrorCode.CODE_U03_INVALID_EMAIL, customError);
 
     }
 
@@ -135,8 +135,8 @@ public class CreateUserIntegrationTest {
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isBadRequest()).andReturn();
 
-        UserError userError = objectMapper.readValue(result.getResponse().getContentAsString(), UserError.class);
-        verifyUserError(UserErrorCode.CODE_U03_INVALID_EMAIL, userError);
+        CustomError customError = objectMapper.readValue(result.getResponse().getContentAsString(), CustomError.class);
+        verifyUserError(ErrorCode.CODE_U03_INVALID_EMAIL, customError);
 
     }
 
@@ -150,8 +150,8 @@ public class CreateUserIntegrationTest {
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isBadRequest()).andReturn();
 
-        UserError userError = objectMapper.readValue(result.getResponse().getContentAsString(), UserError.class);
-        verifyUserError(UserErrorCode.CODE_U01_IMPOSSIBLE_DATE, userError);
+        CustomError customError = objectMapper.readValue(result.getResponse().getContentAsString(), CustomError.class);
+        verifyUserError(ErrorCode.CODE_U01_IMPOSSIBLE_DATE, customError);
 
     }
 
@@ -165,8 +165,8 @@ public class CreateUserIntegrationTest {
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isBadRequest()).andReturn();
 
-        UserError userError = objectMapper.readValue(result.getResponse().getContentAsString(), UserError.class);
-        verifyUserError(UserErrorCode.CODE_U02_WRONG_DATE_FORMAT, userError);
+        CustomError customError = objectMapper.readValue(result.getResponse().getContentAsString(), CustomError.class);
+        verifyUserError(ErrorCode.CODE_U02_WRONG_DATE_FORMAT, customError);
 
     }
 
@@ -180,8 +180,8 @@ public class CreateUserIntegrationTest {
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isBadRequest()).andReturn();
 
-        UserError userError = objectMapper.readValue(result.getResponse().getContentAsString(), UserError.class);
-        verifyUserError(UserErrorCode.CODE_U01_IMPOSSIBLE_DATE, userError);
+        CustomError customError = objectMapper.readValue(result.getResponse().getContentAsString(), CustomError.class);
+        verifyUserError(ErrorCode.CODE_U01_IMPOSSIBLE_DATE, customError);
     }
 
     @SneakyThrows
@@ -194,8 +194,8 @@ public class CreateUserIntegrationTest {
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isBadRequest()).andReturn();
 
-        UserError userError = objectMapper.readValue(result.getResponse().getContentAsString(), UserError.class);
-        verifyUserError(UserErrorCode.CODE_U02_WRONG_DATE_FORMAT, userError);
+        CustomError customError = objectMapper.readValue(result.getResponse().getContentAsString(), CustomError.class);
+        verifyUserError(ErrorCode.CODE_U02_WRONG_DATE_FORMAT, customError);
     }
 
     /*
@@ -211,8 +211,8 @@ public class CreateUserIntegrationTest {
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isBadRequest()).andReturn();
 
-        UserError userError = objectMapper.readValue(result.getResponse().getContentAsString(), UserError.class);
-        verifyUserError(UserErrorCode.CODE_U04_DUPLICATED_EMAIL, userError);
+        CustomError customError = objectMapper.readValue(result.getResponse().getContentAsString(), CustomError.class);
+        verifyUserError(ErrorCode.CODE_U04_DUPLICATED_EMAIL, customError);
 
     }
 

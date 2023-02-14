@@ -1,9 +1,9 @@
 package com.icesi.economiacircularicesi.controller;
 
-import com.icesi.economiacircularicesi.constant.UserErrorCode;
+import com.icesi.economiacircularicesi.constant.ErrorCode;
 import com.icesi.economiacircularicesi.dto.UserDTO.TermsAndConditionsDTO;
 import com.icesi.economiacircularicesi.dto.UserDTO.UserDTO;
-import com.icesi.economiacircularicesi.error.exception.UserError.UserException;
+import com.icesi.economiacircularicesi.error.exception.CustomError.CustomException;
 import com.icesi.economiacircularicesi.mapper.UserMapper;
 import com.icesi.economiacircularicesi.mapper.UserMapperImpl;
 import com.icesi.economiacircularicesi.service.UserService;
@@ -68,47 +68,47 @@ public class UserControllerTest {
     public void invalidEmailTestNoAt(){
         setupScenary();
         baseUserDTO.setEmail("jhon.doeemail.com");
-        verifyCreateUserExceptionThrown(UserErrorCode.CODE_U03_INVALID_EMAIL, baseUserDTO);
+        verifyCreateUserExceptionThrown(ErrorCode.CODE_U03_INVALID_EMAIL, baseUserDTO);
     }
 
     @Test
     public void invalidEmailTestNoLocalPart(){
         setupScenary();
         baseUserDTO.setEmail("@email.com");
-        verifyCreateUserExceptionThrown(UserErrorCode.CODE_U03_INVALID_EMAIL, baseUserDTO);
+        verifyCreateUserExceptionThrown(ErrorCode.CODE_U03_INVALID_EMAIL, baseUserDTO);
     }
     @Test
     public void invalidEmailTestNoDomain(){
         setupScenary();
         baseUserDTO.setEmail("jhon.doe@");
-        verifyCreateUserExceptionThrown(UserErrorCode.CODE_U03_INVALID_EMAIL, baseUserDTO);
+        verifyCreateUserExceptionThrown(ErrorCode.CODE_U03_INVALID_EMAIL, baseUserDTO);
     }
 
     @Test
     public void impossibleRegistrationDateTest(){
         setupScenary();
         baseUserDTO.setRegistrationDate(LocalDateTime.now().plusDays(1).toString());
-        verifyCreateUserExceptionThrown(UserErrorCode.CODE_U01_IMPOSSIBLE_DATE, baseUserDTO);
+        verifyCreateUserExceptionThrown(ErrorCode.CODE_U01_IMPOSSIBLE_DATE, baseUserDTO);
     }
 
     @Test
     public void wrongRegistrationDateFormatTest(){
         setupScenary();
         baseUserDTO.setRegistrationDate("Tuesday, January 10, 2023");
-        verifyCreateUserExceptionThrown(UserErrorCode.CODE_U02_WRONG_DATE_FORMAT, baseUserDTO);
+        verifyCreateUserExceptionThrown(ErrorCode.CODE_U02_WRONG_DATE_FORMAT, baseUserDTO);
     }
     @Test
     public void impossibleTAndCAcceptanceTest(){
         setupScenary();
         baseUserDTO.getTermsAndConditionsHistory().get(0).setAcceptanceDate(LocalDateTime.now().plusDays(1).toString());
-        verifyCreateUserExceptionThrown(UserErrorCode.CODE_U01_IMPOSSIBLE_DATE, baseUserDTO);
+        verifyCreateUserExceptionThrown(ErrorCode.CODE_U01_IMPOSSIBLE_DATE, baseUserDTO);
     }
 
     @Test
     public void wrongTAndCAcceptanceFormatTest(){
         setupScenary();
         baseUserDTO.getTermsAndConditionsHistory().get(0).setAcceptanceDate("Tuesday, January 10, 2023");
-        verifyCreateUserExceptionThrown(UserErrorCode.CODE_U02_WRONG_DATE_FORMAT, baseUserDTO);
+        verifyCreateUserExceptionThrown(ErrorCode.CODE_U02_WRONG_DATE_FORMAT, baseUserDTO);
     }
 
     @Test
@@ -136,14 +136,14 @@ public class UserControllerTest {
         verify(userService, times(1)).updateUser(baseUserDTO.getUserId(), userMapper.fromDTO(baseUserDTO));
     }
 
-    private void verifyCreateUserExceptionThrown(UserErrorCode expectedCode, UserDTO userDTO) {
+    private void verifyCreateUserExceptionThrown(ErrorCode expectedCode, UserDTO userDTO) {
 
         // Check if the corresponding exception is thrown when we are trying to
         // create a user containing an invalid attribute
         try {
             userController.createUser(userDTO);
             fail();
-        } catch (UserException exception) {
+        } catch (CustomException exception) {
 
             assertEquals(HttpStatus.BAD_REQUEST, exception.getHttpStatus());
             assertNotNull(exception.getError());

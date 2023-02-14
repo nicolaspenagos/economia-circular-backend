@@ -1,9 +1,8 @@
 package com.icesi.economiacircularicesi.error;
 
 import com.icesi.economiacircularicesi.constant.ErrorCode;
-import com.icesi.economiacircularicesi.error.exception.GeneralError.GeneralError;
-import com.icesi.economiacircularicesi.error.exception.UserError.UserError;
-import com.icesi.economiacircularicesi.error.exception.UserError.UserException;
+import com.icesi.economiacircularicesi.error.exception.CustomError.CustomError;
+import com.icesi.economiacircularicesi.error.exception.CustomError.CustomException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -19,13 +18,16 @@ import java.util.Map;
 @ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler
-    public ResponseEntity<UserError> handleException(UserException userException){
-        return new ResponseEntity<>(userException.getError(), userException.getHttpStatus());
+    public ResponseEntity<CustomError> handleException(CustomException customException){
+        return new ResponseEntity<>(customException.getError(), customException.getHttpStatus());
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<GeneralError> handleException(HttpMessageNotReadableException exception, HttpServletRequest request) {
-        return new ResponseEntity<>(new GeneralError(exception.getClass().getSimpleName(), exception.getMessage()), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<CustomError> handleException(HttpMessageNotReadableException exception, HttpServletRequest request) {
+
+        CustomError customError = new CustomError(ErrorCode.CODE_E02_NOT_PARSEABLE_JSON,ErrorCode.CODE_E02_NOT_PARSEABLE_JSON.getMessage());
+
+        return new ResponseEntity<>(customError, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

@@ -2,13 +2,13 @@ package com.icesi.economiacircularicesi.controller;
 
 import com.icesi.economiacircularicesi.api.UserAPI;
 import com.icesi.economiacircularicesi.constant.Regex;
-import com.icesi.economiacircularicesi.constant.UserErrorCode;
+import com.icesi.economiacircularicesi.constant.ErrorCode;
 import com.icesi.economiacircularicesi.dto.UserDTO.TermsAndConditionsDTO;
 import com.icesi.economiacircularicesi.dto.UserDTO.UserDTO;
 import com.icesi.economiacircularicesi.dto.UserDTO.UserNoPassDTO;
 import com.icesi.economiacircularicesi.mapper.UserMapper;
 import com.icesi.economiacircularicesi.service.UserService;
-import com.icesi.economiacircularicesi.utils.UserExceptionUtils;
+import com.icesi.economiacircularicesi.utils.ErrorExceptionUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -70,10 +70,10 @@ public class UserController implements UserAPI {
         try{
             LocalDateTime localDateTime = LocalDateTime.parse(date);
             if(localDateTime.isAfter(LocalDateTime.now())){
-                UserExceptionUtils.throwUserException(HttpStatus.BAD_REQUEST, UserErrorCode.CODE_U01_IMPOSSIBLE_DATE);
+                ErrorExceptionUtils.throwCustomException(HttpStatus.BAD_REQUEST, ErrorCode.CODE_U01_IMPOSSIBLE_DATE);
             }
         }catch (DateTimeParseException dateTimeParseException){
-            UserExceptionUtils.throwUserException(HttpStatus.BAD_REQUEST, UserErrorCode.CODE_U02_WRONG_DATE_FORMAT);
+            ErrorExceptionUtils.throwCustomException(HttpStatus.BAD_REQUEST, ErrorCode.CODE_U02_WRONG_DATE_FORMAT);
         }
     }
 
@@ -85,7 +85,7 @@ public class UserController implements UserAPI {
 
     private void validateEmail(String email){
         if(!email.matches(Regex.REGEX_EMAIL_PATTERN))
-            UserExceptionUtils.throwUserException(HttpStatus.BAD_REQUEST, UserErrorCode.CODE_U03_INVALID_EMAIL);
+            ErrorExceptionUtils.throwCustomException(HttpStatus.BAD_REQUEST, ErrorCode.CODE_U03_INVALID_EMAIL);
     }
 
 }

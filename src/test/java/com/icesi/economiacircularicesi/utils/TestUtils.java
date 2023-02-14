@@ -1,9 +1,9 @@
 package com.icesi.economiacircularicesi.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.icesi.economiacircularicesi.constant.UserErrorCode;
+import com.icesi.economiacircularicesi.constant.ErrorCode;
 import com.icesi.economiacircularicesi.dto.UserDTO.UserDTO;
-import com.icesi.economiacircularicesi.error.exception.UserError.UserError;
+import com.icesi.economiacircularicesi.error.exception.CustomError.CustomError;
 import lombok.SneakyThrows;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -17,11 +17,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class TestUtils {
-    public static void verifyUserError(UserErrorCode correctCode, UserError userError) {
+    public static void verifyUserError(ErrorCode correctCode, CustomError customError) {
 
-        assertNotNull(userError);
-        assertEquals(correctCode.getMessage(), userError.getMessage());
-        assertEquals(correctCode, userError.getCode());
+        assertNotNull(customError);
+        assertEquals(correctCode.getMessage(), customError.getMessage());
+        assertEquals(correctCode, customError.getCode());
 
     }
 

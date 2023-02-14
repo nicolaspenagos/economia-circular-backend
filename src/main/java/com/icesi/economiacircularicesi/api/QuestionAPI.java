@@ -1,12 +1,13 @@
 package com.icesi.economiacircularicesi.api;
 
 import com.icesi.economiacircularicesi.dto.QuestionDTO.QuestionDTO;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.icesi.economiacircularicesi.dto.UserDTO.UserDTO;
+import com.icesi.economiacircularicesi.dto.UserDTO.UserNoPassDTO;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RequestMapping("questions")
 public interface QuestionAPI {
@@ -15,24 +16,16 @@ public interface QuestionAPI {
 
     @GetMapping
     public List<QuestionDTO> getQuestions();
-}
 
-/*
-@RequestMapping("users")
-public interface UserAPI {
+    @DeleteMapping("/{questionId}")
+    public ResponseEntity<UUID> deleteQuestion(@PathVariable UUID questionId);
 
-    @PostMapping
-    public UserDTO createUser(@RequestBody UserDTO userDTO);
-    @GetMapping
-    public List<UserNoPassDTO> getUsers();
-    @GetMapping("/{userId}")
-    UserNoPassDTO getUser(@PathVariable UUID userId);
-    @DeleteMapping("/{userId}") //TODO What should deleteUser return? is this ok?
-    public ResponseEntity<UUID> deleteUser(@PathVariable UUID userId);
+    @GetMapping("/{questionId}")
+    QuestionDTO getQuestion(@PathVariable UUID questionId);
 
-    //TODO PATCH update users terms and conds
-    @PatchMapping("/{userId}")
-    public UserNoPassDTO updateUser(@PathVariable UUID userId, @RequestBody UserDTO userDTO);
+    @PatchMapping("/{questionId}")
+    public QuestionDTO updateQuestion(@PathVariable UUID questionId, @RequestBody QuestionDTO questionDTO);
+
 
 }
- */
+
