@@ -25,7 +25,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.UUID;
 
-import static com.icesi.economiacircularicesi.utils.TestUtils.baseUser;
+import static com.icesi.economiacircularicesi.utils.TestUtils.deserializeFromJsonFile;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.*;
@@ -61,7 +61,7 @@ public class UpdateUserIntegrationTest {
         String savedUsedId = savedUserPath.split("/")[2];
 
         //So this test check if all valentina's data is replaced by base user data
-        UserDTO user = baseUser(FilePaths.USER_JSON, objectMapper);
+        UserDTO user = deserializeFromJsonFile(FilePaths.USER_JSON, UserDTO.class, objectMapper);
         user.setUserId(UUID.fromString(savedUsedId));
         String body = objectMapper.writeValueAsString(user);
 

@@ -58,7 +58,6 @@ public class UserServiceImpl implements UserService {
 
     }
 
-
     @Override
     public List<User> getUsers() {
         return StreamSupport.stream(userRepository.findAll().spliterator(), false).collect(Collectors.toList());
@@ -93,7 +92,7 @@ public class UserServiceImpl implements UserService {
 
         saveTermsAndConditions(user.getUserId(), user.getTermsAndConditionsHistory());
 
-        return userRepository.save(user);//TODO Check this
+        return userRepository.save(user);
     }
 
     private void deleteUserAndRelations(User user) {

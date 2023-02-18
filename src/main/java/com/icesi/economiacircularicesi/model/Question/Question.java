@@ -30,8 +30,8 @@ public class Question {
     @Column(name = "question_text")
     private String questionText;
 
-    @Column(name = "is_mandatory")
-    private boolean isMandatory;
+    @Column(name = "mandatory")
+    private boolean mandatory;
 
     @Column(name = "type")
     @Enumerated(EnumType.STRING)

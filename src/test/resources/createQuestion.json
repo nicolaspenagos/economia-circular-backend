@@ -1,0 +1,13 @@
+{
+  "questionText":"Question statement",
+  "mandatory":true,
+  "questionOrder":1,
+  "type":"MULTIPLE_CHOICE",
+  "activity":"A1",
+  "questionOptions":[
+    {
+      "optionOrder":1,
+      "optionValue":"First option."
+    }
+  ]
+}

@@ -26,9 +26,9 @@ public class TestUtils {
     }
 
     @SneakyThrows
-    public static UserDTO baseUser(String fileName, ObjectMapper objectMapper){
-        String body = parseResourceToString("CreateUser.json");
-        return objectMapper.readValue(body, UserDTO.class);
+    public static <T> T deserializeFromJsonFile(String fileName, Class<T> targetType, ObjectMapper objectMapper) {
+        String body = parseResourceToString(fileName);
+        return objectMapper.readValue(body, targetType);
     }
 
     @SneakyThrows

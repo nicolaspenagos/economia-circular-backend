@@ -11,7 +11,7 @@
             </column>
             <column name="question_order" type="int" />
             <column name="question_text" type="varchar(255)" />
-            <column name="is_mandatory" type="boolean" />
+            <column name="mandatory" type="boolean" />
             <column name="type" type="varchar(255)" />
             <column name="activity" type="varchar(255)" />
         </createTable>

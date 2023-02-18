@@ -30,8 +30,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.icesi.economiacircularicesi.dto.UserDTO.UserDTO;
 import com.icesi.economiacircularicesi.constants.User.BaseUser;
 
-import static com.icesi.economiacircularicesi.utils.TestUtils.baseUser;
-import static com.icesi.economiacircularicesi.utils.TestUtils.verifyUserError;
+import static com.icesi.economiacircularicesi.utils.TestUtils.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
@@ -46,7 +45,6 @@ public class CreateUserIntegrationTest {
     private MockMvc mockMvc;
     @Autowired
     private WebApplicationContext webApplicationContext;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -63,9 +61,9 @@ public class CreateUserIntegrationTest {
 
     @SneakyThrows
     @Test
-    public void CreateValidUserIntegrationTest() {
+    public void createValidUserIntegrationTest() {
 
-        UserDTO user = baseUser(FilePaths.USER_JSON, objectMapper);
+        UserDTO user = deserializeFromJsonFile(FilePaths.USER_JSON, UserDTO.class, objectMapper);
         user.setEmail("test@email.com");//A different email of the base user is set to avoid conflicts with the data inserted in the db by other integration tests
         String body = objectMapper.writeValueAsString(user);
         System.out.println(body);
@@ -98,7 +96,7 @@ public class CreateUserIntegrationTest {
     @Test
     public void invalidEmailNoAtIntegrationTest() {
 
-        UserDTO baseUserDTO = baseUser(FilePaths.USER_JSON, objectMapper);
+        UserDTO baseUserDTO = deserializeFromJsonFile(FilePaths.USER_JSON, UserDTO.class, objectMapper);
         baseUserDTO.setEmail("jhon.doeemail.com");
         String body = objectMapper.writeValueAsString(baseUserDTO);
 
@@ -113,7 +111,7 @@ public class CreateUserIntegrationTest {
     @Test
     public void invalidEmailNoLocalPartIntegrationTest() {
 
-        UserDTO baseUserDTO = baseUser(FilePaths.USER_JSON, objectMapper);
+        UserDTO baseUserDTO = deserializeFromJsonFile(FilePaths.USER_JSON, UserDTO.class, objectMapper);
         baseUserDTO.setEmail("@email.com");
         String body = objectMapper.writeValueAsString(baseUserDTO);
 
@@ -129,7 +127,7 @@ public class CreateUserIntegrationTest {
     @Test
     public void invalidEmailNoDomainIntegrationTest(){
 
-        UserDTO baseUserDTO = baseUser(FilePaths.USER_JSON, objectMapper);
+        UserDTO baseUserDTO = deserializeFromJsonFile(FilePaths.USER_JSON, UserDTO.class, objectMapper);
         baseUserDTO.setEmail("jhon.doe@");
         String body = objectMapper.writeValueAsString(baseUserDTO);
 
@@ -144,7 +142,7 @@ public class CreateUserIntegrationTest {
     @Test
     public void impossibleRegistrationDateTest(){
 
-        UserDTO baseUserDTO = baseUser(FilePaths.USER_JSON, objectMapper);
+        UserDTO baseUserDTO = deserializeFromJsonFile(FilePaths.USER_JSON, UserDTO.class, objectMapper);
         baseUserDTO.setRegistrationDate(LocalDateTime.now().plusDays(1).toString());
         String body = objectMapper.writeValueAsString(baseUserDTO);
 
@@ -159,7 +157,7 @@ public class CreateUserIntegrationTest {
     @Test
     public void wrongRegistrationDateIntegrationTest(){
 
-        UserDTO baseUserDTO = baseUser(FilePaths.USER_JSON, objectMapper);
+        UserDTO baseUserDTO = deserializeFromJsonFile(FilePaths.USER_JSON, UserDTO.class, objectMapper);
         baseUserDTO.setRegistrationDate("Tuesday, January 10, 2023");
         String body = objectMapper.writeValueAsString(baseUserDTO);
 
@@ -174,7 +172,7 @@ public class CreateUserIntegrationTest {
     @Test
     public void impossibleTAndCAcceptanceIntegrationTest(){
 
-        UserDTO baseUserDTO = baseUser(FilePaths.USER_JSON, objectMapper);
+        UserDTO baseUserDTO = deserializeFromJsonFile(FilePaths.USER_JSON, UserDTO.class, objectMapper);
         baseUserDTO.getTermsAndConditionsHistory().get(0).setAcceptanceDate(LocalDateTime.now().plusDays(1).toString());
         String body = objectMapper.writeValueAsString(baseUserDTO);
 
@@ -188,7 +186,7 @@ public class CreateUserIntegrationTest {
     @Test
     public void wrongTAndCAcceptanceFormatIntegrationTest(){
 
-        UserDTO baseUserDTO = baseUser(FilePaths.USER_JSON, objectMapper);
+        UserDTO baseUserDTO = deserializeFromJsonFile(FilePaths.USER_JSON, UserDTO.class, objectMapper);
         baseUserDTO.getTermsAndConditionsHistory().get(0).setAcceptanceDate("Tuesday, January 10, 2023");
         String body = objectMapper.writeValueAsString(baseUserDTO);
 
@@ -205,7 +203,7 @@ public class CreateUserIntegrationTest {
     @Test
     public void duplicatedEmailIntegrationTest(){
 
-        UserDTO baseUserDTO = baseUser(FilePaths.USER_JSON, objectMapper);
+        UserDTO baseUserDTO = deserializeFromJsonFile(FilePaths.USER_JSON, UserDTO.class, objectMapper);
         baseUserDTO.setEmail("jhon.doe1@email.com");
         String body = objectMapper.writeValueAsString(baseUserDTO);
 

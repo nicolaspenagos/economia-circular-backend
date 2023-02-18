@@ -5,7 +5,6 @@ import com.icesi.economiacircularicesi.constants.Question.BaseQuestion;
 import com.icesi.economiacircularicesi.constants.Question.BaseQuestionOption;
 import com.icesi.economiacircularicesi.error.exception.CustomError.CustomException;
 import com.icesi.economiacircularicesi.mapper.QuestionMapper;
-import com.icesi.economiacircularicesi.mapper.QuestionMapperImpl;
 import com.icesi.economiacircularicesi.model.Question.Question;
 import com.icesi.economiacircularicesi.model.Question.QuestionOption;
 import com.icesi.economiacircularicesi.model.Question.QuestionType;
@@ -116,6 +115,7 @@ public class QuestionServiceTest {
 
     @Test
     public void updateQuestionTest(){
+
         setupScenary();
         when(questionRepository.findById(baseQuestion.getQuestionId())).thenReturn(Optional.of(baseQuestion));
         doNothing().when(questionMapper).updateQuestionFromQuestion(any(), any());
@@ -124,6 +124,7 @@ public class QuestionServiceTest {
         verify(questionRepository, times(1)).findById(baseQuestion.getQuestionId());
         verify(questionRepository, times(1)).save(baseQuestion);
         verify(questionOptionRepository, times(1)).save(any());
+
     }
 
 

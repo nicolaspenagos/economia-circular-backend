@@ -28,8 +28,8 @@ public class QuestionDTO {
     @NotBlank(message = "Question text may not be blank")
     private String questionText;
 
-    @NotNull(message = "IsMandatory must not be null")
-    private boolean isMandatory;
+    @NotNull(message = "mandatory must not be null")
+    private boolean mandatory;
 
     @NotNull(message = "Type must not be null")
     private QuestionType type;
