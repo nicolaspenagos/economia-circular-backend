@@ -4,7 +4,7 @@ import com.icesi.economiacircularicesi.constant.ErrorCode;
 import com.icesi.economiacircularicesi.constants.FilePaths;
 import com.icesi.economiacircularicesi.dto.UserDTO.TermsAndConditionsDTO;
 import com.icesi.economiacircularicesi.error.exception.CustomError.CustomError;
-import com.icesi.economiacircularicesi.constants.BaseTermsAndCondsAcceptance;
+import com.icesi.economiacircularicesi.constants.User.BaseTermsAndCondsAcceptance;
 import com.icesi.economiacircularicesi.mapper.UserMapper;
 import com.icesi.economiacircularicesi.mapper.UserMapperImpl;
 import lombok.SneakyThrows;
@@ -28,7 +28,7 @@ import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.icesi.economiacircularicesi.dto.UserDTO.UserDTO;
-import com.icesi.economiacircularicesi.constants.BaseUser;
+import com.icesi.economiacircularicesi.constants.User.BaseUser;
 
 import static com.icesi.economiacircularicesi.utils.TestUtils.baseUser;
 import static com.icesi.economiacircularicesi.utils.TestUtils.verifyUserError;

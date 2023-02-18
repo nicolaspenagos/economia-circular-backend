@@ -1,4 +1,4 @@
-package com.icesi.economiacircularicesi.constants;
+package com.icesi.economiacircularicesi.constants.User;
 
 import lombok.AllArgsConstructor;
 
@@ -10,7 +10,5 @@ public enum BaseTermsAndCondsAcceptance {
     LINK("www.link.com");
 
     public final String value;
-
-
 
 }

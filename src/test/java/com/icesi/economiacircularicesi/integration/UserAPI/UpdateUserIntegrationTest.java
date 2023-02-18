@@ -1,8 +1,8 @@
 package com.icesi.economiacircularicesi.integration.UserAPI;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.icesi.economiacircularicesi.constants.BaseTermsAndCondsAcceptance;
-import com.icesi.economiacircularicesi.constants.BaseUser;
+import com.icesi.economiacircularicesi.constants.User.BaseTermsAndCondsAcceptance;
+import com.icesi.economiacircularicesi.constants.User.BaseUser;
 import com.icesi.economiacircularicesi.constants.FilePaths;
 import com.icesi.economiacircularicesi.dto.UserDTO.TermsAndConditionsDTO;
 import com.icesi.economiacircularicesi.dto.UserDTO.UserDTO;

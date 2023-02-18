@@ -26,9 +26,7 @@ import java.util.stream.StreamSupport;
 public class QuestionServiceImpl implements QuestionService {
 
     private QuestionRepository questionRepository;
-
     private QuestionOptionRepository questionOptionRepository;
-
     private QuestionMapper questionMapper;
 
     @Override

@@ -1,7 +1,7 @@
 package com.icesi.economiacircularicesi.service;
 
 import com.icesi.economiacircularicesi.constant.ErrorCode;
-import com.icesi.economiacircularicesi.constants.BaseUser;
+import com.icesi.economiacircularicesi.constants.User.BaseUser;
 import com.icesi.economiacircularicesi.error.exception.CustomError.CustomException;
 import com.icesi.economiacircularicesi.mapper.UserMapper;
 import com.icesi.economiacircularicesi.mapper.UserMapperImpl;
@@ -93,7 +93,7 @@ public class UserServiceTest {
     public void updateUserTest(){
 
         setupScenary();
-        when(userRepository.findById(baseUser.getUserId())).thenReturn(Optional.ofNullable(baseUser));
+        when(userRepository.findById(baseUser.getUserId())).thenReturn(Optional.of(baseUser));
         doNothing().when(userMapper).updateUserFromUser(any(), any());
 
         userService.updateUser(baseUser.getUserId(), baseUser);

@@ -23,7 +23,6 @@ public class QuestionController implements QuestionAPI {
 
     @Override
     public QuestionDTO createQuestion(@Valid QuestionDTO questionDTO) {
-        System.out.println(questionDTO);
         return questionMapper.fromQuestion(questionService.createQuestion(questionMapper.fromDTO(questionDTO)));
     }
 
@@ -42,6 +41,7 @@ public class QuestionController implements QuestionAPI {
         return questionMapper.fromQuestion(questionService.getQuestion(questionId));
     }
 
+    //TODO How to use @valid with updateData
     @Override
     public QuestionDTO updateQuestion(UUID questionId, QuestionDTO questionDTO) {
         return questionMapper.fromQuestion(questionService.updateQuestion(questionId, questionMapper.fromDTO(questionDTO)));

@@ -7,8 +7,8 @@ import com.icesi.economiacircularicesi.error.exception.CustomError.CustomExcepti
 import com.icesi.economiacircularicesi.mapper.UserMapper;
 import com.icesi.economiacircularicesi.mapper.UserMapperImpl;
 import com.icesi.economiacircularicesi.service.UserService;
-import com.icesi.economiacircularicesi.constants.BaseTermsAndCondsAcceptance;
-import com.icesi.economiacircularicesi.constants.BaseUser;
+import com.icesi.economiacircularicesi.constants.User.BaseTermsAndCondsAcceptance;
+import com.icesi.economiacircularicesi.constants.User.BaseUser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;

@@ -1,9 +1,8 @@
-package com.icesi.economiacircularicesi.constants;
+package com.icesi.economiacircularicesi.constants.User;
 
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-
 public enum BaseUser {
 
     UUID("f89a5360-39d6-43ad-8798-ef9666666715"),

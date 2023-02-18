@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -36,6 +37,7 @@ public class QuestionDTO {
     @NotBlank(message = "Activity may not be blank")
     private String activity;
 
+    @Valid
     @NotNull
     @NotEmpty(message = "Options may not be empty")
     private List<QuestionOptionDTO> questionOptions;
