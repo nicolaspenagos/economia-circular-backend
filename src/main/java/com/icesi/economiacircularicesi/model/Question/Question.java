@@ -33,6 +33,9 @@ public class Question {
     @Column(name = "mandatory")
     private boolean mandatory;
 
+    @Column(name = "justify")
+    private boolean justify;
+
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
     private QuestionType type;

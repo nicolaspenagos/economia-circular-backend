@@ -1,6 +1,7 @@
 {
   "questionText":"Question statement",
   "mandatory":true,
+  "justify":true,
   "questionOrder":1,
   "type":"MULTIPLE_CHOICE",
   "activity":"A1",

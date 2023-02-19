@@ -31,6 +31,9 @@ public class QuestionDTO {
     @NotNull(message = "mandatory must not be null")
     private boolean mandatory;
 
+    @NotNull(message = "Justify must not be null")
+    private boolean justify;
+
     @NotNull(message = "Type must not be null")
     private QuestionType type;
 

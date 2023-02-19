@@ -76,6 +76,7 @@ public class CreateQuestionIntegrationTest {
         assertTrue(questionDTO instanceof QuestionDTO);
         assertThat(questionDTO, hasProperty("questionText", is("Question statement")));
         assertThat(questionDTO, hasProperty("mandatory", is(true)));
+        assertThat(questionDTO, hasProperty("justify", is(true)));
         assertThat(questionDTO, hasProperty("questionOrder", is(1)));
         assertThat(questionDTO, hasProperty("type", is(QuestionType.MULTIPLE_CHOICE)));
         assertThat(questionDTO, hasProperty("activity", is("A1")));

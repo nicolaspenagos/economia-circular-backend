@@ -12,6 +12,7 @@
             <column name="question_order" type="int" />
             <column name="question_text" type="varchar(255)" />
             <column name="mandatory" type="boolean" />
+            <column name="justify" type="boolean" />
             <column name="type" type="varchar(255)" />
             <column name="activity" type="varchar(255)" />
         </createTable>
