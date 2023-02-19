@@ -8,9 +8,9 @@ import java.util.UUID;
 
 public interface UserService {
 
-    public User createUser(User user);
-    public List<User> getUsers();
-    public User getUser(UUID userId);
-    public ResponseEntity<UUID> deleteUser(UUID userId);
-    public User updateUser(UUID userId, User user);
+    User createUser(User user);
+    List<User> getUsers();
+    User getUser(UUID userId);
+    ResponseEntity<UUID> deleteUser(UUID userId);
+    User updateUser(UUID userId, User user);
 }

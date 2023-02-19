@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <!-- Refer to https://docs.liquibase.com/change-types/community/create-table.html -->
+
+    <changeSet id="0d691c3a-ac1f-4476-a68d-2b1133e8d1ca" author="nicolas.penagos" failOnError="true">
+        <createTable tableName="activities">
+            <column name="activity_id" type="UUID">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+            <column name="description" type="varchar(255)" />
+            <column name="title" type="varchar(255)" />
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false" unique="true" />
+            </column>
+            <column name="score" type="double" />
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
+
