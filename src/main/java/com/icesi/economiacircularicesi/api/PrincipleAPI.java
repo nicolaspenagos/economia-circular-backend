@@ -1,6 +1,6 @@
 package com.icesi.economiacircularicesi.api;
 
-import com.icesi.economiacircularicesi.dto.ActivityDTO.ActivityDTO;
+import com.icesi.economiacircularicesi.dto.PrincipleDTO.PrincipleDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 import java.util.UUID;
 
-@RequestMapping("activities")
-public interface ActivityAPI {
+@RequestMapping("principles")
+public interface PrincipleAPI {
 
     @GetMapping
-    public List<ActivityDTO> getActivities();
+    public List<PrincipleDTO> getPrinciples();
 
-    @GetMapping("/{activityId}")
-    public ActivityDTO getActivity(@PathVariable UUID activityId);
+    @GetMapping("/{principleId}")
+    public PrincipleDTO getPrinciple(@PathVariable UUID principleId);
 
 }

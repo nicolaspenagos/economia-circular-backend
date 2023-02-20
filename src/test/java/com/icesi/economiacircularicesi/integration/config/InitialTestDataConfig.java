@@ -10,7 +10,7 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import javax.sql.DataSource;
 
 @Configuration
-public class InitialDataConfig {
+public class InitialTestDataConfig {
 
     @Autowired
     public void configureInitialData(DataSource dataSource, SpringLiquibase liquibase){

@@ -4,9 +4,9 @@
 
     <!-- Refer to https://docs.liquibase.com/change-types/community/create-table.html -->
 
-    <changeSet id="0d691c3a-ac1f-4476-a68d-2b1133e8d1ca" author="nicolas.penagos" failOnError="true">
-        <createTable tableName="activities">
-            <column name="activity_id" type="UUID">
+    <changeSet id="cd08aebe-35be-4cd3-a760-6e95098b01c5" author="nicolas.penagos" failOnError="true">
+        <createTable tableName="principles">
+            <column name="principle_id" type="UUID">
                 <constraints nullable="false" primaryKey="true" />
             </column>
             <column name="description" type="varchar" />
