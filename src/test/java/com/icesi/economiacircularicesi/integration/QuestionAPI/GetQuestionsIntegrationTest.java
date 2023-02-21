@@ -41,14 +41,13 @@ public class GetQuestionsIntegrationTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
     private ObjectMapper objectMapper;
-    private UserMapper userMapper;
 
     @BeforeEach
     public void init() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
         objectMapper = new ObjectMapper();
         objectMapper.findAndRegisterModules();
-        userMapper = new UserMapperImpl();
+
     }
 
     @SneakyThrows

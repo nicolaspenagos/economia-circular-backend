@@ -1,11 +1,8 @@
-package com.icesi.economiacircularicesi.integration.QuestionAPI;
-
+package com.icesi.economiacircularicesi.integration.PrincipleAPI;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.icesi.economiacircularicesi.dto.QuestionDTO.QuestionDTO;
-import com.icesi.economiacircularicesi.dto.QuestionDTO.QuestionOptionDTO;
+import com.icesi.economiacircularicesi.dto.ActivityDTO.ActivityDTO;
 
-import com.icesi.economiacircularicesi.model.Question.QuestionType;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,54 +28,54 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration
 @SpringBootTest
-public class GetQuestionIntegrationTest {
+public class GetActivityIntegrationTest {
 
     private MockMvc mockMvc;
     @Autowired
     private WebApplicationContext webApplicationContext;
     private ObjectMapper objectMapper;
 
-
     @BeforeEach
     public void init() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
         objectMapper = new ObjectMapper();
         objectMapper.findAndRegisterModules();
-
     }
 
     @SneakyThrows
     @Test
-    public void getQuestionIntegrationTest(){
+    public void getActivityIntegrationTest(){
 
-        // Path of a previously inserted question in the db
-        String path = "/questions/8090410a-0f48-462a-a1d3-e002a2a5ca1f";
+
+        String path = "/activities/";
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get(path)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("")).andExpect(status().isOk())
                 .andReturn();
 
-        QuestionDTO questionDTO = objectMapper.readValue(result.getResponse().getContentAsString(), QuestionDTO.class);
+        ActivityDTO[] activities = objectMapper.readValue(result.getResponse().getContentAsString(), ActivityDTO[].class);
 
-        QuestionOptionDTO optionDTO = questionDTO.getQuestionOptions().get(0);
+        assertNotNull(activities);
+        assertTrue(activities.length==2);
 
-        assertNotNull(questionDTO);
-        assertTrue(questionDTO instanceof QuestionDTO);
-        assertThat(questionDTO, hasProperty("questionText", is("Question statement")));
-        assertThat(questionDTO, hasProperty("mandatory", is(true)));
-        assertThat(questionDTO, hasProperty("justify", is(true)));
-        assertThat(questionDTO, hasProperty("questionOrder", is(1)));
-        assertThat(questionDTO, hasProperty("type", is(QuestionType.MULTIPLE_CHOICE)));
-        assertThat(questionDTO, hasProperty("activity", is("A1")));
+        ActivityDTO activityDTO = activities[0];
 
-        assertNotNull(questionDTO.getQuestionOptions());
-        assertTrue(questionDTO.getQuestionOptions().size()==1);
+        assertNotNull(activityDTO);
+        assertTrue(activityDTO instanceof ActivityDTO);
+        assertThat(activityDTO, hasProperty("description", is("Description text")));
+        assertThat(activityDTO, hasProperty("title", is("A1 Title")));
+        assertThat(activityDTO, hasProperty("name", is("A1")));
+        assertThat(activityDTO, hasProperty("score", is(1000.0)));
 
-        assertNotNull(optionDTO);
-        assertTrue(optionDTO instanceof QuestionOptionDTO);
-        assertThat(optionDTO, hasProperty("optionOrder", is(1)));
-        assertThat(optionDTO, hasProperty("optionValue", is("First option.")));
+        ActivityDTO secondActivityDTO = activities[1];
+
+        assertNotNull(secondActivityDTO);
+        assertTrue(secondActivityDTO instanceof ActivityDTO);
+        assertThat(secondActivityDTO, hasProperty("description", is("Description text 2")));
+        assertThat(secondActivityDTO, hasProperty("title", is("A2 Title")));
+        assertThat(secondActivityDTO, hasProperty("name", is("A2")));
+        assertThat(secondActivityDTO, hasProperty("score", is(2000.0)));
 
     }
 }

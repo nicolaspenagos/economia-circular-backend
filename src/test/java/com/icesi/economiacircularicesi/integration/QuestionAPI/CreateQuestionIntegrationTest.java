@@ -48,14 +48,14 @@ public class CreateQuestionIntegrationTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
     private ObjectMapper objectMapper;
-    private QuestionMapper questionMapper;
+
 
     @BeforeEach
     public void init(){
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
         objectMapper = new ObjectMapper();
         objectMapper.findAndRegisterModules();
-        questionMapper = new QuestionMapperImpl();
+
     }
 
     @SneakyThrows

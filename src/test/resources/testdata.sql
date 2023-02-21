@@ -18,3 +18,6 @@ INSERT INTO "QUESTION_OPTIONS" (question_option_id, option_order, option_value, 
 INSERT INTO "QUESTION_OPTIONS" (question_option_id, option_order, option_value, question_id) VALUES ('00cd2ffc-9d57-418e-93e5-bab7da822dc1',1,'First option.', '8090410a-0f48-462a-a1d3-e002a2a5ca1f');
 INSERT INTO "QUESTION_OPTIONS" (question_option_id, option_order, option_value, question_id) VALUES ('0e43ef5a-4744-4114-8d81-53eab19a7ebc',1,'First option.', 'b9589cbf-d309-447d-8b34-0b4d3a890c1f');
 INSERT INTO "QUESTION_OPTIONS" (question_option_id, option_order, option_value, question_id) VALUES ('482db004-5f3e-45ef-8cb8-fed17e5af69f',1,'First option.', '98af9133-409b-41ad-a7f8-3f0f7f3b92f1');
+
+INSERT INTO  "ACTIVITIES" (activity_id, description, title, name, score) values ('1ac711f2-682c-46e3-83aa-7fecf28f1082', 'Description text', 'A1 Title', 'A1', 1000.0);
+INSERT INTO  "ACTIVITIES" (activity_id, description, title, name, score) values ('3c5834fc-fa42-4170-abeb-d7cb43198554', 'Description text 2', 'A2 Title', 'A2', 2000.0);
