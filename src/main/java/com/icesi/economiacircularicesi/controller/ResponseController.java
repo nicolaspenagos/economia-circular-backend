@@ -7,6 +7,8 @@ import com.icesi.economiacircularicesi.service.ResponseService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 @RestController
 @AllArgsConstructor
 public class ResponseController implements ResponseAPI {
@@ -17,5 +19,11 @@ public class ResponseController implements ResponseAPI {
     @Override
     public ResponseDTO createResponse(ResponseDTO responseDTO) {
         return responseMapper.fromResponse(responseService.createResponse(responseMapper.fromDTO(responseDTO)));
+    }
+
+    @Override
+    public ResponseDTO updateResponse(UUID responseId, ResponseDTO responseDTO) {
+        return responseMapper.fromResponse(responseService.updateResponse(responseId, responseMapper.fromDTO(responseDTO)));
+        //    return questionMapper.fromQuestion(questionService.updateQuestion(questionId, questionMapper.fromDTO(questionDTO)));
     }
 }

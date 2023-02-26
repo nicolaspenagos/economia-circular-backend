@@ -74,7 +74,10 @@ public class UserServiceImpl implements UserService {
 
         Optional.ofNullable(getUser(userId))
                 .ifPresentOrElse(
-                        (user) -> deleteUserAndRelations(user),
+                        (user) -> {
+                            deleteUserRelations(user.getTermsAndConditionsHistory());
+                            userRepository.delete(user);
+                        },
                         () -> {
                             ErrorExceptionUtils.throwCustomException(HttpStatus.BAD_REQUEST, ErrorCode.CODE_U05_USER_NOT_FOUND);
                         }
@@ -88,6 +91,10 @@ public class UserServiceImpl implements UserService {
 
         User user = userRepository.findById(userId).orElseThrow(()-> new CustomException(HttpStatus.BAD_REQUEST, new CustomError(ErrorCode.CODE_U05_USER_NOT_FOUND, ErrorCode.CODE_U05_USER_NOT_FOUND.getMessage())));
 
+        if(userUpdate.getTermsAndConditionsHistory()!=null && !userUpdate.getTermsAndConditionsHistory().isEmpty())
+            deleteUserRelations(user.getTermsAndConditionsHistory());
+
+
         userMapper.updateUserFromUser(userUpdate, user);
 
         saveTermsAndConditions(user.getUserId(), user.getTermsAndConditionsHistory());
@@ -95,13 +102,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
-    private void deleteUserAndRelations(User user) {
+    private void deleteUserRelations(List<TermsAndConditions> termsAndConditions) {
 
-        for (TermsAndConditions currentTC : user.getTermsAndConditionsHistory()) {
+        for (TermsAndConditions currentTC : termsAndConditions) {
             termsAndConditionsRepository.delete(currentTC);
         }
-        userRepository.delete(user);
-
     }
 
 

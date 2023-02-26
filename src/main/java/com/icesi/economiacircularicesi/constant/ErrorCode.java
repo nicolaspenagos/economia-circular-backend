@@ -14,7 +14,8 @@ public enum ErrorCode {
     CODE_U05_USER_NOT_FOUND("User not found: The user you refer to does not exist"),
     CODE_E01_INVALID_ARGUMENTS("At least one property is invalid"),
     CODE_E02_NOT_PARSEABLE_JSON("HttpMessageNotReadableException: The JSON sent cannot be parsed"),
-    CODE_Q01_QUESTION_NOT_FOUND("Question not found: The question you refer to does not exist");
+    CODE_Q01_QUESTION_NOT_FOUND("Question not found: The question you refer to does not exist"),
+    CODE_R01_RESPONSE_NOT_FOUND("Response not found: The response you refer to does not exist");
 
     private String message;
 

@@ -11,6 +11,7 @@ import com.icesi.economiacircularicesi.model.Question.QuestionOption;
 import com.icesi.economiacircularicesi.repository.QuestionRepository.QuestionOptionRepository;
 import com.icesi.economiacircularicesi.repository.QuestionRepository.QuestionRepository;
 import com.icesi.economiacircularicesi.service.QuestionService;
+import com.icesi.economiacircularicesi.utils.CRUDRepositoryUtils;
 import com.icesi.economiacircularicesi.utils.ErrorExceptionUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -55,6 +56,11 @@ public class QuestionServiceImpl implements QuestionService {
 
         Question question = questionRepository.findById(questionId).orElseThrow(()->new CustomException(HttpStatus.BAD_REQUEST, new CustomError(ErrorCode.CODE_Q01_QUESTION_NOT_FOUND, ErrorCode.CODE_Q01_QUESTION_NOT_FOUND.getMessage())));
 
+
+        if (questionUpdate.getQuestionOptions()!=null && !questionUpdate.getQuestionOptions().isEmpty()){
+            deleteQuestionRelations(question.getQuestionOptions());// Deleting former options that are no longer used  deleteQuestionRelations(question.getQuestionOptions());
+        }
+
         questionMapper.updateQuestionFromQuestion(questionUpdate, question);
         saveQuestionOptions(questionId, question.getQuestionOptions());
 
@@ -77,7 +83,10 @@ public class QuestionServiceImpl implements QuestionService {
 
         Optional.ofNullable(getQuestion(questionId))
                 .ifPresentOrElse(
-                        (question) -> deleteQuestionAndRelations(question),
+                        (question) -> {
+                            deleteQuestionRelations(question.getQuestionOptions());
+                            questionRepository.delete(question);
+                            },
                         () -> {
                             ErrorExceptionUtils.throwCustomException(HttpStatus.BAD_REQUEST, ErrorCode.CODE_Q01_QUESTION_NOT_FOUND);
                         }
@@ -86,15 +95,12 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
 
-    private void deleteQuestionAndRelations(Question question) {
+    private void deleteQuestionRelations(List<QuestionOption> options) {
 
-        for (QuestionOption currentOptn : question.getQuestionOptions()) {
-            questionOptionRepository.delete(currentOptn);
+        for (QuestionOption currentOpt : options) {
+            questionOptionRepository.delete(currentOpt);
         }
-        questionRepository.delete(question);
 
     }
-
-
 
 }
