@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -58,6 +59,16 @@ public class ResponseServiceImpl implements ResponseService {
 
         return responseRepository.save(response);
 
+    }
+
+    @Override
+    public List<Response> getUserResponses(UUID userId) {
+        return responseRepository.findByUserResponses(userId).orElse(new ArrayList<>());
+    }
+
+    @Override
+    public List<Response> getUserActiveResponses(UUID userId) {
+        return responseRepository.findByUserActiveResponses(userId).orElse(new ArrayList<>());
     }
 
     private void deleteResponseRelations(List<ResponseOption> selectedOptions){

@@ -12,6 +12,9 @@
             <column name="response_date" type="date">
                 <constraints nullable="false" />
             </column>
+            <column name="user_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
             <column name="complete" type="boolean">
                 <constraints nullable="false" />
             </column>

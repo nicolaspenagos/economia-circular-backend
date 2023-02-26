@@ -15,5 +15,10 @@ public interface ResponseAPI {
    @PatchMapping("{responseId}")
    ResponseDTO updateResponse(@PathVariable UUID responseId, @RequestBody ResponseDTO responseDTO);
 
+   @GetMapping("users/{userId}")
+   List<ResponseDTO> getUserResponses(@PathVariable UUID userId);
+
+   @GetMapping("users/active/{userId}")
+   List<ResponseDTO> getActiveUserResponses(@PathVariable UUID userId);
 
 }

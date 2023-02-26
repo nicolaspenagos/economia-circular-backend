@@ -28,6 +28,9 @@ public class Response {
     @Column(name="response_date")
     private LocalDateTime responseDate;
 
+    @Column(name="user_id")
+    private UUID userId;
+
     @Column(name = "complete")
     private boolean complete;
 

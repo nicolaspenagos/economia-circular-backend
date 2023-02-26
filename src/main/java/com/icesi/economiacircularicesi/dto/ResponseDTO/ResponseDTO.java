@@ -1,10 +1,10 @@
 package com.icesi.economiacircularicesi.dto.ResponseDTO;
 
-import com.icesi.economiacircularicesi.model.Response.ResponseOption;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -19,6 +19,9 @@ public class ResponseDTO {
     private UUID responseId;
 
     private LocalDateTime responseDate;
+
+    @NotBlank
+    private UUID userId;
 
     @NotNull
     private boolean complete;

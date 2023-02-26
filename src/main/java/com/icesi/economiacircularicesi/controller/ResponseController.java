@@ -7,7 +7,9 @@ import com.icesi.economiacircularicesi.service.ResponseService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @AllArgsConstructor
@@ -24,6 +26,15 @@ public class ResponseController implements ResponseAPI {
     @Override
     public ResponseDTO updateResponse(UUID responseId, ResponseDTO responseDTO) {
         return responseMapper.fromResponse(responseService.updateResponse(responseId, responseMapper.fromDTO(responseDTO)));
-        //    return questionMapper.fromQuestion(questionService.updateQuestion(questionId, questionMapper.fromDTO(questionDTO)));
+    }
+
+    @Override
+    public List<ResponseDTO> getUserResponses(UUID userId) {
+        return  responseService.getUserResponses(userId).stream().map(responseMapper::fromResponse).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ResponseDTO> getActiveUserResponses(UUID userId) {
+        return responseService.getUserActiveResponses(userId).stream().map(responseMapper::fromResponse).collect(Collectors.toList());
     }
 }
