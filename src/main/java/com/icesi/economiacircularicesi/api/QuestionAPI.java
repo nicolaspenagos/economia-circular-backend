@@ -12,19 +12,19 @@ import java.util.UUID;
 @RequestMapping("questions")
 public interface QuestionAPI {
     @PostMapping
-    public QuestionDTO createQuestion(@RequestBody QuestionDTO questionDTO);
+    QuestionDTO createQuestion(@RequestBody QuestionDTO questionDTO);
 
     @GetMapping
-    public List<QuestionDTO> getQuestions();
+    List<QuestionDTO> getQuestions();
 
     @DeleteMapping("/{questionId}")
-    public ResponseEntity<UUID> deleteQuestion(@PathVariable UUID questionId);
+    ResponseEntity<UUID> deleteQuestion(@PathVariable UUID questionId);
 
     @GetMapping("/{questionId}")
     QuestionDTO getQuestion(@PathVariable UUID questionId);
 
     @PatchMapping("/{questionId}")
-    public QuestionDTO updateQuestion(@PathVariable UUID questionId, @RequestBody QuestionDTO questionDTO);
+    QuestionDTO updateQuestion(@PathVariable UUID questionId, @RequestBody QuestionDTO questionDTO);
 
 
 }

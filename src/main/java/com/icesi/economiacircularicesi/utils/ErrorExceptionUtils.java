@@ -10,4 +10,5 @@ public class ErrorExceptionUtils {
     public static void throwCustomException(HttpStatus httpStatus, ErrorCode code){
         throw new CustomException(httpStatus, new CustomError(code, code.getMessage()));
     }
+
 }

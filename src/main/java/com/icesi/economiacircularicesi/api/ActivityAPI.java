@@ -12,9 +12,10 @@ import java.util.UUID;
 public interface ActivityAPI {
 
     @GetMapping
-    public List<ActivityDTO> getActivities();
+    List<ActivityDTO> getActivities();
 
     @GetMapping("/{activityId}")
-    public ActivityDTO getActivity(@PathVariable UUID activityId);
+    ActivityDTO getActivity(@PathVariable UUID activityId);
+
 
 }

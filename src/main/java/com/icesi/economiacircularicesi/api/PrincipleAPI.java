@@ -12,9 +12,9 @@ import java.util.UUID;
 public interface PrincipleAPI {
 
     @GetMapping
-    public List<PrincipleDTO> getPrinciples();
+    List<PrincipleDTO> getPrinciples();
 
     @GetMapping("/{principleId}")
-    public PrincipleDTO getPrinciple(@PathVariable UUID principleId);
+    PrincipleDTO getPrinciple(@PathVariable UUID principleId);
 
 }

@@ -12,19 +12,19 @@ import java.util.UUID;
 public interface UserAPI {
 
     @PostMapping
-    public UserDTO createUser(@RequestBody UserDTO userDTO);
+    UserDTO createUser(@RequestBody UserDTO userDTO);
 
     @GetMapping
-    public List<UserNoPassDTO> getUsers();
+    List<UserNoPassDTO> getUsers();
 
     @GetMapping("/{userId}")
     UserNoPassDTO getUser(@PathVariable UUID userId);
 
     @DeleteMapping("/{userId}") //TODO What should deleteUser return? is this ok?
-    public ResponseEntity<UUID> deleteUser(@PathVariable UUID userId);
+    ResponseEntity<UUID> deleteUser(@PathVariable UUID userId);
 
     //TODO PATCH update users terms and conds
     @PatchMapping("/{userId}")
-    public UserNoPassDTO updateUser(@PathVariable UUID userId, @RequestBody UserDTO userDTO);
+    UserNoPassDTO updateUser(@PathVariable UUID userId, @RequestBody UserDTO userDTO);
 
 }

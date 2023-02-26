@@ -1,5 +1,7 @@
 package com.icesi.economiacircularicesi.service.impl;
 
+
+
 import com.icesi.economiacircularicesi.constant.ErrorCode;
 import com.icesi.economiacircularicesi.error.exception.CustomError.CustomError;
 import com.icesi.economiacircularicesi.error.exception.CustomError.CustomException;
@@ -59,6 +61,17 @@ public class QuestionServiceImpl implements QuestionService {
         return questionRepository.save(question);
     }
 
+    private void saveQuestionOptions(UUID questionId, List<QuestionOption> questionOptions){
+        for(QuestionOption currentOpt:questionOptions){
+
+            Question questionRef = new Question();
+            questionRef.setQuestionId(questionId);
+            currentOpt.setQuestion(questionRef);
+
+            questionOptionRepository.save(currentOpt);
+        }
+    }
+
     @Override
     public ResponseEntity<UUID> deleteQuestion(UUID questionId) {
 
@@ -82,15 +95,6 @@ public class QuestionServiceImpl implements QuestionService {
 
     }
 
-    private void saveQuestionOptions(UUID questionId, List<QuestionOption> questionOptions){
-        for(QuestionOption currentOpt:questionOptions){
 
-            Question questionRef = new Question();
-            questionRef.setQuestionId(questionId);
-            currentOpt.setQuestion(questionRef);
-
-            questionOptionRepository.save(currentOpt);
-        }
-    }
 
 }
