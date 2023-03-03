@@ -1,6 +1,7 @@
 package com.icesi.economiacircularicesi.api;
 
 import com.icesi.economiacircularicesi.dto.ResponseDTO.ResponseDTO;
+import com.icesi.economiacircularicesi.model.Response.Response;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,5 +21,8 @@ public interface ResponseAPI {
 
    @GetMapping("users/active/{userId}")
    List<ResponseDTO> getActiveUserResponses(@PathVariable UUID userId);
+
+   @GetMapping("{responseId}")
+   Response getResponse(@PathVariable UUID userId);
 
 }

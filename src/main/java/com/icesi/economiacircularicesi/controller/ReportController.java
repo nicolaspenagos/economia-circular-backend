@@ -17,8 +17,8 @@ public class ReportController implements ReportAPI {
     public ReportMapper reportMapper;
 
     @Override
-    public ReportDTO getUserReport(UUID userId) {
-        return reportMapper.fromResponse(reportService.getUserResult(userId));
+    public ReportDTO getUserReport(UUID userId, UUID responseId) {
+        return reportMapper.fromResponse(reportService.getUserReport(userId, responseId));
     }
 
 }

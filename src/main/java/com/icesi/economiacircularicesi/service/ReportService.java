@@ -6,6 +6,6 @@ import java.util.UUID;
 
 public interface ReportService {
 
-    Report getUserResult(UUID userId);
+    Report getUserReport(UUID userId, UUID responseId);
 
 }

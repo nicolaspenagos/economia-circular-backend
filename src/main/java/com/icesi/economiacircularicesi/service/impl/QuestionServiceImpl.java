@@ -67,6 +67,13 @@ public class QuestionServiceImpl implements QuestionService {
         return questionRepository.save(question);
     }
 
+    @Override
+    public List<Question> getQuestionsByActivity(String activity) {
+        return questionRepository.findByActivity(activity).orElse(null);
+    }
+
+
+
     private void saveQuestionOptions(UUID questionId, List<QuestionOption> questionOptions){
         for(QuestionOption currentOpt:questionOptions){
 
@@ -102,5 +109,6 @@ public class QuestionServiceImpl implements QuestionService {
         }
 
     }
+
 
 }

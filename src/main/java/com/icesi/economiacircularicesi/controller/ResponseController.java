@@ -3,6 +3,7 @@ package com.icesi.economiacircularicesi.controller;
 import com.icesi.economiacircularicesi.api.ResponseAPI;
 import com.icesi.economiacircularicesi.dto.ResponseDTO.ResponseDTO;
 import com.icesi.economiacircularicesi.mapper.ResponseMapper;
+import com.icesi.economiacircularicesi.model.Response.Response;
 import com.icesi.economiacircularicesi.service.ResponseService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,5 +37,10 @@ public class ResponseController implements ResponseAPI {
     @Override
     public List<ResponseDTO> getActiveUserResponses(UUID userId) {
         return responseService.getUserActiveResponses(userId).stream().map(responseMapper::fromResponse).collect(Collectors.toList());
+    }
+
+    @Override
+    public Response getResponse(UUID userId) {
+        return null;
     }
 }

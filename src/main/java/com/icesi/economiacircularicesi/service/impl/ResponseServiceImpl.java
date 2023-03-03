@@ -71,6 +71,11 @@ public class ResponseServiceImpl implements ResponseService {
         return responseRepository.findByUserActiveResponses(userId).orElse(new ArrayList<>());
     }
 
+    @Override
+    public Response getResponse(UUID responseId) {
+        return responseRepository.findById(responseId).orElse(null);
+    }
+
     private void deleteResponseRelations(List<ResponseOption> selectedOptions){
         for(ResponseOption currentOpt: selectedOptions){
             responseOptionRepository.delete(currentOpt);

@@ -17,4 +17,6 @@ public interface QuestionService {
 
     Question updateQuestion(UUID questionId, Question question);
 
+    List<Question> getQuestionsByActivity(String activity);
+
 }

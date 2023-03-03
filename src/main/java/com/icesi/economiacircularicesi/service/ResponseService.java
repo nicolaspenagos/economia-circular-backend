@@ -15,4 +15,6 @@ public interface ResponseService {
 
     List<Response> getUserActiveResponses(UUID userId);
 
+    Response getResponse(UUID responseId);
+
 }

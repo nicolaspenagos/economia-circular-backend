@@ -17,7 +17,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class User extends{
 
     @Id
     @Type(type = "org.hibernate.type.PostgresUUIDType")

@@ -10,7 +10,7 @@ import java.util.UUID;
 @RequestMapping("report")
 public interface ReportAPI {
 
-    @GetMapping("/{userId}")
-    ReportDTO getUserReport(@PathVariable UUID userId);
+    @GetMapping("/{userId}/{responseId}")
+    ReportDTO getUserReport(@PathVariable UUID userId, @PathVariable UUID responseId);
 
 }
