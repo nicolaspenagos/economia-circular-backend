@@ -22,7 +22,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.UUID;
 
-import static com.icesi.economiacircularicesi.utils.TestUtils.verifyUserError;
+import static com.icesi.economiacircularicesi.testsutils.TestUtils.verifyUserError;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 

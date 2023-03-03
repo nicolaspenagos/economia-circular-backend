@@ -6,7 +6,7 @@
 
     <changeSet id="def7cc01-73a4-43f8-842c-65cbd469cb29" author="nicolas.penagos" failOnError="true">
         <createTable tableName="questions">
-            <column name="question_id" type="UUID">
+            <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" />
             </column>
             <column name="question_order" type="int" />

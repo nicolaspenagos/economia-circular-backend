@@ -32,7 +32,7 @@ public class QuestionServiceTest {
     private QuestionServiceImpl questionService;
     private Question baseQuestion;
 
-    public void setupScenary(){
+    public void setupScenery(){
 
         baseQuestion = new Question(UUID.fromString(BaseQuestion.UUID.value), Integer.parseInt(BaseQuestion.ORDER.value), BaseQuestion.TEXT.value, Boolean.valueOf(BaseQuestion.IS_MANDOTORY.value), Boolean.valueOf(BaseQuestion.JUSTIFY.value),QuestionType.valueOf(BaseQuestion.TYPE.value), BaseQuestion.ACTIVITY.value, null);
 
@@ -58,7 +58,7 @@ public class QuestionServiceTest {
     @Test
     public void createQuestionTest(){
 
-        setupScenary();
+        setupScenery();
 
         when(questionRepository.save(baseQuestion)).thenReturn(baseQuestion);
         questionService.createQuestion(baseQuestion);
@@ -75,18 +75,18 @@ public class QuestionServiceTest {
 
     @Test
     public void getQuestionTest(){
-        setupScenary();
-        questionService.getQuestion(baseQuestion.getQuestionId());
-        verify(questionRepository, times(1)).findById(baseQuestion.getQuestionId());
+        setupScenery();
+        questionService.getQuestion(baseQuestion.getId());
+        verify(questionRepository, times(1)).findById(baseQuestion.getId());
     }
 
     @Test
     public void deleteQuestionTest(){
 
-        setupScenary();
+        setupScenery();
 
-        when(questionRepository.findById(baseQuestion.getQuestionId())).thenReturn(Optional.of(baseQuestion));
-        questionService.deleteQuestion(baseQuestion.getQuestionId());
+        when(questionRepository.findById(baseQuestion.getId())).thenReturn(Optional.of(baseQuestion));
+        questionService.deleteQuestion(baseQuestion.getId());
         verify(questionRepository, times(1)).delete(baseQuestion);
         verify(questionOptionRepository, times(1)).delete(baseQuestion.getQuestionOptions().get(0));
 
@@ -95,12 +95,12 @@ public class QuestionServiceTest {
     @Test
     public void questionNotFoundDeleteTest(){
 
-        setupScenary();
-        when(questionRepository.findById(baseQuestion.getQuestionId())).thenReturn(Optional.ofNullable(null));
+        setupScenery();
+        when(questionRepository.findById(baseQuestion.getId())).thenReturn(Optional.ofNullable(null));
 
         try{
 
-            questionService.deleteQuestion(baseQuestion.getQuestionId());
+            questionService.deleteQuestion(baseQuestion.getId());
             fail();
 
         }catch (CustomException exception){
@@ -116,12 +116,12 @@ public class QuestionServiceTest {
     @Test
     public void updateQuestionTest(){
 
-        setupScenary();
-        when(questionRepository.findById(baseQuestion.getQuestionId())).thenReturn(Optional.of(baseQuestion));
+        setupScenery();
+        when(questionRepository.findById(baseQuestion.getId())).thenReturn(Optional.of(baseQuestion));
         doNothing().when(questionMapper).updateQuestionFromQuestion(any(), any());
 
-        questionService.updateQuestion(baseQuestion.getQuestionId(), baseQuestion);
-        verify(questionRepository, times(1)).findById(baseQuestion.getQuestionId());
+        questionService.updateQuestion(baseQuestion.getId(), baseQuestion);
+        verify(questionRepository, times(1)).findById(baseQuestion.getId());
         verify(questionRepository, times(1)).save(baseQuestion);
         verify(questionOptionRepository, times(1)).save(any());
 

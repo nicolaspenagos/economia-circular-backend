@@ -1,5 +1,6 @@
 package com.icesi.economiacircularicesi.model.User;
 
+import com.icesi.economiacircularicesi.model.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,12 +18,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User extends{
-
-    @Id
-    @Type(type = "org.hibernate.type.PostgresUUIDType")
-    @Column(name = "user_id")
-    private UUID userId;
+public class User extends BaseEntity {
 
     @Column(name = "email")
     private String email;
@@ -54,9 +50,23 @@ public class User extends{
     @OneToMany(mappedBy = "user", targetEntity = TermsAndConditions.class)
     private List<TermsAndConditions> termsAndConditionsHistory;
 
-    @PrePersist
-    public void generateId() {this.userId = UUID.randomUUID();}
+    public User(UUID id, String email, String password, String name, String lastname, String position, String sector, String macrosector, String organization, LocalDateTime registrationDate, List<TermsAndConditions> termsAndConditionsHistory) {
 
+        super.setId(id);
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.lastname = lastname;
+        this.position = position;
+        this.sector = sector;
+        this.macrosector = macrosector;
+        this.organization = organization;
+        this.registrationDate = registrationDate;
+        this.termsAndConditionsHistory = termsAndConditionsHistory;
+
+    }
+    @PrePersist
+    public void generateId() {super.setId(UUID.randomUUID());}
 
 
 }

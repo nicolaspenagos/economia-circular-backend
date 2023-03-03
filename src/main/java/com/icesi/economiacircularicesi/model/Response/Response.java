@@ -24,6 +24,7 @@ public class Response {
     @Type(type = "org.hibernate.type.PostgresUUIDType")
     @Column(name = "response_id")
     private UUID responseId;
+    //TODO Extends BaseEntity
 
     @Column(name="response_date")
     private LocalDateTime responseDate;

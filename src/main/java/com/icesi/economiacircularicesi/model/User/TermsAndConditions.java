@@ -21,7 +21,7 @@ public class TermsAndConditions {
     @Id
     @Type(type = "org.hibernate.type.PostgresUUIDType")
     private UUID termsAndConditionsId;
-
+    //TODO Extends BaseEntity
     @Column(name = "acceptance_date")
     private LocalDateTime acceptanceDate;
 

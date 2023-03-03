@@ -25,7 +25,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.UUID;
 
-import static com.icesi.economiacircularicesi.utils.TestUtils.deserializeFromJsonFile;
+import static com.icesi.economiacircularicesi.testsutils.TestUtils.deserializeFromJsonFile;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.*;

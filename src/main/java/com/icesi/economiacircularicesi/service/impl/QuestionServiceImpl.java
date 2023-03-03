@@ -11,7 +11,6 @@ import com.icesi.economiacircularicesi.model.Question.QuestionOption;
 import com.icesi.economiacircularicesi.repository.QuestionRepository.QuestionOptionRepository;
 import com.icesi.economiacircularicesi.repository.QuestionRepository.QuestionRepository;
 import com.icesi.economiacircularicesi.service.QuestionService;
-import com.icesi.economiacircularicesi.utils.CRUDRepositoryUtils;
 import com.icesi.economiacircularicesi.utils.ErrorExceptionUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -36,7 +35,7 @@ public class QuestionServiceImpl implements QuestionService {
     public Question createQuestion(Question question) {
 
         Question savedQuestion = questionRepository.save(question);
-        saveQuestionOptions(savedQuestion.getQuestionId(), question.getQuestionOptions());
+        saveQuestionOptions(savedQuestion.getId(), question.getQuestionOptions());
         return savedQuestion;
     }
 
@@ -78,7 +77,7 @@ public class QuestionServiceImpl implements QuestionService {
         for(QuestionOption currentOpt:questionOptions){
 
             Question questionRef = new Question();
-            questionRef.setQuestionId(questionId);
+            questionRef.setId(questionId);
             currentOpt.setQuestion(questionRef);
 
             questionOptionRepository.save(currentOpt);

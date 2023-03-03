@@ -1,6 +1,6 @@
 package com.icesi.economiacircularicesi.model.Question;
 
-import com.icesi.economiacircularicesi.model.User.TermsAndConditions;
+import com.icesi.economiacircularicesi.model.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,12 +17,8 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Question {
+public class Question extends BaseEntity {
 
-    @Id
-    @Type(type = "org.hibernate.type.PostgresUUIDType")
-    @Column(name = "question_id")
-    private UUID questionId;
 
     @Column(name = "question_order")
     private int questionOrder;
@@ -45,10 +41,24 @@ public class Question {
 
     @OneToMany(mappedBy = "question", targetEntity = QuestionOption.class)
     private List<QuestionOption> questionOptions;
+    public Question(UUID id, int questionOrder, String questionText, boolean mandatory, boolean justify, QuestionType type, String activity, List<QuestionOption> questionOptions) {
+
+        super.setId(id);
+        this.questionOrder = questionOrder;
+        this.questionText = questionText;
+        this.mandatory = mandatory;
+        this.justify = justify;
+        this.type = type;
+        this.activity = activity;
+        this.questionOptions = questionOptions;
+
+    }
+
+
 
     @PrePersist
     public void generateId() {
-        this.questionId = UUID.randomUUID();
+        super.setId(UUID.randomUUID());
     }
 
 }

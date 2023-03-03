@@ -1,28 +1,16 @@
 package com.icesi.economiacircularicesi.integration.QuestionAPI;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.icesi.economiacircularicesi.constants.FilePaths;
-import com.icesi.economiacircularicesi.constants.User.BaseTermsAndCondsAcceptance;
-import com.icesi.economiacircularicesi.constants.User.BaseUser;
 import com.icesi.economiacircularicesi.dto.QuestionDTO.QuestionDTO;
 import com.icesi.economiacircularicesi.dto.QuestionDTO.QuestionOptionDTO;
-import com.icesi.economiacircularicesi.dto.UserDTO.TermsAndConditionsDTO;
-import com.icesi.economiacircularicesi.dto.UserDTO.UserDTO;
-import com.icesi.economiacircularicesi.mapper.QuestionMapper;
-import com.icesi.economiacircularicesi.mapper.QuestionMapperImpl;
-import com.icesi.economiacircularicesi.mapper.UserMapper;
-import com.icesi.economiacircularicesi.mapper.UserMapperImpl;
-import com.icesi.economiacircularicesi.model.Question.QuestionOption;
 import com.icesi.economiacircularicesi.model.Question.QuestionType;
 import lombok.SneakyThrows;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -31,7 +19,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import static com.icesi.economiacircularicesi.utils.TestUtils.deserializeFromJsonFile;
+import static com.icesi.economiacircularicesi.testsutils.TestUtils.deserializeFromJsonFile;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;

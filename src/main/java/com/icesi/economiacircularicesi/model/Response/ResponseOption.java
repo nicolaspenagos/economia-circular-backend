@@ -22,7 +22,7 @@ public class ResponseOption {
     @Type(type = "org.hibernate.type.PostgresUUIDType")
     @Column(name = "option_response_id")
     private UUID optionResponseId;
-
+    //TODO Extends BaseEntity
     @Column(name = "question_id_reference")
     private UUID questionIdReference;
 

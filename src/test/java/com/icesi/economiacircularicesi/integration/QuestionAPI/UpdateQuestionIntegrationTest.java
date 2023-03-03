@@ -4,8 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.icesi.economiacircularicesi.constants.FilePaths;
 import com.icesi.economiacircularicesi.dto.QuestionDTO.QuestionDTO;
 import com.icesi.economiacircularicesi.dto.QuestionDTO.QuestionOptionDTO;
-import com.icesi.economiacircularicesi.dto.UserDTO.UserDTO;
-import com.icesi.economiacircularicesi.dto.UserDTO.UserNoPassDTO;
 import com.icesi.economiacircularicesi.model.Question.QuestionType;
 import lombok.SneakyThrows;
 import org.hamcrest.Matchers;
@@ -25,7 +23,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.UUID;
 
-import static com.icesi.economiacircularicesi.utils.TestUtils.deserializeFromJsonFile;
+import static com.icesi.economiacircularicesi.testsutils.TestUtils.deserializeFromJsonFile;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;

@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword())); //Encrypt the password using Bcrypt encrypted hash
 
         User savedUser = userRepository.save(user);
-        saveTermsAndConditions(savedUser.getUserId(), user.getTermsAndConditionsHistory());
+        saveTermsAndConditions(savedUser.getId(), user.getTermsAndConditionsHistory());
 
         return savedUser;
 
@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
 
         for (TermsAndConditions currentTC : termsAndConditionsList) {
             User userRef = new User();
-            userRef.setUserId(userId);
+            userRef.setId(userId);
             currentTC.setUser(userRef);
 
             termsAndConditionsRepository.save(currentTC);
@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserService {
 
         userMapper.updateUserFromUser(userUpdate, user);
 
-        saveTermsAndConditions(user.getUserId(), user.getTermsAndConditionsHistory());
+        saveTermsAndConditions(user.getId(), user.getTermsAndConditionsHistory());
 
         return userRepository.save(user);
     }

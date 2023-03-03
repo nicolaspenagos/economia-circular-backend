@@ -24,7 +24,7 @@ public class Activity {
     @Type(type = "org.hibernate.type.PostgresUUIDType")
     @Column(name = "activity_id")
     private UUID activityId;
-
+    //TODO Extends BaseEntity
     @Column(name = "description")
     private String description;
 

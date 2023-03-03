@@ -24,7 +24,7 @@ public class Principle {
     @Type(type = "org.hibernate.type.PostgresUUIDType")
     @Column(name = "principle_id")
     private UUID principleId;
-
+    //TODO Extends BaseEntity
     @Column(name = "description")
     private String description;
 

@@ -12,7 +12,7 @@
             <column name="option_order" type="int" />
             <column name="option_value" type="varchar(255)" />
             <column name="question_id" type="UUID" >
-                <constraints primaryKey="true" nullable="false" references="questions(question_id)" foreignKeyName="fk-question-option"/>
+                <constraints primaryKey="true" nullable="false" references="questions(id)" foreignKeyName="fk-question-option"/>
             </column>
         </createTable>
     </changeSet>

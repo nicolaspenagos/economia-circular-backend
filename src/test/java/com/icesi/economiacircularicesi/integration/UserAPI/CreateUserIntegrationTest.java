@@ -30,7 +30,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.icesi.economiacircularicesi.dto.UserDTO.UserDTO;
 import com.icesi.economiacircularicesi.constants.User.BaseUser;
 
-import static com.icesi.economiacircularicesi.utils.TestUtils.*;
+import static com.icesi.economiacircularicesi.testsutils.TestUtils.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;

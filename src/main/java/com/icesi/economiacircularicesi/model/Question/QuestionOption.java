@@ -22,7 +22,7 @@ public class QuestionOption {
     @Type(type = "org.hibernate.type.PostgresUUIDType")
     @Column(name = "question_option_id")
     private UUID questionOptionId;
-
+    //TODO Extends BaseEntity
     @Column(name = "option_order")
     private int optionOrder;
     @Column(name="option_value")

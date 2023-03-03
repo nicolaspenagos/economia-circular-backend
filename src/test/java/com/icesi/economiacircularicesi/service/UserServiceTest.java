@@ -93,12 +93,12 @@ public class UserServiceTest {
     public void updateUserTest(){
 
         setupScenary();
-        when(userRepository.findById(baseUser.getUserId())).thenReturn(Optional.of(baseUser));
+        when(userRepository.findById(baseUser.getId())).thenReturn(Optional.of(baseUser));
         doNothing().when(userMapper).updateUserFromUser(any(), any());
 
-        userService.updateUser(baseUser.getUserId(), baseUser);
+        userService.updateUser(baseUser.getId(), baseUser);
 
-        verify(userRepository,times(1)).findById(baseUser.getUserId());
+        verify(userRepository,times(1)).findById(baseUser.getId());
         verify(userRepository, times(1)).save(baseUser);
         verify(termsAndConditionsRepository, times(1)).save(any());
 
@@ -120,9 +120,9 @@ public class UserServiceTest {
     public void deleteUserTest(){
 
         setupScenary();
-        when(userRepository.findById(baseUser.getUserId())).thenReturn(Optional.of(baseUser));
+        when(userRepository.findById(baseUser.getId())).thenReturn(Optional.of(baseUser));
 
-        userService.deleteUser(baseUser.getUserId());
+        userService.deleteUser(baseUser.getId());
 
         verify(termsAndConditionsRepository, times(1)).delete(baseUser.getTermsAndConditionsHistory().get(0));
         verify(userRepository, times(baseUser.getTermsAndConditionsHistory().size())).delete(baseUser);
@@ -133,11 +133,11 @@ public class UserServiceTest {
     public void userNotFoundDeleteTest(){
 
         setupScenary();
-        when(userRepository.findById(baseUser.getUserId())).thenReturn(Optional.ofNullable(null));
+        when(userRepository.findById(baseUser.getId())).thenReturn(Optional.ofNullable(null));
 
         try{
 
-            userService.deleteUser(baseUser.getUserId());
+            userService.deleteUser(baseUser.getId());
             fail();
 
         }catch (CustomException exception){

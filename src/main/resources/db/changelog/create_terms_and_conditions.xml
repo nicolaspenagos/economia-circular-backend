@@ -12,7 +12,7 @@
             <column name="link" type="varchar(255)" />
             <column name="acceptance_date" type="date" />
             <column name="user_id" type="UUID" >
-                <constraints primaryKey="true" nullable="false" references="users(user_id)" foreignKeyName="fk-user-tc-user"/>
+                <constraints primaryKey="true" nullable="false" references="users(id)" foreignKeyName="fk-user-tc-user"/>
             </column>
         </createTable>
     </changeSet>

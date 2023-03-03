@@ -1,4 +1,4 @@
-package com.icesi.economiacircularicesi.utils;
+package com.icesi.economiacircularicesi.testsutils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.icesi.economiacircularicesi.constant.ErrorCode;
