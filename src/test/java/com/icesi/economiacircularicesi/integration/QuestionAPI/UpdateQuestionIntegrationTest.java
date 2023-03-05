@@ -79,7 +79,7 @@ public class UpdateQuestionIntegrationTest {
         assertThat(questionDTO, hasProperty("justify", is(true)));
         assertThat(questionDTO, hasProperty("questionOrder", is(1)));
         assertThat(questionDTO, hasProperty("type", is(QuestionType.MULTIPLE_CHOICE)));
-        assertThat(questionDTO, hasProperty("activity", is("A1")));
+        assertThat(questionDTO, hasProperty("activityId", is(UUID.fromString("7c1e1808-2ad9-46c4-bd69-aff6c3fa111d"))));
 
         assertNotNull(questionDTO.getQuestionOptions());
         assertTrue(questionDTO.getQuestionOptions().size()==1);

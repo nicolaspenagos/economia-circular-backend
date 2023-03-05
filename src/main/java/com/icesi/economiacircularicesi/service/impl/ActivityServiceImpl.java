@@ -27,4 +27,10 @@ public class ActivityServiceImpl implements ActivityService {
         return activityRepository.findById(activityId).orElse(null);
     }
 
+    @Override
+    public Activity getActivityByName(String activityName) {
+        return null;
+    }
+
+
 }

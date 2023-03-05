@@ -24,6 +24,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.util.List;
+import java.util.UUID;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasProperty;
@@ -70,7 +71,7 @@ public class GetQuestionsIntegrationTest {
         assertThat(firstQuestion, hasProperty("justify", is(true)));
         assertThat(firstQuestion, hasProperty("questionOrder", is(1)));
         assertThat(firstQuestion, hasProperty("type", is(QuestionType.INCREMENTAL_SINGLE_ANSWER)));
-        assertThat(firstQuestion, hasProperty("activity", is("A2")));
+        assertThat(firstQuestion, hasProperty("activityId", is(UUID.fromString("1ac711f2-682c-46e3-83aa-7fecf28f1082"))));
 
         assertNotNull(firstQuestion.getQuestionOptions());
         assertTrue(firstQuestion.getQuestionOptions().size()==1);
@@ -92,7 +93,7 @@ public class GetQuestionsIntegrationTest {
         assertThat(secondQuestion, hasProperty("justify", is(true)));
         assertThat(secondQuestion, hasProperty("questionOrder", is(1)));
         assertThat(secondQuestion, hasProperty("type", is(QuestionType.SINGLE_ANSWER)));
-        assertThat(secondQuestion, hasProperty("activity", is("A11")));
+        assertThat(secondQuestion, hasProperty("activityId", is(UUID.fromString("200176e0-2600-40e4-87ee-1b832a425caf"))));
 
         assertNotNull(secondQuestion.getQuestionOptions());
         assertTrue(secondQuestion.getQuestionOptions().size()==1);

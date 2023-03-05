@@ -21,6 +21,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.UUID;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
@@ -70,7 +72,7 @@ public class GetQuestionIntegrationTest {
         assertThat(questionDTO, hasProperty("justify", is(true)));
         assertThat(questionDTO, hasProperty("questionOrder", is(1)));
         assertThat(questionDTO, hasProperty("type", is(QuestionType.MULTIPLE_CHOICE)));
-        assertThat(questionDTO, hasProperty("activity", is("A1")));
+        assertThat(questionDTO, hasProperty("activityId", is(UUID.fromString("1ac711f2-682c-46e3-83aa-7fecf28f1082"))));
 
         assertNotNull(questionDTO.getQuestionOptions());
         assertTrue(questionDTO.getQuestionOptions().size()==1);

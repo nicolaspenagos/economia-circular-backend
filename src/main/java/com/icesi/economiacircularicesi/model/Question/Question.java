@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.List;
@@ -36,12 +35,12 @@ public class Question extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private QuestionType type;
 
-    @Column(name = "activity")
-    private String activity;
+    @Column(name = "activity_id")
+    private UUID activityId;
 
     @OneToMany(mappedBy = "question", targetEntity = QuestionOption.class)
     private List<QuestionOption> questionOptions;
-    public Question(UUID id, int questionOrder, String questionText, boolean mandatory, boolean justify, QuestionType type, String activity, List<QuestionOption> questionOptions) {
+    public Question(UUID id, int questionOrder, String questionText, boolean mandatory, boolean justify, QuestionType type, UUID activityRef, List<QuestionOption> questionOptions) {
 
         super.setId(id);
         this.questionOrder = questionOrder;
@@ -49,7 +48,7 @@ public class Question extends BaseEntity {
         this.mandatory = mandatory;
         this.justify = justify;
         this.type = type;
-        this.activity = activity;
+        this.activityId = activityRef;
         this.questionOptions = questionOptions;
 
     }
