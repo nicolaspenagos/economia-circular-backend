@@ -13,8 +13,9 @@ import java.util.List;
 public class Report {
 
     private LocalDateTime date;
-
     private List<Score> reportByActivities;
     private List<Score> reportByPrinciples;
+
+
 
 }

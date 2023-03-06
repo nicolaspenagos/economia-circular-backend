@@ -6,11 +6,12 @@
 
     <changeSet id="b4ee73d2-cadb-49b1-aa9c-2b789c5742fe" author="nicolas.penagos" failOnError="true">
         <createTable tableName="question_options">
-            <column name="question_option_id" type="UUID">
+            <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" />
             </column>
             <column name="option_order" type="int" />
             <column name="option_value" type="varchar(255)" />
+            <column name="dependent_question_id" type="UUID" />
             <column name="question_id" type="UUID" >
                 <constraints primaryKey="true" nullable="false" references="questions(id)" foreignKeyName="fk-question-option"/>
             </column>

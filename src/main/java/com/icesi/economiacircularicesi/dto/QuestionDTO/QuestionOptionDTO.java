@@ -24,4 +24,6 @@ public class QuestionOptionDTO {
     @NotBlank(message = "Option value may not be blank")
     private String optionValue;
 
+    private UUID dependentQuestionId;
+
 }

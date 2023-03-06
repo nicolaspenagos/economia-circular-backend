@@ -1,6 +1,6 @@
 package com.icesi.economiacircularicesi.model.Question;
 
-import com.icesi.economiacircularicesi.model.User.User;
+import com.icesi.economiacircularicesi.model.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,25 +16,30 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class QuestionOption {
+public class QuestionOption extends BaseEntity {
 
-    @Id
-    @Type(type = "org.hibernate.type.PostgresUUIDType")
-    @Column(name = "question_option_id")
-    private UUID questionOptionId;
-    //TODO Extends BaseEntity
     @Column(name = "option_order")
     private int optionOrder;
     @Column(name="option_value")
     private String optionValue;
 
+    @Column(name="dependent_question_id")
+    private UUID dependentQuestionId;
+
     @ManyToOne(targetEntity = Question.class)
     @JoinColumn(name = "question_id")
     private Question question;
 
+    public QuestionOption(UUID id, int optionOrder, String optionValue, Question question) {
+        super.setId(id);
+        this.optionOrder = optionOrder;
+        this.optionValue = optionValue;
+        this.question = question;
+    }
+
     @PrePersist
     public void generateId() {
-       this.questionOptionId = UUID.randomUUID();
+        super.setId(UUID.randomUUID());
     }
 
 
