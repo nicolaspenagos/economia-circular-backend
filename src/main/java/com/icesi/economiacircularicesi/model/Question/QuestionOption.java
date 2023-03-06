@@ -26,6 +26,9 @@ public class QuestionOption extends BaseEntity {
     @Column(name="dependent_question_id")
     private UUID dependentQuestionId;
 
+    @Column(name="exclusive")
+    private boolean exclusive;
+
     @ManyToOne(targetEntity = Question.class)
     @JoinColumn(name = "question_id")
     private Question question;

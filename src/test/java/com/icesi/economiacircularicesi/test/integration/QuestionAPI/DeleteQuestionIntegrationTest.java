@@ -21,7 +21,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.UUID;
 
-import static com.icesi.economiacircularicesi.utils.TestUtils.verifyUserError;
+import static com.icesi.economiacircularicesi.utils.TestUtils.verifyError;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -65,7 +65,7 @@ public class DeleteQuestionIntegrationTest {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.delete("/questions/"+randomQuestionId).contentType(MediaType.APPLICATION_JSON).content("")).andExpect(status().isBadRequest()).andReturn();
 
         CustomError customError = objectMapper.readValue(result.getResponse().getContentAsString(), CustomError.class);
-        verifyUserError(ErrorCode.CODE_Q01_QUESTION_NOT_FOUND, customError);
+        verifyError(ErrorCode.CODE_Q01_QUESTION_NOT_FOUND, customError);
 
     }
 }

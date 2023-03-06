@@ -70,7 +70,7 @@ public class UpdateQuestionIntegrationTest {
 
         QuestionDTO questionDTO = objectMapper.readValue(result.getResponse().getContentAsString(), QuestionDTO.class);
 
-        QuestionOptionDTO optionDTO = questionDTO.getQuestionOptions().get(0);
+        QuestionOptionDTO optionDTO = questionDTO.getQuestionOptions().get(1);
 
         assertNotNull(questionDTO);
         assertTrue(questionDTO instanceof QuestionDTO);
@@ -82,7 +82,7 @@ public class UpdateQuestionIntegrationTest {
         assertThat(questionDTO, hasProperty("activityId", is(UUID.fromString("7c1e1808-2ad9-46c4-bd69-aff6c3fa111d"))));
 
         assertNotNull(questionDTO.getQuestionOptions());
-        assertTrue(questionDTO.getQuestionOptions().size()==1);
+        assertTrue(questionDTO.getQuestionOptions().size()==2);
 
         assertNotNull(optionDTO);
         assertTrue(optionDTO instanceof QuestionOptionDTO);

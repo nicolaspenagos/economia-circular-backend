@@ -1,8 +1,10 @@
 package com.icesi.economiacircularicesi.test.integration.QuestionAPI;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.icesi.economiacircularicesi.constant.ErrorCode;
 import com.icesi.economiacircularicesi.dto.QuestionDTO.QuestionDTO;
 import com.icesi.economiacircularicesi.dto.QuestionDTO.QuestionOptionDTO;
+import com.icesi.economiacircularicesi.error.exception.CustomError.CustomError;
 import com.icesi.economiacircularicesi.model.Question.QuestionType;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,6 +24,7 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.UUID;
 
 import static com.icesi.economiacircularicesi.utils.TestUtils.deserializeFromJsonFile;
+import static com.icesi.economiacircularicesi.utils.TestUtils.verifyError;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
@@ -60,7 +63,7 @@ public class CreateQuestionIntegrationTest {
 
         QuestionDTO questionDTO = objectMapper.readValue(result.getResponse().getContentAsString(), QuestionDTO.class);
 
-        QuestionOptionDTO optionDTO = questionDTO.getQuestionOptions().get(0);
+        QuestionOptionDTO optionDTO = questionDTO.getQuestionOptions().get(1);
 
         assertNotNull(questionDTO);
         assertTrue(questionDTO instanceof QuestionDTO);
@@ -72,13 +75,68 @@ public class CreateQuestionIntegrationTest {
         assertThat(questionDTO, hasProperty("activityId", is(UUID.fromString("7c1e1808-2ad9-46c4-bd69-aff6c3fa111d"))));
 
         assertNotNull(questionDTO.getQuestionOptions());
-        assertTrue(questionDTO.getQuestionOptions().size()==1);
+        assertTrue(questionDTO.getQuestionOptions().size()==2);
 
         assertNotNull(optionDTO);
         assertTrue(optionDTO instanceof QuestionOptionDTO);
         assertThat(optionDTO, hasProperty("optionOrder", is(1)));
         assertThat(optionDTO, hasProperty("optionValue", is("First option.")));
+        assertThat(optionDTO, hasProperty("exclusive", is(false)));
         assertThat(optionDTO, hasProperty("dependentQuestionId", is(UUID.fromString("39b4542c-b630-43d5-80a0-050b348b08c7"))));
 
     }
+
+    @SneakyThrows
+    @Test
+    public void createInvalidIncrementalQuestionIntegrationTest() {
+
+        QuestionDTO baseQuestionDTO = deserializeFromJsonFile("createQuestion.json", QuestionDTO.class, objectMapper);
+
+        baseQuestionDTO.setType(QuestionType.INCREMENTAL_SINGLE_CHOICE);
+
+        String body = objectMapper.writeValueAsString(baseQuestionDTO);
+
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/questions").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isBadRequest()).andReturn();
+
+        CustomError customError = objectMapper.readValue(result.getResponse().getContentAsString(), CustomError.class);
+        verifyError(ErrorCode.CODE_Q02_INVALID_QUESTION_OPTIONS, customError);
+
+    }
+
+    @SneakyThrows
+    @Test
+    public void createInvalidMultipleChoiceQuestionIntegrationTest() {
+
+        QuestionDTO baseQuestionDTO = deserializeFromJsonFile("createQuestion.json", QuestionDTO.class, objectMapper);
+
+        baseQuestionDTO.getQuestionOptions().get(1).setExclusive(true);
+
+        String body = objectMapper.writeValueAsString(baseQuestionDTO);
+
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/questions").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isBadRequest()).andReturn();
+
+        CustomError customError = objectMapper.readValue(result.getResponse().getContentAsString(), CustomError.class);
+        verifyError(ErrorCode.CODE_Q02_INVALID_QUESTION_OPTIONS, customError);
+
+    }
+
+    @SneakyThrows
+    @Test
+    public void createInvalidSingleChoiceQuestionIntegrationTest() {
+
+        QuestionDTO baseQuestionDTO = deserializeFromJsonFile("createQuestion.json", QuestionDTO.class, objectMapper);
+
+        baseQuestionDTO.setType(QuestionType.SINGLE_CHOICE);
+        baseQuestionDTO.getQuestionOptions().get(1).setExclusive(true);
+
+        String body = objectMapper.writeValueAsString(baseQuestionDTO);
+
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/questions").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isBadRequest()).andReturn();
+
+        CustomError customError = objectMapper.readValue(result.getResponse().getContentAsString(), CustomError.class);
+        verifyError(ErrorCode.CODE_Q02_INVALID_QUESTION_OPTIONS, customError);
+
+    }
+
+
 }

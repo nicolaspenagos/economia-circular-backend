@@ -1,7 +1,9 @@
 package com.icesi.economiacircularicesi.test.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.icesi.economiacircularicesi.constant.Question.BaseQuestion;
 import com.icesi.economiacircularicesi.controller.QuestionController;
+import com.icesi.economiacircularicesi.dto.QuestionDTO.QuestionDTO;
 import com.icesi.economiacircularicesi.mapper.QuestionMapper;
 import com.icesi.economiacircularicesi.mapper.QuestionMapperImpl;
 import com.icesi.economiacircularicesi.service.QuestionService;
@@ -10,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
+import static com.icesi.economiacircularicesi.utils.TestUtils.deserializeFromJsonFile;
 import static org.mockito.Mockito.*;
 
 public class QuestionControllerTest {
@@ -27,7 +30,9 @@ public class QuestionControllerTest {
 
     @Test
     public void createQuestionTest(){
-        questionController.createQuestion(any());
+        QuestionDTO baseQuestionDTO = deserializeFromJsonFile("createQuestion.json", QuestionDTO.class, new ObjectMapper());
+
+        questionController.createQuestion(baseQuestionDTO);
         verify(questionService, times(1)).createQuestion(any());
     }
 

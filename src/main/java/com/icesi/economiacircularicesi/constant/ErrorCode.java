@@ -15,6 +15,9 @@ public enum ErrorCode {
     CODE_E01_INVALID_ARGUMENTS("At least one property is invalid"),
     CODE_E02_NOT_PARSEABLE_JSON("HttpMessageNotReadableException: The JSON sent cannot be parsed"),
     CODE_Q01_QUESTION_NOT_FOUND("Question not found: The question you refer to does not exist"),
+
+    CODE_Q02_INVALID_QUESTION_OPTIONS("Invalid questions options: the exclusiveness of the options does not correspond with the type of the quesion")
+    ,
     CODE_R01_RESPONSE_NOT_FOUND("Response not found: The response you refer to does not exist");
 
     private String message;

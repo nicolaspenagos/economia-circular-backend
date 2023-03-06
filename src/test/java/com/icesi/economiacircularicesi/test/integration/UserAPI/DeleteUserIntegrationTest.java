@@ -22,7 +22,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.UUID;
 
-import static com.icesi.economiacircularicesi.utils.TestUtils.verifyUserError;
+import static com.icesi.economiacircularicesi.utils.TestUtils.verifyError;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -64,7 +64,7 @@ public class DeleteUserIntegrationTest {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.delete("/users/"+userId).contentType(MediaType.APPLICATION_JSON).content("")).andExpect(status().isBadRequest()).andReturn();
 
         CustomError customError = objectMapper.readValue(result.getResponse().getContentAsString(), CustomError.class);
-        verifyUserError(ErrorCode.CODE_U05_USER_NOT_FOUND, customError);
+        verifyError(ErrorCode.CODE_U05_USER_NOT_FOUND, customError);
     }
 
 

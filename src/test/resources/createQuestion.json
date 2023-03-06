@@ -7,8 +7,15 @@
   "activityId":"7c1e1808-2ad9-46c4-bd69-aff6c3fa111d",
   "questionOptions":[
     {
+      "optionOrder":0,
+      "optionValue":"Exclusive option.",
+      "exclusive":true,
+      "dependentQuestionId": "39b4542c-b630-43d5-80a0-050b348b08c7"
+    },
+    {
       "optionOrder":1,
       "optionValue":"First option.",
+      "exclusive":false,
       "dependentQuestionId": "39b4542c-b630-43d5-80a0-050b348b08c7"
     }
   ]

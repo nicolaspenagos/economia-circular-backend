@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class TestUtils {
-    public static void verifyUserError(ErrorCode correctCode, CustomError customError) {
+    public static void verifyError(ErrorCode correctCode, CustomError customError) {
 
         assertNotNull(customError);
         assertEquals(correctCode.getMessage(), customError.getMessage());

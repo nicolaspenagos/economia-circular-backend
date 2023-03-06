@@ -103,7 +103,7 @@ public class CreateUserIntegrationTest {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isBadRequest()).andReturn();
 
         CustomError customError = objectMapper.readValue(result.getResponse().getContentAsString(), CustomError.class);
-        verifyUserError(ErrorCode.CODE_U03_INVALID_EMAIL, customError);
+        verifyError(ErrorCode.CODE_U03_INVALID_EMAIL, customError);
 
     }
 
@@ -118,7 +118,7 @@ public class CreateUserIntegrationTest {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isBadRequest()).andReturn();
 
         CustomError customError = objectMapper.readValue(result.getResponse().getContentAsString(), CustomError.class);
-        verifyUserError(ErrorCode.CODE_U03_INVALID_EMAIL, customError);
+        verifyError(ErrorCode.CODE_U03_INVALID_EMAIL, customError);
 
     }
 
@@ -134,7 +134,7 @@ public class CreateUserIntegrationTest {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isBadRequest()).andReturn();
 
         CustomError customError = objectMapper.readValue(result.getResponse().getContentAsString(), CustomError.class);
-        verifyUserError(ErrorCode.CODE_U03_INVALID_EMAIL, customError);
+        verifyError(ErrorCode.CODE_U03_INVALID_EMAIL, customError);
 
     }
 
@@ -149,7 +149,7 @@ public class CreateUserIntegrationTest {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isBadRequest()).andReturn();
 
         CustomError customError = objectMapper.readValue(result.getResponse().getContentAsString(), CustomError.class);
-        verifyUserError(ErrorCode.CODE_U01_IMPOSSIBLE_DATE, customError);
+        verifyError(ErrorCode.CODE_U01_IMPOSSIBLE_DATE, customError);
 
     }
 
@@ -164,7 +164,7 @@ public class CreateUserIntegrationTest {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isBadRequest()).andReturn();
 
         CustomError customError = objectMapper.readValue(result.getResponse().getContentAsString(), CustomError.class);
-        verifyUserError(ErrorCode.CODE_U02_WRONG_DATE_FORMAT, customError);
+        verifyError(ErrorCode.CODE_U02_WRONG_DATE_FORMAT, customError);
 
     }
 
@@ -179,7 +179,7 @@ public class CreateUserIntegrationTest {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isBadRequest()).andReturn();
 
         CustomError customError = objectMapper.readValue(result.getResponse().getContentAsString(), CustomError.class);
-        verifyUserError(ErrorCode.CODE_U01_IMPOSSIBLE_DATE, customError);
+        verifyError(ErrorCode.CODE_U01_IMPOSSIBLE_DATE, customError);
     }
 
     @SneakyThrows
@@ -193,7 +193,7 @@ public class CreateUserIntegrationTest {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isBadRequest()).andReturn();
 
         CustomError customError = objectMapper.readValue(result.getResponse().getContentAsString(), CustomError.class);
-        verifyUserError(ErrorCode.CODE_U02_WRONG_DATE_FORMAT, customError);
+        verifyError(ErrorCode.CODE_U02_WRONG_DATE_FORMAT, customError);
     }
 
     /*
@@ -210,7 +210,7 @@ public class CreateUserIntegrationTest {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isBadRequest()).andReturn();
 
         CustomError customError = objectMapper.readValue(result.getResponse().getContentAsString(), CustomError.class);
-        verifyUserError(ErrorCode.CODE_U04_DUPLICATED_EMAIL, customError);
+        verifyError(ErrorCode.CODE_U04_DUPLICATED_EMAIL, customError);
 
     }
 
