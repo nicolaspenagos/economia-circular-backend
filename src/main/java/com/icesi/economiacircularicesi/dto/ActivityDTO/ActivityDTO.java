@@ -11,7 +11,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class ActivityDTO {
 
-    private UUID activityId;
+    private UUID id;
 
     private String description;
 
@@ -20,5 +20,7 @@ public class ActivityDTO {
     private String name;
 
     private double score;
+
+    private boolean containsDependentScoreQuestions;
 
 }

@@ -33,11 +33,12 @@ public class QuestionOption extends BaseEntity {
     @JoinColumn(name = "question_id")
     private Question question;
 
-    public QuestionOption(UUID id, int optionOrder, String optionValue, Question question) {
+    public QuestionOption(UUID id, int optionOrder, String optionValue, Question question, boolean exclusive) {
         super.setId(id);
         this.optionOrder = optionOrder;
         this.optionValue = optionValue;
         this.question = question;
+        this.exclusive = exclusive;
     }
 
     @PrePersist

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class Score {
 
     private String shortName;
-    private String fullName;
+    private String title;
     private double possibleScore;
     private double obtainedScore;
     private double obtainedPercentage;

@@ -6,7 +6,7 @@
 
     <changeSet id="0d691c3a-ac1f-4476-a68d-2b1133e8d1ca" author="nicolas.penagos" failOnError="true">
         <createTable tableName="activities">
-            <column name="activity_id" type="UUID">
+            <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" />
             </column>
             <column name="description" type="varchar" />
@@ -15,6 +15,7 @@
                 <constraints nullable="false" unique="true" />
             </column>
             <column name="score" type="double" />
+            <column name="contains_dependent_score_questions" type="boolean" />
         </createTable>
     </changeSet>
 </databaseChangeLog>

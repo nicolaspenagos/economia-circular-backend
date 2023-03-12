@@ -11,6 +11,7 @@ import com.icesi.economiacircularicesi.model.Response.ResponseOption;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -29,13 +30,47 @@ public class ReportServiceUtils {
         return -1;
     }
 
+    public Score rateActivity(Activity activity, Map<UUID, List<ResponseOption>> responseOptionsByQuestions, List<Question> questions){
+
+       // Score score = new Score(activity.getName(),activity.getTitle(), activity.getScore())
+        List<Question> activityQuestions = questions.stream().filter(q->q.getActivityId().equals(activity.getId())).collect(Collectors.toList());
+
+        Double activityObtainedScore = 0.0;
+
+
+        for(Question currentQuestion: activityQuestions){
+
+            Double questionTotalScore = activity.getScore()/activityQuestions.size();
+
+            System.out.println(currentQuestion.getActivityId());
+            activityObtainedScore += scoreQuestion(currentQuestion, responseOptionsByQuestions.get(currentQuestion.getId()), questionTotalScore);
+
+        }
+
+        return new Score(activity.getName(), activity.getTitle(), activity.getScore(), activityObtainedScore, activityObtainedScore/activity.getScore()*100.0);
+
+    }
+
+    public List<Score> getActivitiesScore(List<Activity> activities, Response response, List<Question> questions){
+
+        Map<UUID, Map<UUID, List<ResponseOption>>> optionsByActivityAndQuestion = getResponseOptionsMappedByActivityAndQuestion(response.getSelectedOptions(), activities, questions);
+
+        List<Score> activitiesScore = new ArrayList<>();
+
+        for(Activity currentActivity:activities){
+            activitiesScore.add(rateActivity(currentActivity, optionsByActivityAndQuestion.get(currentActivity.getId()), questions));
+        }
+
+        return activitiesScore;
+    }
+
     public  Map<UUID, Map<UUID, List<ResponseOption>>> getResponseOptionsMappedByActivityAndQuestion(List<ResponseOption> selectedOptions, List<Activity> activities, List<Question> questions){
 
         Map<UUID, Map<UUID, List<ResponseOption>>> responseOptsByActivityMap = new HashMap<>();
 
         // Setting all the keys
         for(Activity activity : activities){
-            responseOptsByActivityMap.put(activity.getActivityId(), new HashMap<>());
+            responseOptsByActivityMap.put(activity.getId(), new HashMap<>());
         }
 
         // Classifying the options by activities
@@ -55,26 +90,7 @@ public class ReportServiceUtils {
         return responseOptsByActivityMap;
     }
 
-    public Score rateActivity(Activity activity, Map<UUID, List<ResponseOption>> responseOptionsByQuestions, List<Question> questions){
-
-        List<Question> activityQuestions = questions.stream().filter(q->q.getActivityId().equals(activity.getActivityId())).collect(Collectors.toList());
-
-        for(Question currentQuestion: activityQuestions){
-
-            Double questionTotalScore = activity.getScore()/activityQuestions.size();
-            rateQuestion(currentQuestion, responseOptionsByQuestions.get(currentQuestion.getActivityId()), questionTotalScore);
-
-        }
-
-        return null;
-
-    }
-
-
-
-
-
-    public double rateQuestion(Question question, List<ResponseOption> selectedOptions, Double questionScore){
+    public double scoreQuestion(Question question, List<ResponseOption> selectedOptions, Double questionScore){
 
         QuestionType questionType = question.getType();
         List<QuestionOption> questionOptions = question.getQuestionOptions();
@@ -84,31 +100,20 @@ public class ReportServiceUtils {
         }
 
         if(questionType.equals(QuestionType.INCREMENTAL_SINGLE_CHOICE)){
-            return scoreIncrementalSingleAnswer(questionScore, questionOptions, selectedOptions.get(0));
+            return scoreIncrementalSingleChoice(questionScore, questionOptions, selectedOptions.get(0));
         }
 
         if(questionType.equals(QuestionType.SINGLE_CHOICE)){
-            // return scoreSingleAnswer();
+            System.out.println("-----------------------");
+            System.out.println(selectedOptions);
+            return scoreSingleChoice(questionScore, questionOptions, selectedOptions.get(0));
         }
 
         return 0.0;
 
     }
 
-    public List<Score> getActivitiesScore(List<Activity> activities, Response response, List<Question> questions){
-
-        Map<UUID, Map<UUID, List<ResponseOption>>> optionsByActivityAndQuestion = getResponseOptionsMappedByActivityAndQuestion(response.getSelectedOptions(), activities, questions);
-
-        List<Score> activitiesScore = new ArrayList<>();
-
-        for(Activity currentActivity:activities){
-            activitiesScore.add(rateActivity(currentActivity, optionsByActivityAndQuestion.get(currentActivity.getActivityId()), questions));
-        }
-
-        return activitiesScore;
-    }
-
-    public double scoreIncrementalSingleAnswer(double questionScore, List<QuestionOption> questionOptions, ResponseOption selectedOption){
+    public double scoreIncrementalSingleChoice(double questionScore, List<QuestionOption> questionOptions, ResponseOption selectedOption){
 
         // Due to the first option scores zero points we subtract one from the total options to calculate the incremental score of the rest of the options
         double scorePerOption = questionScore/(questionOptions.size()-1);
@@ -121,14 +126,37 @@ public class ReportServiceUtils {
 
     public double scoreMultipleChoice(double questionScore, List<QuestionOption> questionOptions,List<ResponseOption> selectedOptions ){
 
-        double scorePerOption = questionScore/questionOptions.size();
+        int numberOfExclusive = 0;
+
+        for(QuestionOption questionOption : questionOptions){
+            if(questionOption.isExclusive()){
+                numberOfExclusive++;
+            }
+        }
+
+        for(ResponseOption selectedOption: selectedOptions ){
+
+            QuestionOption questionOpt = questionOptions.get(ReportServiceUtils.getIndexOf(questionOptions, selectedOption.getOptionIdReference()));
+
+            if(questionOpt.isExclusive())
+                return 0.0;
+        }
+
+        double scorePerOption = questionScore/(questionOptions.size()-numberOfExclusive);
         int numSelectedOpts = selectedOptions.size();
         return scorePerOption*numSelectedOpts;
 
     }
 
-    public double scoreSingleAnswer(){
-        return 0.0;
+    public double scoreSingleChoice(double questionScore, List<QuestionOption> questionOptions, ResponseOption selectedOption){
+
+        QuestionOption selectedOpt = questionOptions.get(ReportServiceUtils.getIndexOf(questionOptions, selectedOption.getOptionIdReference()));
+
+        if(selectedOpt.isExclusive()){
+            return 0.0;
+        }
+
+        return questionScore;
     }
 
 
