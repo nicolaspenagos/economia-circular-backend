@@ -30,25 +30,36 @@ public class ReportServiceUtils {
         return -1;
     }
 
-    public Score rateActivity(Activity activity, Map<UUID, List<ResponseOption>> responseOptionsByQuestions, List<Question> questions){
-
-       // Score score = new Score(activity.getName(),activity.getTitle(), activity.getScore())
-        List<Question> activityQuestions = questions.stream().filter(q->q.getActivityId().equals(activity.getId())).collect(Collectors.toList());
+    public Score rateActivity(Activity activity, Map<UUID, List<ResponseOption>> responseOptionsByQuestions, List<Question> activityQuestions, int dependentExcludingOptsCounter){
 
         Double activityObtainedScore = 0.0;
 
-
         for(Question currentQuestion: activityQuestions){
 
-            Double questionTotalScore = activity.getScore()/activityQuestions.size();
+            Double questionTotalScore = activity.getScore()/(activityQuestions.size()-dependentExcludingOptsCounter);
 
-            System.out.println(currentQuestion.getActivityId());
             activityObtainedScore += scoreQuestion(currentQuestion, responseOptionsByQuestions.get(currentQuestion.getId()), questionTotalScore);
 
         }
-
         return new Score(activity.getName(), activity.getTitle(), activity.getScore(), activityObtainedScore, activityObtainedScore/activity.getScore()*100.0);
+    }
 
+    public Score rateDependentActivity(Activity activity, Map<UUID, List<ResponseOption>> responseOptionsByQuestions, List<Question> activityQuestions){
+
+        int excludingOptsCounter = 0;
+
+        for(Question currentQuestion: activityQuestions){
+
+            // Questions of a dependent activity are single choice questions
+            UUID selectedOptId = responseOptionsByQuestions.get(currentQuestion.getId()).get(0).getOptionIdReference();
+            QuestionOption selectedOpt = currentQuestion.getQuestionOptions().get(getIndexOf(currentQuestion.getQuestionOptions(), selectedOptId));
+
+            if(selectedOpt.isNotApply())
+                excludingOptsCounter++;
+
+        }
+
+        return rateActivity(activity, responseOptionsByQuestions, activityQuestions, excludingOptsCounter);
     }
 
     public List<Score> getActivitiesScore(List<Activity> activities, Response response, List<Question> questions){
@@ -58,9 +69,16 @@ public class ReportServiceUtils {
         List<Score> activitiesScore = new ArrayList<>();
 
         for(Activity currentActivity:activities){
-            activitiesScore.add(rateActivity(currentActivity, optionsByActivityAndQuestion.get(currentActivity.getId()), questions));
-        }
+            List<Question> activityQuestions = questions.stream().filter(q->q.getActivityId().equals(currentActivity.getId())).collect(Collectors.toList());
 
+            if(currentActivity.isContainsDependentScoreQuestions()){
+
+                activitiesScore.add(rateDependentActivity(currentActivity, optionsByActivityAndQuestion.get(currentActivity.getId()), activityQuestions));
+            }else{
+
+                activitiesScore.add(rateActivity(currentActivity, optionsByActivityAndQuestion.get(currentActivity.getId()), activityQuestions, 0));
+            }
+        }
         return activitiesScore;
     }
 
@@ -103,11 +121,11 @@ public class ReportServiceUtils {
             return scoreIncrementalSingleChoice(questionScore, questionOptions, selectedOptions.get(0));
         }
 
-        if(questionType.equals(QuestionType.SINGLE_CHOICE)){
-            System.out.println("-----------------------");
-            System.out.println(selectedOptions);
+        if(questionType.equals(QuestionType.SINGLE_CHOICE)||questionType.equals(QuestionType.SINGLE_CHOICE_DEPENDENT)){
             return scoreSingleChoice(questionScore, questionOptions, selectedOptions.get(0));
         }
+
+
 
         return 0.0;
 
@@ -158,6 +176,9 @@ public class ReportServiceUtils {
 
         return questionScore;
     }
+
+
+
 
 
 }

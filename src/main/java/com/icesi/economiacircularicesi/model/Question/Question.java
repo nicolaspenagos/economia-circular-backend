@@ -35,12 +35,15 @@ public class Question extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private QuestionType type;
 
+    @Column(name = "hint")
+    private String hint;
+
     @Column(name = "activity_id")
     private UUID activityId;
 
     @OneToMany(mappedBy = "question", targetEntity = QuestionOption.class)
     private List<QuestionOption> questionOptions;
-    public Question(UUID id, int questionOrder, String questionText, boolean mandatory, boolean justify, QuestionType type, UUID activityRef, List<QuestionOption> questionOptions) {
+    public Question(UUID id, int questionOrder, String questionText, boolean mandatory, boolean justify, QuestionType type, String hint,UUID activityRef, List<QuestionOption> questionOptions) {
 
         super.setId(id);
         this.questionOrder = questionOrder;
@@ -48,6 +51,7 @@ public class Question extends BaseEntity {
         this.mandatory = mandatory;
         this.justify = justify;
         this.type = type;
+        this.hint = hint;
         this.activityId = activityRef;
         this.questionOptions = questionOptions;
 

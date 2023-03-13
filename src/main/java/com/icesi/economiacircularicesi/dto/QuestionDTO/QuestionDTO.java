@@ -37,6 +37,8 @@ public class QuestionDTO {
     @NotNull(message = "Type must not be null")
     private QuestionType type;
 
+    private String hint;
+
     @NotNull(message = "Activity may not be null")
     private UUID activityId;
 

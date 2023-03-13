@@ -6,6 +6,7 @@ import com.icesi.economiacircularicesi.error.exception.CustomError.CustomExcepti
 import com.icesi.economiacircularicesi.model.Activity.Activity;
 import com.icesi.economiacircularicesi.model.Question.Question;
 import com.icesi.economiacircularicesi.model.Report.Report;
+import com.icesi.economiacircularicesi.model.Report.Score;
 import com.icesi.economiacircularicesi.model.Response.Response;
 import com.icesi.economiacircularicesi.model.User.User;
 import com.icesi.economiacircularicesi.service.*;
@@ -41,10 +42,12 @@ public class ReportServiceImpl implements ReportService {
         List<Activity> activities = activityService.getActivities();
         List<Question> questions = questionService.getQuestions();
 
+        List<Score> reportByActivities = reportServiceUtils.getActivitiesScore(activityService.getActivities(), response, questionService.getQuestions());
+
         // Building the report
         Report report = new Report();
         report.setDate(LocalDateTime.now());
-       // report.setReportByActivities(getActivitiesScore(activities, response));
+        report.setReportByActivities(reportByActivities);
 
         return report;
     }

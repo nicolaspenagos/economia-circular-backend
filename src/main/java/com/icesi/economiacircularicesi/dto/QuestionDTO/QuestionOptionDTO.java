@@ -23,8 +23,11 @@ public class QuestionOptionDTO {
     @NotBlank(message = "Option value may not be blank")
     private String optionValue;
 
-    @NotNull
+    @NotNull(message = "Exclusive must not be null")
     private boolean exclusive;
+
+    @NotNull(message = "Not apply must not be null")
+    private boolean notApply;
 
     private UUID dependentQuestionId;
 

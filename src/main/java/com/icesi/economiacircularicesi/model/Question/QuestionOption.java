@@ -29,16 +29,20 @@ public class QuestionOption extends BaseEntity {
     @Column(name="exclusive")
     private boolean exclusive;
 
+    @Column(name="not_apply")
+    private boolean notApply;
+
     @ManyToOne(targetEntity = Question.class)
     @JoinColumn(name = "question_id")
     private Question question;
 
-    public QuestionOption(UUID id, int optionOrder, String optionValue, Question question, boolean exclusive) {
+    public QuestionOption(UUID id, int optionOrder, String optionValue, Question question, boolean exclusive, boolean notApply) {
         super.setId(id);
         this.optionOrder = optionOrder;
         this.optionValue = optionValue;
         this.question = question;
         this.exclusive = exclusive;
+        this.notApply = notApply;
     }
 
     @PrePersist

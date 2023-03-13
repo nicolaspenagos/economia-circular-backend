@@ -34,9 +34,9 @@ public class QuestionServiceTest {
 
     public void setupScenery(){
 
-        baseQuestion = new Question(UUID.fromString(BaseQuestion.UUID.value), Integer.parseInt(BaseQuestion.ORDER.value), BaseQuestion.TEXT.value, Boolean.valueOf(BaseQuestion.IS_MANDOTORY.value), Boolean.valueOf(BaseQuestion.JUSTIFY.value),QuestionType.valueOf(BaseQuestion.TYPE.value), UUID.fromString(BaseQuestion.ACTIVITY_ID.value), null);
+        baseQuestion = new Question(UUID.fromString(BaseQuestion.UUID.value), Integer.parseInt(BaseQuestion.ORDER.value), BaseQuestion.TEXT.value, Boolean.valueOf(BaseQuestion.IS_MANDOTORY.value), Boolean.valueOf(BaseQuestion.JUSTIFY.value),QuestionType.valueOf(BaseQuestion.TYPE.value),"", UUID.fromString(BaseQuestion.ACTIVITY_ID.value), null);
 
-        QuestionOption questionOption = new QuestionOption(UUID.fromString(BaseQuestionOption.UUID.value), Integer.parseInt(BaseQuestionOption.ORDER.value), BaseQuestionOption.VALUE.value, baseQuestion, true);
+        QuestionOption questionOption = new QuestionOption(UUID.fromString(BaseQuestionOption.UUID.value), Integer.parseInt(BaseQuestionOption.ORDER.value), BaseQuestionOption.VALUE.value, baseQuestion, true, false);
 
         List<QuestionOption> options = new ArrayList<>();
         options.add(questionOption);

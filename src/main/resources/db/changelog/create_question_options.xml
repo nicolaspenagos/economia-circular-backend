@@ -12,6 +12,7 @@
             <column name="option_order" type="int" />
             <column name="option_value" type="varchar(255)" />
             <column name="exclusive" type="boolean" />
+            <column name="not_apply" type="boolean" />
             <column name="dependent_question_id" type="UUID" />
             <column name="question_id" type="UUID" >
                 <constraints primaryKey="true" nullable="false" references="questions(id)" foreignKeyName="fk-question-option"/>
