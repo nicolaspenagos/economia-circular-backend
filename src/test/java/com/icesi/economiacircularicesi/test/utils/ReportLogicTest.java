@@ -7,7 +7,7 @@ import com.icesi.economiacircularicesi.model.Question.QuestionType;
 import com.icesi.economiacircularicesi.model.Report.Score;
 import com.icesi.economiacircularicesi.model.Response.Response;
 import com.icesi.economiacircularicesi.model.Response.ResponseOption;
-import com.icesi.economiacircularicesi.utils.ReportServiceUtils;
+import com.icesi.economiacircularicesi.utils.ReportLogic;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,10 +21,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-public class ReportServiceUtilsTest {
+public class ReportLogicTest {
 
 
-    private ReportServiceUtils reportServiceUtils;
+    private ReportLogic reportLogic;
     private List<QuestionOption> questionOptions;
     private List<ResponseOption> selectedOptions;
     private List<ResponseOption> selectedOptions2;
@@ -60,7 +60,7 @@ public class ReportServiceUtilsTest {
 
     @BeforeEach
     public void init(){
-        reportServiceUtils = new ReportServiceUtils();
+        reportLogic = new ReportLogic();
     }
 
     public void setupOptsAndResponses(){
@@ -102,7 +102,6 @@ public class ReportServiceUtilsTest {
         questions.add(new Question(QUESTION_2_ID, 2, "Question text 2",true, false, QuestionType.INCREMENTAL_SINGLE_CHOICE, "",ACTIVITY_1_ID, questionOptions));
         questions.add(new Question(QUESTION_3_ID, 0, "Question text 3",true, false, QuestionType.SINGLE_CHOICE,"",ACTIVITY_2_ID, questionOptions));
         questions.add(new Question(QUESTION_4_ID, 3, "Question text 4",true, false, QuestionType.MULTIPLE_CHOICE,"",ACTIVITY_1_ID, questionOptions));
-
 
     }
 
@@ -146,10 +145,10 @@ public class ReportServiceUtilsTest {
 
         setupOptsAndResponses();
         // expected: 0 = selected exclusive
-        assertEquals(0.0, reportServiceUtils.scoreMultipleChoice(400.0, questionOptions, selectedOptions));
+        assertEquals(0.0, reportLogic.scoreMultipleChoice(400.0, questionOptions, selectedOptions));
 
         selectedOptions.remove(0);
-        assertEquals(200.0, reportServiceUtils.scoreMultipleChoice(400.0, questionOptions, selectedOptions));
+        assertEquals(200.0, reportLogic.scoreMultipleChoice(400.0, questionOptions, selectedOptions));
 
     }
 
@@ -159,19 +158,19 @@ public class ReportServiceUtilsTest {
         setupOptsAndResponses();
 
         // expected = 0.0 (first option)
-        assertEquals(0.0, reportServiceUtils.scoreIncrementalSingleChoice(400, questionOptions, selectedOptions.get(0)));
+        assertEquals(0.0, reportLogic.scoreIncrementalSingleChoice(400, questionOptions, selectedOptions.get(0)));
 
         // expected = 200 (second option), score per option = 400/(5-1)
-        assertEquals(200.0, reportServiceUtils.scoreIncrementalSingleChoice(400, questionOptions, selectedOptions.get(2)));
+        assertEquals(200.0, reportLogic.scoreIncrementalSingleChoice(400, questionOptions, selectedOptions.get(2)));
 
     }
 
     @Test
     public void scoreSingleChoiceTest(){
         setupOptsAndResponses();
-        assertEquals(0.0, reportServiceUtils.scoreSingleChoice(400.0, questionOptions, selectedOptions.get(0)));
+        assertEquals(0.0, reportLogic.scoreSingleChoice(400.0, questionOptions, selectedOptions.get(0)));
 
-        assertEquals(400.0, reportServiceUtils.scoreSingleChoice(400.0, questionOptions, selectedOptions.get(1)));
+        assertEquals(400.0, reportLogic.scoreSingleChoice(400.0, questionOptions, selectedOptions.get(1)));
     }
 
 
@@ -188,23 +187,23 @@ public class ReportServiceUtilsTest {
 
         // MULTIPLE_CHOICE
         question.setType(QuestionType.MULTIPLE_CHOICE);
-        assertEquals(0, reportServiceUtils.scoreQuestion(question,selectedOptions, 400.0));
+        assertEquals(0, reportLogic.scoreQuestion(question,selectedOptions, 400.0));
 
         temp.add(selectedOptions.get(1));
         temp.add(selectedOptions.get(2));
-        assertEquals(0, reportServiceUtils.scoreQuestion(question,selectedOptions, 400.0));
+        assertEquals(0, reportLogic.scoreQuestion(question,selectedOptions, 400.0));
 
         temp.clear();
         temp.add(selectedOptions.get(0));
 
         // INCREMENTAL_SINGLE_CHOICE
         question.setType(QuestionType.INCREMENTAL_SINGLE_CHOICE);
-        assertEquals(0.0, reportServiceUtils.scoreQuestion(question,temp, 400.0));
+        assertEquals(0.0, reportLogic.scoreQuestion(question,temp, 400.0));
 
         temp.clear();
         temp.add(selectedOptions.get(2));
 
-        assertEquals(200.0, reportServiceUtils.scoreQuestion(question,temp, 400.0));
+        assertEquals(200.0, reportLogic.scoreQuestion(question,temp, 400.0));
 
         // SINGLE_CHOICE
         question.setType(QuestionType.SINGLE_CHOICE);
@@ -212,12 +211,12 @@ public class ReportServiceUtilsTest {
         temp.clear();
         temp.add(selectedOptions.get(0));
 
-        assertEquals(0.0, reportServiceUtils.scoreQuestion(question, temp, 400.0));
+        assertEquals(0.0, reportLogic.scoreQuestion(question, temp, 400.0));
 
         temp.clear();
         temp.add(selectedOptions.get(2));
 
-        assertEquals(400.0, reportServiceUtils.scoreQuestion(question, temp, 400.0));
+        assertEquals(400.0, reportLogic.scoreQuestion(question, temp, 400.0));
 
     }
 
@@ -232,7 +231,7 @@ public class ReportServiceUtilsTest {
         selectedOptions.get(1).setQuestionIdReference(QUESTION_1_ID);
         selectedOptions.get(2).setQuestionIdReference(QUESTION_2_ID);
         selectedOptions.add(new ResponseOption(UUID.randomUUID(),QUESTION_3_ID,SELECTED_2PT0_ID,null));
-        Map<UUID, Map<UUID, List<ResponseOption>>> responseOptsByActivityMap = reportServiceUtils.getResponseOptionsMappedByActivityAndQuestion(selectedOptions, activities, questions);
+        Map<UUID, Map<UUID, List<ResponseOption>>> responseOptsByActivityMap = reportLogic.getResponseOptionsMappedByActivityAndQuestion(selectedOptions, activities, questions);
 
         ArrayList<ResponseOption> temp = new ArrayList<>();
         temp.add(selectedOptions.get(0));
@@ -260,12 +259,12 @@ public class ReportServiceUtilsTest {
 
         Activity activity = activities.get(0); // Getting ACTIVITY_1 from setup
 
-        Map<UUID, List<ResponseOption>> responseOptionsByQuestions = reportServiceUtils.getResponseOptionsMappedByActivityAndQuestion(selectedOptions2, activities, questions).get(activity.getId()); // Getting the map
+        Map<UUID, List<ResponseOption>> responseOptionsByQuestions = reportLogic.getResponseOptionsMappedByActivityAndQuestion(selectedOptions2, activities, questions).get(activity.getId()); // Getting the map
 
         questions.remove(2); // To remove the question from activity 2
-        Score activityScore = reportServiceUtils.rateActivity(activities.get(0),responseOptionsByQuestions, questions, 0);
+        Score activityScore = reportLogic.rateActivity(activities.get(0),responseOptionsByQuestions, questions, 0);
 
-        assertEquals(activity.getName(),activityScore.getShortName());
+        assertEquals(activity.getName(),activityScore.getShortname());
         assertEquals(activity.getTitle(),activityScore.getTitle());
         assertEquals(activity.getScore(), activityScore.getPossibleScore());
 
@@ -290,19 +289,19 @@ public class ReportServiceUtilsTest {
 
         Response response = new Response(UUID.randomUUID(), LocalDateTime.now(), UUID.randomUUID() ,true, selectedOptions2);
 
-        List<Score> activitiesScore = reportServiceUtils.getActivitiesScore(activities, response, questions);
+        List<Score> activitiesScore = reportLogic.getActivitiesScore(activities, response, questions);
 
         Score score1 = activitiesScore.get(0);
         Score score2 = activitiesScore.get(1);
 
 
-        assertThat(score1, hasProperty("shortName", is("A1")));
+        assertThat(score1, hasProperty("shortname", is("A1")));
         assertThat(score1, hasProperty("title", is("ACTIVITY 1")));
         assertThat(score1, hasProperty("possibleScore", is(600.0)));
         assertThat(score1, hasProperty("obtainedScore", is(300.0)));
         assertThat(score1, hasProperty("obtainedPercentage", is(50.0)));
 
-        assertThat(score2, hasProperty("shortName", is("A2")));
+        assertThat(score2, hasProperty("shortname", is("A2")));
         assertThat(score2, hasProperty("title", is("ACTIVITY 2")));
         assertThat(score2, hasProperty("possibleScore", is(400.0)));
         assertThat(score2, hasProperty("obtainedScore", is(400.0)));
@@ -310,7 +309,7 @@ public class ReportServiceUtilsTest {
 
         Score score3 = activitiesScore.get(2);
 
-        assertThat(score3, hasProperty("shortName", is("A3")));
+        assertThat(score3, hasProperty("shortname", is("A3")));
         assertThat(score3, hasProperty("title", is("ACTIVITY 3")));
         assertThat(score3, hasProperty("possibleScore", is(400.0)));
         assertThat(score3, hasProperty("obtainedScore", is(200.0)));

@@ -78,4 +78,5 @@ public class GetActivityIntegrationTest {
         assertThat(secondActivityDTO, hasProperty("score", is(2000.0)));
 
     }
+
 }

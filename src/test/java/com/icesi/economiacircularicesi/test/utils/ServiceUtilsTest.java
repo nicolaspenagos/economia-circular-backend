@@ -2,7 +2,7 @@ package com.icesi.economiacircularicesi.test.utils;
 
 import com.icesi.economiacircularicesi.model.Question.Question;
 import com.icesi.economiacircularicesi.model.User.User;
-import com.icesi.economiacircularicesi.utils.ReportServiceUtils;
+import com.icesi.economiacircularicesi.utils.ReportLogic;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -61,11 +61,11 @@ public class ServiceUtilsTest {
         setupUsersScenery();
         usersList.get(0).setId(id);
 
-        int index = ReportServiceUtils.getIndexOf(usersList, id);
+        int index = ReportLogic.getIndexOf(usersList, id);
         assertTrue(index == 0);
         assertTrue(usersList.get(index).getName().equals("Nicolas"));
 
-        assertTrue(ReportServiceUtils.getIndexOf(usersList, UUID.randomUUID())==-1);
+        assertTrue(ReportLogic.getIndexOf(usersList, UUID.randomUUID())==-1);
 
     }
 
@@ -75,11 +75,11 @@ public class ServiceUtilsTest {
         setupQuestionsScenery();
         questionsList.get(2).setId(id);
 
-        int index = ReportServiceUtils.getIndexOf(questionsList, id);
+        int index = ReportLogic.getIndexOf(questionsList, id);
         assertTrue(index == 2);
         assertTrue(questionsList.get(index).getQuestionText().equals("Txt3"));
 
-        assertTrue(ReportServiceUtils.getIndexOf(questionsList, UUID.randomUUID())==-1);
+        assertTrue(ReportLogic.getIndexOf(questionsList, UUID.randomUUID())==-1);
 
     }
 

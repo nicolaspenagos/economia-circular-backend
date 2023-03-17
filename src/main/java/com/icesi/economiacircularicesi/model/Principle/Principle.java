@@ -1,15 +1,14 @@
 package com.icesi.economiacircularicesi.model.Principle;
 
+import com.icesi.economiacircularicesi.model.Activity.Activity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Set;
 import java.util.UUID;
 
 @Data
@@ -36,5 +35,13 @@ public class Principle {
 
     @Column(name = "score")
     private double score;
+
+    @ManyToMany
+    @JoinTable(
+            name = "principle_activity",
+            joinColumns = @JoinColumn(name = "principle_id"),
+            inverseJoinColumns = @JoinColumn(name = "activity_id"))
+    private Set<Activity> activitySet;
+
 
 }

@@ -1,7 +1,9 @@
 package com.icesi.economiacircularicesi.utils;
 
+import com.icesi.economiacircularicesi.constant.ErrorCode;
 import com.icesi.economiacircularicesi.model.Activity.Activity;
 import com.icesi.economiacircularicesi.model.BaseEntity;
+import com.icesi.economiacircularicesi.model.Principle.Principle;
 import com.icesi.economiacircularicesi.model.Question.Question;
 import com.icesi.economiacircularicesi.model.Question.QuestionOption;
 import com.icesi.economiacircularicesi.model.Question.QuestionType;
@@ -9,15 +11,15 @@ import com.icesi.economiacircularicesi.model.Report.Score;
 import com.icesi.economiacircularicesi.model.Response.Response;
 import com.icesi.economiacircularicesi.model.Response.ResponseOption;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
-import java.text.DecimalFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
 @AllArgsConstructor
-public class ReportServiceUtils {
+public class ReportLogic {
 
     public static <T extends BaseEntity> int  getIndexOf(List<T> list, UUID id){
 
@@ -30,6 +32,31 @@ public class ReportServiceUtils {
         return -1;
     }
 
+    public List<Score> getPrinciplesScore(List<Principle> principles, List<Activity> activities, List<Score> activitiesScore){
+
+        List<Score> principlesScore = new ArrayList<>();
+
+        for(Principle principle: principles){
+            double principleObtainedScore = 0.0;
+
+            Iterator<Activity> iterator = principle.getActivitySet().iterator();
+            while(iterator.hasNext()){
+                Activity activity = iterator.next();
+                Score activityScore = activitiesScore.get(getIndexOf(activities, activity.getId()));
+                principleObtainedScore += activityScore.getObtainedScore()*getActivityWeighing(principle, activity);
+            }
+
+            principlesScore.add(new Score(principle.getPrincipleId(), principle.getTitle(), principle.getName(), principle.getScore(), principleObtainedScore,  principleObtainedScore/principle.getScore()*100.0));
+
+        }
+
+        return principlesScore;
+    }
+
+    public double getActivityWeighing(Principle principle, Activity activity){
+        return activity.getScore()/(principle.getScore()/principle.getActivitySet().size());
+    }
+
     public Score rateActivity(Activity activity, Map<UUID, List<ResponseOption>> responseOptionsByQuestions, List<Question> activityQuestions, int dependentExcludingOptsCounter){
 
         Double activityObtainedScore = 0.0;
@@ -37,11 +64,10 @@ public class ReportServiceUtils {
         for(Question currentQuestion: activityQuestions){
 
             Double questionTotalScore = activity.getScore()/(activityQuestions.size()-dependentExcludingOptsCounter);
-
             activityObtainedScore += scoreQuestion(currentQuestion, responseOptionsByQuestions.get(currentQuestion.getId()), questionTotalScore);
 
         }
-        return new Score(activity.getName(), activity.getTitle(), activity.getScore(), activityObtainedScore, activityObtainedScore/activity.getScore()*100.0);
+        return new Score(activity.getId(),activity.getName(), activity.getTitle(), activity.getScore(), activityObtainedScore, activityObtainedScore/activity.getScore()*100.0);
     }
 
     public Score rateDependentActivity(Activity activity, Map<UUID, List<ResponseOption>> responseOptionsByQuestions, List<Question> activityQuestions){
@@ -72,10 +98,8 @@ public class ReportServiceUtils {
             List<Question> activityQuestions = questions.stream().filter(q->q.getActivityId().equals(currentActivity.getId())).collect(Collectors.toList());
 
             if(currentActivity.isContainsDependentScoreQuestions()){
-
                 activitiesScore.add(rateDependentActivity(currentActivity, optionsByActivityAndQuestion.get(currentActivity.getId()), activityQuestions));
             }else{
-
                 activitiesScore.add(rateActivity(currentActivity, optionsByActivityAndQuestion.get(currentActivity.getId()), activityQuestions, 0));
             }
         }
@@ -136,7 +160,7 @@ public class ReportServiceUtils {
         // Due to the first option scores zero points we subtract one from the total options to calculate the incremental score of the rest of the options
         double scorePerOption = questionScore/(questionOptions.size()-1);
 
-        QuestionOption selectedOpt = questionOptions.get(ReportServiceUtils.getIndexOf(questionOptions, selectedOption.getOptionIdReference()));
+        QuestionOption selectedOpt = questionOptions.get(ReportLogic.getIndexOf(questionOptions, selectedOption.getOptionIdReference()));
 
         return scorePerOption*selectedOpt.getOptionOrder();
 
@@ -154,7 +178,7 @@ public class ReportServiceUtils {
 
         for(ResponseOption selectedOption: selectedOptions ){
 
-            QuestionOption questionOpt = questionOptions.get(ReportServiceUtils.getIndexOf(questionOptions, selectedOption.getOptionIdReference()));
+            QuestionOption questionOpt = questionOptions.get(ReportLogic.getIndexOf(questionOptions, selectedOption.getOptionIdReference()));
 
             if(questionOpt.isExclusive())
                 return 0.0;
@@ -168,7 +192,7 @@ public class ReportServiceUtils {
 
     public double scoreSingleChoice(double questionScore, List<QuestionOption> questionOptions, ResponseOption selectedOption){
 
-        QuestionOption selectedOpt = questionOptions.get(ReportServiceUtils.getIndexOf(questionOptions, selectedOption.getOptionIdReference()));
+        QuestionOption selectedOpt = questionOptions.get(ReportLogic.getIndexOf(questionOptions, selectedOption.getOptionIdReference()));
 
         if(selectedOpt.isExclusive()){
             return 0.0;
@@ -176,8 +200,6 @@ public class ReportServiceUtils {
 
         return questionScore;
     }
-
-
 
 
 

@@ -2,7 +2,7 @@ package com.icesi.economiacircularicesi.test.service;
 
 import com.icesi.economiacircularicesi.service.*;
 import com.icesi.economiacircularicesi.service.impl.ReportServiceImpl;
-import com.icesi.economiacircularicesi.utils.ReportServiceUtils;
+import com.icesi.economiacircularicesi.utils.ReportLogic;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +15,8 @@ public class ReportServiceTest {
     private ResponseService responseService;
     private QuestionService questionService;
     private ActivityService activityService;
-    private ReportServiceUtils reportServiceUtil;
+    private ReportLogic reportServiceUtil;
+    private PrincipleService principleService;
 
 
     @BeforeEach
@@ -25,8 +26,9 @@ public class ReportServiceTest {
         responseService = mock(ResponseService.class);
         questionService = mock(QuestionService.class);
         activityService = mock(ActivityService.class);
-        reportServiceUtil = mock(ReportServiceUtils.class);
-        reportService = new ReportServiceImpl(userService, responseService, questionService, activityService, reportServiceUtil);
+        reportServiceUtil = mock(ReportLogic.class);
+        principleService = mock(PrincipleService.class);
+        reportService = new ReportServiceImpl(userService, responseService, questionService, activityService, principleService,reportServiceUtil);
 
     }
 

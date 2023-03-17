@@ -21,3 +21,11 @@ INSERT INTO "QUESTION_OPTIONS" (id, option_order, option_value, question_id, exc
 
 INSERT INTO  "ACTIVITIES" (id, description, title, name, score, contains_dependent_score_questions) values ('1ac711f2-682c-46e3-83aa-7fecf28f1082', 'Description text', 'A1 Title', 'A1', 1000.0, false);
 INSERT INTO  "ACTIVITIES" (id, description, title, name, score, contains_dependent_score_questions) values ('3c5834fc-fa42-4170-abeb-d7cb43198554', 'Description text 2', 'A2 Title', 'A2', 2000.0,  false);
+
+
+INSERT INTO  "PRINCIPLES" (principle_id, description, title, name, score) values ('840c6bbb-3f35-4210-b4ad-22b364533a64', 'Description text', 'P1 Title', 'P1', 1000.0);
+
+INSERT INTO "PRINCIPLE_ACTIVITY" (principle_id, activity_id) values ('840c6bbb-3f35-4210-b4ad-22b364533a64', '1ac711f2-682c-46e3-83aa-7fecf28f1082');
+
+
+

@@ -10,5 +10,6 @@
     <include file="create_terms_and_conditions.xml" relativeToChangelogFile="true" />
     <include file="create_question.xml" relativeToChangelogFile="true" />
     <include file="create_question_options.xml" relativeToChangelogFile="true" />
+    <include file="create_principle_activity.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

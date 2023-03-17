@@ -48,7 +48,7 @@ public class ResponseServiceImpl implements ResponseService {
     @Override
     public Response updateResponse(UUID responseId, Response responseUpdate) {
 
-        Response response = responseRepository.findById(responseId).orElseThrow(()-> new CustomException(HttpStatus.BAD_REQUEST, new CustomError(ErrorCode.CODE_R01_RESPONSE_NOT_FOUND, ErrorCode.CODE_R01_RESPONSE_NOT_FOUND.getMessage())));
+        Response response = responseRepository.findById(responseId).orElseThrow(()-> new CustomException(HttpStatus.BAD_REQUEST, new CustomError(ErrorCode.CODE_R02_RESPONSE_NOT_FOUND, ErrorCode.CODE_R02_RESPONSE_NOT_FOUND.getMessage())));
 
         if(responseUpdate.getSelectedOptions()!= null && !responseUpdate.getSelectedOptions().isEmpty())
             deleteResponseRelations(response.getSelectedOptions());

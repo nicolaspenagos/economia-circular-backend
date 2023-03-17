@@ -4,7 +4,6 @@ import com.icesi.economiacircularicesi.constant.ErrorCode;
 import com.icesi.economiacircularicesi.constant.User.BaseUser;
 import com.icesi.economiacircularicesi.error.exception.CustomError.CustomException;
 import com.icesi.economiacircularicesi.mapper.UserMapper;
-import com.icesi.economiacircularicesi.mapper.UserMapperImpl;
 import com.icesi.economiacircularicesi.model.User.TermsAndConditions;
 import com.icesi.economiacircularicesi.model.User.User;
 import com.icesi.economiacircularicesi.repository.UserRepository.TermsAndConditionsRepository;
@@ -69,7 +68,7 @@ public class UserServiceTest {
     @BeforeEach
     private void init(){
 
-        userMapper = mock(UserMapperImpl.class) ;
+        userMapper = mock(UserMapper.class) ;
         userRepository = mock(UserRepository.class);
         termsAndConditionsRepository = mock(TermsAndConditionsRepository.class);
         passwordEncoder = mock(PasswordEncoder.class);
