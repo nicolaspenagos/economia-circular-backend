@@ -54,7 +54,7 @@ public class ReportLogic {
     }
 
     public double getActivityWeighing(Principle principle, Activity activity){
-        return activity.getScore()/(principle.getScore()/principle.getActivitySet().size());
+        return (principle.getScore()/principle.getActivitySet().size())/activity.getScore();
     }
 
     public Score rateActivity(Activity activity, Map<UUID, List<ResponseOption>> responseOptionsByQuestions, List<Question> activityQuestions, int dependentExcludingOptsCounter){

@@ -1,6 +1,7 @@
 package com.icesi.economiacircularicesi.test.utils;
 
 import com.icesi.economiacircularicesi.model.Activity.Activity;
+import com.icesi.economiacircularicesi.model.Principle.Principle;
 import com.icesi.economiacircularicesi.model.Question.Question;
 import com.icesi.economiacircularicesi.model.Question.QuestionOption;
 import com.icesi.economiacircularicesi.model.Question.QuestionType;
@@ -16,21 +17,9 @@ import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class ReportLogicTest {
-
-
-    private ReportLogic reportLogic;
-    private List<QuestionOption> questionOptions;
-    private List<ResponseOption> selectedOptions;
-    private List<ResponseOption> selectedOptions2;
-    private List<Question> questions;
-
-    private List<Activity> activities;
 
     public final static UUID QUESTION_OPT0_ID = UUID.randomUUID();
     public final static UUID QUESTION_OPT1_ID = UUID.randomUUID();
@@ -54,8 +43,13 @@ public class ReportLogicTest {
     public final static UUID QUESTION_6_ID = UUID.randomUUID();
     public final static UUID QUESTION_7_ID = UUID.randomUUID();
 
-
-
+    private ReportLogic reportLogic;
+    private List<QuestionOption> questionOptions;
+    private List<ResponseOption> selectedOptions;
+    private List<ResponseOption> selectedOptions2;
+    private List<Question> questions;
+    private List<Activity> activities;
+    private List<Principle> principles;
 
 
     @BeforeEach
@@ -84,15 +78,29 @@ public class ReportLogicTest {
 
     }
 
-    public void setupActivity(){
+    public void setupActivities(){
 
         activities = new ArrayList<>();
 
         activities.add(new Activity(ACTIVITY_1_ID,"Activity description", "ACTIVITY 1", "A1", 600.0, false));
-
         activities.add(new Activity(ACTIVITY_2_ID,"Activity description", "ACTIVITY 2", "A2", 400.0, false));
         activities.add(new Activity(ACTIVITY_3_ID,"Activity description", "ACTIVITY 3", "A3", 400.0, true));
 
+    }
+
+    public void setupPrinciples(){
+        principles = new ArrayList<>();
+
+        Set<Activity> p1Activities = new HashSet<>();
+        p1Activities.add(activities.get(0));
+        p1Activities.add(activities.get(1));
+        p1Activities.add(activities.get(2));
+        principles.add(new Principle(UUID.randomUUID(),"Principle description", "PRINCIPLE 1", "P1", 900, p1Activities));
+
+        Set<Activity> p2Activities = new HashSet<>();
+        p2Activities.add(activities.get(1));
+        p2Activities.add(activities.get(2));
+        principles.add(new Principle(UUID.randomUUID(),"Principle description", "PRINCIPLE 2", "P2", 200, p2Activities));
     }
 
     public void setupQuestions(){
@@ -178,7 +186,7 @@ public class ReportLogicTest {
     public void scoreQuestionTest(){
 
         setupOptsAndResponses();
-        setupActivity();
+        setupActivities();
         setupQuestions();
 
         Question question = questions.get(0);
@@ -224,7 +232,7 @@ public class ReportLogicTest {
     public void getResponseOptionsMappedByActivityAndQuestionTest(){
 
         setupOptsAndResponses();
-        setupActivity();
+        setupActivities();
         setupQuestions();
 
         selectedOptions.get(0).setQuestionIdReference(QUESTION_1_ID);
@@ -252,7 +260,7 @@ public class ReportLogicTest {
     public void rateActivityTest(){
 
         setupOptsAndResponses();
-        setupActivity();
+        setupActivities();
         setupQuestions();
         setUpSelectedOptions2();
 
@@ -282,7 +290,7 @@ public class ReportLogicTest {
     public void getActivitiesScoreTest(){
 
         setupOptsAndResponses();
-        setupActivity();
+        setupActivities();
         setupQuestions();
         setUpSelectedOptions2();
         setUpScenery3();
@@ -317,7 +325,16 @@ public class ReportLogicTest {
 
     }
 
+    @Test
+    public void getActivityWeighingTest(){
 
+        setupActivities();
+        setupPrinciples();
 
+        // Expected (900/3)/400
+        assertEquals(0.75, reportLogic.getActivityWeighing(principles.get(0), activities.get(1)));
+        assertEquals(0.25, reportLogic.getActivityWeighing(principles.get(1), activities.get(1)));
+
+    }
 
 }
