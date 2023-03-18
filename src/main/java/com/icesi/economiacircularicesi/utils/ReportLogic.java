@@ -59,13 +59,13 @@ public class ReportLogic {
 
     public Score rateActivity(Activity activity, Map<UUID, List<ResponseOption>> responseOptionsByQuestions, List<Question> activityQuestions, int dependentExcludingOptsCounter){
 
+
         Double activityObtainedScore = 0.0;
 
         for(Question currentQuestion: activityQuestions){
 
             Double questionTotalScore = activity.getScore()/(activityQuestions.size()-dependentExcludingOptsCounter);
             activityObtainedScore += scoreQuestion(currentQuestion, responseOptionsByQuestions.get(currentQuestion.getId()), questionTotalScore);
-
         }
         return new Score(activity.getId(),activity.getName(), activity.getTitle(), activity.getScore(), activityObtainedScore, activityObtainedScore/activity.getScore()*100.0);
     }

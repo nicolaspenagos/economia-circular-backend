@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ServiceUtilsTest {
+public class  ServiceUtilsTest {
 
     private UUID id;
     private List<User> usersList;

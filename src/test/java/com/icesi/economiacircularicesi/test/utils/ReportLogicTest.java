@@ -82,13 +82,14 @@ public class ReportLogicTest {
 
         activities = new ArrayList<>();
 
-        activities.add(new Activity(ACTIVITY_1_ID,"Activity description", "ACTIVITY 1", "A1", 600.0, false));
+        activities.add(new Activity(ACTIVITY_1_ID,"Activity description", "ACTIVITY 1", "A1", 300.0, false));
         activities.add(new Activity(ACTIVITY_2_ID,"Activity description", "ACTIVITY 2", "A2", 400.0, false));
         activities.add(new Activity(ACTIVITY_3_ID,"Activity description", "ACTIVITY 3", "A3", 400.0, true));
 
     }
 
     public void setupPrinciples(){
+
         principles = new ArrayList<>();
 
         Set<Activity> p1Activities = new HashSet<>();
@@ -101,6 +102,7 @@ public class ReportLogicTest {
         p2Activities.add(activities.get(1));
         p2Activities.add(activities.get(2));
         principles.add(new Principle(UUID.randomUUID(),"Principle description", "PRINCIPLE 2", "P2", 200, p2Activities));
+
     }
 
     public void setupQuestions(){
@@ -276,10 +278,10 @@ public class ReportLogicTest {
         assertEquals(activity.getTitle(),activityScore.getTitle());
         assertEquals(activity.getScore(), activityScore.getPossibleScore());
 
-        // QuestionTotalScore = 200
+        // QuestionTotalScore = 150
         // QuestionOptions = 5
-        // Expected Score = (200.0/(5-1)*0)+(200.0/(5-1)*4)+(200.0/(5-1)*2) for the above configuration of selected options and questions
-        double expectedScore = (200.0/(5-1)*0)+(200.0/(5-1)*4)+(200.0/(5-1)*2);
+        // Expected Score = (100.0/(5-1)*0)+(100.0/(5-1)*4)+(100.0/(5-1)*2) for the above configuration of selected options and questions
+        double expectedScore = (100.0/(5-1)*0)+(100.0/(5-1)*4)+(100.0/(5-1)*2);
 
         assertEquals(expectedScore, activityScore.getObtainedScore());
         assertEquals(expectedScore/activity.getScore()*100, activityScore.getObtainedPercentage());
@@ -305,8 +307,8 @@ public class ReportLogicTest {
 
         assertThat(score1, hasProperty("shortname", is("A1")));
         assertThat(score1, hasProperty("title", is("ACTIVITY 1")));
-        assertThat(score1, hasProperty("possibleScore", is(600.0)));
-        assertThat(score1, hasProperty("obtainedScore", is(300.0)));
+        assertThat(score1, hasProperty("possibleScore", is(300.0)));
+        assertThat(score1, hasProperty("obtainedScore", is(150.0)));
         assertThat(score1, hasProperty("obtainedPercentage", is(50.0)));
 
         assertThat(score2, hasProperty("shortname", is("A2")));
@@ -334,6 +336,37 @@ public class ReportLogicTest {
         // Expected (900/3)/400
         assertEquals(0.75, reportLogic.getActivityWeighing(principles.get(0), activities.get(1)));
         assertEquals(0.25, reportLogic.getActivityWeighing(principles.get(1), activities.get(1)));
+
+    }
+
+    @Test
+    public void getGetScoreByPrinciples(){
+
+        setupActivities();
+        setupPrinciples();
+
+        List<Score> activitiesScore = new ArrayList<>();
+        Activity a1 = activities.get(0);
+        Activity a2 = activities.get(1);
+        Activity a3 = activities.get(2);
+
+        activitiesScore.add(new Score(a1.getId(), a1.getName(), a1.getTitle(), a1.getScore(),  300.0, 50.0));
+        activitiesScore.add(new Score(a2.getId(), a2.getName(), a2.getTitle(), a2.getScore(),  400.0, 100.0));
+        activitiesScore.add(new Score(a3.getId(), a3.getName(), a3.getTitle(), a3.getScore(),  200.0, 50.0));
+
+        List<Score> expectedPrinciplesScore = new ArrayList<>();
+        Principle p1 = principles.get(0);
+        Principle p2 = principles.get(1);
+
+        Double p1ExpectedScore = (300.0*1)+(400*0.75)+(200*0.75);
+        expectedPrinciplesScore.add(new Score(p1.getPrincipleId(), p1.getTitle(), p1.getName(), p1.getScore(), p1ExpectedScore, p1ExpectedScore/p1.getScore()*100));
+
+        Double p2ExpectedScore = (400*0.25)+(200*0.25);
+        expectedPrinciplesScore.add(new Score(p2.getPrincipleId(), p2.getTitle(), p2.getName(), p2.getScore(), p2ExpectedScore, p2ExpectedScore/p2.getScore()*100));
+
+        System.out.println(expectedPrinciplesScore.toString());
+        System.out.println(reportLogic.getPrinciplesScore(principles, activities, activitiesScore).toString());
+        assertEquals(expectedPrinciplesScore, reportLogic.getPrinciplesScore(principles, activities, activitiesScore));
 
     }
 
