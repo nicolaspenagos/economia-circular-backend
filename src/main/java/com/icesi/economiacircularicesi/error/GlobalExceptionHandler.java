@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -42,5 +43,6 @@ public class GlobalExceptionHandler {
         });
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
+
 
 }

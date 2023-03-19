@@ -11,10 +11,10 @@ import com.icesi.economiacircularicesi.repository.UserRepository.UserRepository;
 import com.icesi.economiacircularicesi.service.UserService;
 import com.icesi.economiacircularicesi.utils.ErrorExceptionUtils;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,14 +30,13 @@ public class UserServiceImpl implements UserService {
     public final UserRepository userRepository;
     public final TermsAndConditionsRepository termsAndConditionsRepository;
     public final UserMapper userMapper;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();;
 
     @Override
     public User createUser(User user) {
 
         validateUniqueEmail(user.getEmail());
-        user.setPassword(passwordEncoder.encode(user.getPassword())); //Encrypt the password using Bcrypt encrypted hash
+        user.setPassword(encoder.encode(user.getPassword())); //Encrypt the password using Bcrypt encrypted hash
 
         User savedUser = userRepository.save(user);
         saveTermsAndConditions(savedUser.getId(), user.getTermsAndConditionsHistory());
