@@ -12,7 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class UserNoPassDTO {
 
-    private UUID userId;
+    private UUID id;
 
     private String email;
 

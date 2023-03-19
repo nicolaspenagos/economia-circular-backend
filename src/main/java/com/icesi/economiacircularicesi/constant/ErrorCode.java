@@ -19,7 +19,10 @@ public enum ErrorCode {
 
     CODE_Q02_INVALID_QUESTION_OPTIONS("Invalid questions options: the exclusiveness of the options does not correspond with the type of the quesion"),
     CODE_R01_ACTIVITY_WEIGHING_ERROR("Activity weighing error: the activity does not apply to the principle"),
-    CODE_R02_RESPONSE_NOT_FOUND("Response not found: The response you refer to does not exist");
+    CODE_R02_RESPONSE_NOT_FOUND("Response not found: The response you refer to does not exist"),
+    CODE_A01_NOT_AUTHENTICATED("Not authenticated: The user must be authenticated to perform this request"),
+    CODE_A02_INVALID_EMAIL("Invalid email"),
+    CODE_A03_WRONG_PASSWORD("Wrong password");
 
     private String message;
 

@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
     public final UserRepository userRepository;
     public final TermsAndConditionsRepository termsAndConditionsRepository;
     public final UserMapper userMapper;
-    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();;
+    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @Override
     public User createUser(User user) {

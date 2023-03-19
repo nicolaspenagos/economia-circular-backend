@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-@RequestMapping("users")
+@RequestMapping("/users")
 public interface UserAPI {
 
     @PostMapping
