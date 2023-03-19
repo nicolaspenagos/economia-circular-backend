@@ -133,8 +133,8 @@ public class UserControllerTest {
     @Test
     public void updateUserTest(){
         setupScenary();
-        userController.updateUser(baseUserDTO.getUserId(),baseUserDTO);
-        verify(userService, times(1)).updateUser(baseUserDTO.getUserId(), userMapper.fromDTO(baseUserDTO));
+        userController.updateUser(baseUserDTO.getId(),baseUserDTO);
+        verify(userService, times(1)).updateUser(baseUserDTO.getId(), userMapper.fromDTO(baseUserDTO));
     }
 
     private void verifyCreateUserExceptionThrown(ErrorCode expectedCode, UserDTO userDTO) {

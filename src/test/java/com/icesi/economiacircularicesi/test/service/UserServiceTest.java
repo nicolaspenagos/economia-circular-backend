@@ -33,8 +33,6 @@ public class UserServiceTest {
     private UserServiceImpl userService;
     private User baseUser;
 
-    private PasswordEncoder passwordEncoder;
-
     public void setupScenary(){
 
         baseUser = new User(
@@ -71,8 +69,7 @@ public class UserServiceTest {
         userMapper = mock(UserMapper.class) ;
         userRepository = mock(UserRepository.class);
         termsAndConditionsRepository = mock(TermsAndConditionsRepository.class);
-        passwordEncoder = mock(PasswordEncoder.class);
-        userService = new UserServiceImpl(userRepository, termsAndConditionsRepository, userMapper, passwordEncoder);
+        userService = new UserServiceImpl(userRepository, termsAndConditionsRepository, userMapper);
 
     }
 
@@ -84,7 +81,6 @@ public class UserServiceTest {
         userService.createUser(baseUser);
         verify(userRepository, times(1)).save(baseUser);
         verify(termsAndConditionsRepository, times(1)).save(baseUser.getTermsAndConditionsHistory().get(0));
-        verify(passwordEncoder, times(1)).encode(BaseUser.PASSWORD.value);
 
     }
 

@@ -62,7 +62,7 @@ public class UpdateUserIntegrationTest {
 
         //So this test check if all valentina's data is replaced by base user data
         UserDTO user = deserializeFromJsonFile(FilePaths.USER_JSON, UserDTO.class, objectMapper);
-        user.setUserId(UUID.fromString(savedUsedId));
+        user.setId(UUID.fromString(savedUsedId));
         String body = objectMapper.writeValueAsString(user);
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.patch(savedUserPath)

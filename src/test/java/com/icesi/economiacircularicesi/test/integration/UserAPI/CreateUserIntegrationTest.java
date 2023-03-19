@@ -15,6 +15,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -45,11 +46,11 @@ public class CreateUserIntegrationTest {
     private MockMvc mockMvc;
     @Autowired
     private WebApplicationContext webApplicationContext;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     private ObjectMapper objectMapper;
     private UserMapper userMapper;
+
+    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();;
 
     @BeforeEach
     public void init() {
@@ -66,7 +67,7 @@ public class CreateUserIntegrationTest {
         UserDTO user = deserializeFromJsonFile(FilePaths.USER_JSON, UserDTO.class, objectMapper);
         user.setEmail("test@email.com");//A different email of the base user is set to avoid conflicts with the data inserted in the db by other integration tests
         String body = objectMapper.writeValueAsString(user);
-        System.out.println(body);
+
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isOk()).andReturn();
 
         UserDTO userDTO = objectMapper.readValue(result.getResponse().getContentAsString(), UserDTO.class);
@@ -75,7 +76,7 @@ public class CreateUserIntegrationTest {
         assertNotNull(userDTO);
         assertTrue(userDTO instanceof UserDTO);
         assertThat(userDTO, hasProperty("email", is("test@email.com")));
-        assertTrue(passwordEncoder.matches(BaseUser.PASSWORD.value, userDTO.getPassword()));
+        assertTrue(encoder.matches(BaseUser.PASSWORD.value, userDTO.getPassword()));
         assertThat(userDTO, hasProperty("name", is(BaseUser.NAME.value)));
         assertThat(userDTO, hasProperty("lastname", is(BaseUser.LASTNAME.value)));
         assertThat(userDTO, hasProperty("position", is(BaseUser.POSITION.value)));

@@ -34,7 +34,6 @@ public class DeleteUserIntegrationTest {
     private MockMvc mockMvc;
     @Autowired
     private WebApplicationContext webApplicationContext;
-
     private ObjectMapper objectMapper;
     private UserMapper userMapper;
 
