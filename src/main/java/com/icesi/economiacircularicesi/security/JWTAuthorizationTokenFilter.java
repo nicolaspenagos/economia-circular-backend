@@ -5,6 +5,7 @@ import com.icesi.economiacircularicesi.constant.ErrorCode;
 import com.icesi.economiacircularicesi.error.exception.CustomError.CustomError;
 import com.icesi.economiacircularicesi.error.exception.CustomError.CustomException;
 
+import com.icesi.economiacircularicesi.utils.ErrorExceptionUtils;
 import com.icesi.economiacircularicesi.utils.JWTParser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
@@ -46,9 +47,11 @@ public class JWTAuthorizationTokenFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         try {
             if (containsToken(request)) {
+
                 String jwtToken = request.getHeader(AUTHORIZATION_HEADER).replace(TOKEN_PREFIX, StringUtils.EMPTY);
                 Claims claims = JWTParser.decodeJWT(jwtToken);
                 SecurityContext context = parseClaims(jwtToken, claims);
+                isAuthorized(request, context, response);
                 SecurityContextHolder.setUserContext(context);
                 filterChain.doFilter(request, response);
             } else {
@@ -58,7 +61,9 @@ public class JWTAuthorizationTokenFilter extends OncePerRequestFilter {
         } catch (JwtException e) {
             CustomException userDemoException = new CustomException(HttpStatus.UNAUTHORIZED, new CustomError(ErrorCode.CODE_A01_NOT_AUTHENTICATED, ErrorCode.CODE_A01_NOT_AUTHENTICATED.getMessage()));
             createUnauthorizedFilter( userDemoException, response);
-        } finally {
+        }  catch (CustomException e) { // Handle the CustomException thrown by isAuthorized method
+            createUnauthorizedFilter(e, response);
+        }finally {
             SecurityContextHolder.clearContext();
         }
     }
@@ -106,6 +111,29 @@ public class JWTAuthorizationTokenFilter extends OncePerRequestFilter {
         response.getWriter().write(message);
         response.getWriter().flush();
     }
+
+    private void isAuthorized(HttpServletRequest request, SecurityContext context, HttpServletResponse response){
+
+        String[] usersPermissions = new UserRolePermissions().getUserRolePermissionsList(context.getUserId().toString());
+
+        boolean authorizedFlag = searchPermission(usersPermissions, request);
+
+        if(!authorizedFlag){
+            ErrorExceptionUtils.throwCustomException(HttpStatus.UNAUTHORIZED, ErrorCode.CODE_A04_UNAUTHORIZED);
+        }
+    }
+
+    private boolean searchPermission(String[] permissions, HttpServletRequest request){
+        String requestToString = request.getMethod() + " " + request.getRequestURI();
+
+        for(String permission:permissions){
+            if(permission.equals(requestToString))
+                return true;
+        }
+
+        return false;
+    }
+
 
 
 

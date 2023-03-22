@@ -22,7 +22,8 @@ public enum ErrorCode {
     CODE_R02_RESPONSE_NOT_FOUND("Response not found: The response you refer to does not exist"),
     CODE_A01_NOT_AUTHENTICATED("Not authenticated: The user must be authenticated to perform this request"),
     CODE_A02_INVALID_EMAIL("Invalid email"),
-    CODE_A03_WRONG_PASSWORD("Wrong password");
+    CODE_A03_WRONG_PASSWORD("Wrong password"),
+    CODE_A04_UNAUTHORIZED("You are not authorized to make this request");
 
     private String message;
 
