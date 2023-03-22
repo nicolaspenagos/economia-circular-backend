@@ -127,11 +127,34 @@ public class JWTAuthorizationTokenFilter extends OncePerRequestFilter {
         String requestToString = request.getMethod() + " " + request.getRequestURI();
 
         for(String permission:permissions){
+
+            if(permission.endsWith("*") && validateSharedPaths(permission, requestToString)){
+              return true;
+            }
+
             if(permission.equals(requestToString))
                 return true;
         }
 
         return false;
+    }
+
+    private boolean validateSharedPaths(String permission, String request){
+
+        String[] permissionParts = permission.split("/");
+        String[] requestParts = request.split("/");
+
+        if (permissionParts.length < 2 || requestParts.length < 2) {
+            return false;
+        }
+
+        for (int i = 0; i < permissionParts.length - 1; i++) {
+            if (!permissionParts[i].equals(requestParts[i])) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
 
