@@ -10,7 +10,7 @@ import java.util.UUID;
 @RequestMapping("response")
 public interface ResponseAPI {
 
-   @PostMapping
+   @PostMapping()
    ResponseDTO createResponse(@RequestBody ResponseDTO responseDTO);
 
    @PatchMapping("{responseId}")

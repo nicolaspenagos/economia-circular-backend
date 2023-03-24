@@ -6,16 +6,23 @@ import com.icesi.economiacircularicesi.error.exception.CustomError.CustomExcepti
 import com.icesi.economiacircularicesi.mapper.ResponseMapper;
 import com.icesi.economiacircularicesi.model.Response.Response;
 import com.icesi.economiacircularicesi.model.Response.ResponseOption;
+import com.icesi.economiacircularicesi.model.User.User;
 import com.icesi.economiacircularicesi.repository.ResponseRepository.ResponseOptionRepository;
 import com.icesi.economiacircularicesi.repository.ResponseRepository.ResponseRepository;
+import com.icesi.economiacircularicesi.security.SecurityContextHolder;
 import com.icesi.economiacircularicesi.service.ResponseService;
+import com.icesi.economiacircularicesi.service.UserService;
+import com.icesi.economiacircularicesi.utils.ErrorExceptionUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @AllArgsConstructor
 @Service
@@ -23,12 +30,16 @@ public class ResponseServiceImpl implements ResponseService {
 
     private ResponseRepository responseRepository;
     private ResponseOptionRepository responseOptionRepository;
+    private UserService userService;
 
     private ResponseMapper responseMapper;
 
     @Override
     public Response createResponse(Response response) {
-        System.out.println(response);
+
+        // We do not need to check if the user exists because in the AuthorizationFilter we are doing so (just a user that exists can be logged in)
+        response.setUserId(SecurityContextHolder.getContext().getUserId());
+
         Response savedResponse =  responseRepository.save(response);
         saveResponseOptions(savedResponse.getResponseId(), savedResponse.getSelectedOptions());
         return  savedResponse;
@@ -50,6 +61,9 @@ public class ResponseServiceImpl implements ResponseService {
     public Response updateResponse(UUID responseId, Response responseUpdate) {
 
         Response response = responseRepository.findById(responseId).orElseThrow(()-> new CustomException(HttpStatus.BAD_REQUEST, new CustomError(ErrorCode.CODE_R02_RESPONSE_NOT_FOUND, ErrorCode.CODE_R02_RESPONSE_NOT_FOUND.getMessage())));
+
+        if(!response.getUserId().equals(SecurityContextHolder.getContext().getUserId()))
+            ErrorExceptionUtils.throwCustomException(HttpStatus.UNAUTHORIZED, ErrorCode.CODE_A04_UNAUTHORIZED);
 
         if(responseUpdate.getSelectedOptions()!= null && !responseUpdate.getSelectedOptions().isEmpty())
             deleteResponseRelations(response.getSelectedOptions());

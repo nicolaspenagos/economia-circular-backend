@@ -114,6 +114,7 @@ public class JWTAuthorizationTokenFilter extends OncePerRequestFilter {
 
     private void isAuthorized(HttpServletRequest request, SecurityContext context, HttpServletResponse response){
 
+        System.out.println();
         String[] usersPermissions = new UserRolePermissions().getUserRolePermissionsList(context.getUserId().toString());
 
         boolean authorizedFlag = searchPermission(usersPermissions, request);
@@ -126,8 +127,8 @@ public class JWTAuthorizationTokenFilter extends OncePerRequestFilter {
     private boolean searchPermission(String[] permissions, HttpServletRequest request){
         String requestToString = request.getMethod() + " " + request.getRequestURI();
 
-        for(String permission:permissions){
 
+        for(String permission:permissions){
             if(permission.endsWith("*") && validateSharedPaths(permission, requestToString)){
               return true;
             }
