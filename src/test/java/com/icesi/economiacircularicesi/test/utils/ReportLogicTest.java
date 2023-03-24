@@ -359,10 +359,10 @@ public class ReportLogicTest {
         Principle p2 = principles.get(1);
 
         Double p1ExpectedScore = (300.0*1)+(400*0.75)+(200*0.75);
-        expectedPrinciplesScore.add(new Score(p1.getPrincipleId(), p1.getTitle(), p1.getName(), p1.getScore(), p1ExpectedScore, p1ExpectedScore/p1.getScore()*100));
+        expectedPrinciplesScore.add(new Score(p1.getId(), p1.getTitle(), p1.getName(), p1.getScore(), p1ExpectedScore, p1ExpectedScore/p1.getScore()*100));
 
         Double p2ExpectedScore = (400*0.25)+(200*0.25);
-        expectedPrinciplesScore.add(new Score(p2.getPrincipleId(), p2.getTitle(), p2.getName(), p2.getScore(), p2ExpectedScore, p2ExpectedScore/p2.getScore()*100));
+        expectedPrinciplesScore.add(new Score(p2.getId(), p2.getTitle(), p2.getName(), p2.getScore(), p2ExpectedScore, p2ExpectedScore/p2.getScore()*100));
 
         System.out.println(expectedPrinciplesScore.toString());
         System.out.println(reportLogic.getPrinciplesScore(principles, activities, activitiesScore).toString());

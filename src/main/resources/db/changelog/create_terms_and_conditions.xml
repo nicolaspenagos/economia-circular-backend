@@ -6,7 +6,7 @@
 
     <changeSet id="51185cea-08a1-4b62-b2e8-3e7d70510f23" author="nicolas.penagos" failOnError="true">
         <createTable tableName="terms_and_conditions">
-            <column name="terms_and_conditions_id" type="UUID">
+            <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true" />
             </column>
             <column name="link" type="varchar(255)" />

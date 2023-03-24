@@ -6,7 +6,6 @@ import com.icesi.economiacircularicesi.error.exception.CustomError.CustomExcepti
 import com.icesi.economiacircularicesi.mapper.ResponseMapper;
 import com.icesi.economiacircularicesi.model.Response.Response;
 import com.icesi.economiacircularicesi.model.Response.ResponseOption;
-import com.icesi.economiacircularicesi.model.User.User;
 import com.icesi.economiacircularicesi.repository.ResponseRepository.ResponseOptionRepository;
 import com.icesi.economiacircularicesi.repository.ResponseRepository.ResponseRepository;
 import com.icesi.economiacircularicesi.security.SecurityContextHolder;
@@ -19,10 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @AllArgsConstructor
 @Service
@@ -41,7 +37,7 @@ public class ResponseServiceImpl implements ResponseService {
         response.setUserId(SecurityContextHolder.getContext().getUserId());
 
         Response savedResponse =  responseRepository.save(response);
-        saveResponseOptions(savedResponse.getResponseId(), savedResponse.getSelectedOptions());
+        saveResponseOptions(savedResponse.getId(), savedResponse.getSelectedOptions());
         return  savedResponse;
     }
 
@@ -50,7 +46,7 @@ public class ResponseServiceImpl implements ResponseService {
         for(ResponseOption currentOpt:responseOptions){
 
             Response responseRef = new Response();
-            responseRef.setResponseId(responseId);
+            responseRef.setId(responseId);
             currentOpt.setResponse(responseRef);
             responseOptionRepository.save(currentOpt);
 
@@ -70,7 +66,7 @@ public class ResponseServiceImpl implements ResponseService {
 
         responseMapper.updateResponseFromResponse(responseUpdate, response);
 
-        saveResponseOptions(response.getResponseId(), response.getSelectedOptions());
+        saveResponseOptions(response.getId(), response.getSelectedOptions());
 
         return responseRepository.save(response);
 

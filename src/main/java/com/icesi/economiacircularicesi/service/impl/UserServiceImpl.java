@@ -64,7 +64,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUser(UUID userId) {
-        //TODO if the user does not exist, should getUser return null or an exception?
         return userRepository.findById(userId).orElse(null);
     }
 

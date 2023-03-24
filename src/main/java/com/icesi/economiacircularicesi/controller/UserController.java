@@ -55,7 +55,6 @@ public class UserController implements UserAPI {
         return userService.deleteUser(userId);
     }
 
-    //TODO How to use @valid with updateData
     @Override
     public UserNoPassDTO updateUser(UUID userId, UserDTO userDTO) {
 

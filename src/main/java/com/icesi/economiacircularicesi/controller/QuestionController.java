@@ -51,7 +51,6 @@ public class QuestionController implements QuestionAPI {
         return questionMapper.fromQuestion(questionService.getQuestion(questionId));
     }
 
-    //TODO How to use @valid with updateData
     @Override
     public QuestionDTO updateQuestion(UUID questionId, QuestionDTO questionDTO) {
         return questionMapper.fromQuestion(questionService.updateQuestion(questionId, questionMapper.fromDTO(questionDTO)));

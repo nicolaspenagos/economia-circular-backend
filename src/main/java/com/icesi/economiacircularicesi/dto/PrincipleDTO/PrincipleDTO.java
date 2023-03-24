@@ -13,7 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class PrincipleDTO {
 
-    private UUID principleId;
+    private UUID id;
 
     private String description;
 

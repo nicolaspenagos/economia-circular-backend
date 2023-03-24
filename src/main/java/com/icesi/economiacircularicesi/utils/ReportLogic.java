@@ -1,6 +1,5 @@
 package com.icesi.economiacircularicesi.utils;
 
-import com.icesi.economiacircularicesi.constant.ErrorCode;
 import com.icesi.economiacircularicesi.model.Activity.Activity;
 import com.icesi.economiacircularicesi.model.BaseEntity;
 import com.icesi.economiacircularicesi.model.Principle.Principle;
@@ -11,7 +10,6 @@ import com.icesi.economiacircularicesi.model.Report.Score;
 import com.icesi.economiacircularicesi.model.Response.Response;
 import com.icesi.economiacircularicesi.model.Response.ResponseOption;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -46,7 +44,7 @@ public class ReportLogic {
                 principleObtainedScore += activityScore.getObtainedScore()*getActivityWeighing(principle, activity);
             }
 
-            principlesScore.add(new Score(principle.getPrincipleId(), principle.getTitle(), principle.getName(), principle.getScore(), principleObtainedScore,  principleObtainedScore/principle.getScore()*100.0));
+            principlesScore.add(new Score(principle.getId(), principle.getTitle(), principle.getName(), principle.getScore(), principleObtainedScore,  principleObtainedScore/principle.getScore()*100.0));
 
         }
 

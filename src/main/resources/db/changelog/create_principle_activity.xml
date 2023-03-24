@@ -4,7 +4,7 @@
     <changeSet id="33d4e9bc-7210-47c3-9617-c56ab7c0750p" author="nicolas.penagos" failOnError="true">
         <createTable tableName="principle_activity">
             <column name="principle_id" type="UUID">
-                <constraints nullable="false" primaryKey="true" references="principles(principle_id)" foreignKeyName="fk-principle_activity"/>
+                <constraints nullable="false" primaryKey="true" references="principles(id)" foreignKeyName="fk-principle_activity"/>
             </column>
             <column name="activity_id" type="UUID">
                 <constraints nullable="false" primaryKey="true" references="activities(id)" foreignKeyName="fk-activity_principle"/>

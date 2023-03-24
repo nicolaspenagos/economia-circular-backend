@@ -15,7 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class TermsAndConditionsDTO {
 
-    private UUID termsAndConditionsId;
+    private UUID id;
 
     @NotBlank(message = "Link may not be blank")
     private String acceptanceDate;

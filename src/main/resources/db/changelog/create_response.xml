@@ -6,7 +6,7 @@
 
     <changeSet id="920409d8-af4d-4d44-88a8-716aa004d44d" author="nicolas.penagos" failOnError="true">
         <createTable tableName="responses">
-            <column name="response_id" type="UUID">
+            <column name="id" type="UUID">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="response_date" type="date">

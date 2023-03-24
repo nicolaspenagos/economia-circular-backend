@@ -1,6 +1,7 @@
 package com.icesi.economiacircularicesi.model.Response;
 
 
+import com.icesi.economiacircularicesi.model.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,13 +17,8 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResponseOption {
+public class ResponseOption extends BaseEntity {
 
-    @Id
-    @Type(type = "org.hibernate.type.PostgresUUIDType")
-    @Column(name = "option_response_id")
-    private UUID optionResponseId;
-    //TODO Extends BaseEntity
     @Column(name = "question_id_reference")
     private UUID questionIdReference;
 
@@ -33,9 +29,16 @@ public class ResponseOption {
     @JoinColumn(name = "response_id")
     private Response response;
 
+    public ResponseOption(UUID id,UUID questionIdReference, UUID optionIdReference, Response response) {
+        super.setId(id);
+        this.questionIdReference = questionIdReference;
+        this.optionIdReference = optionIdReference;
+        this.response = response;
+    }
+
     @PrePersist
     public void generateId() {
-        this.optionResponseId = UUID.randomUUID();
+        super.setId(UUID.randomUUID());
     }
 
 }

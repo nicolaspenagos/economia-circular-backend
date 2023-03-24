@@ -20,7 +20,7 @@ public interface UserAPI {
     @GetMapping("/{userId}")
     UserNoPassDTO getUser(@PathVariable UUID userId);
 
-    @DeleteMapping("/{userId}") //TODO What should deleteUser return? is this ok?
+    @DeleteMapping("/{userId}")
     ResponseEntity<UUID> deleteUser(@PathVariable UUID userId);
 
     @PatchMapping("/{userId}")

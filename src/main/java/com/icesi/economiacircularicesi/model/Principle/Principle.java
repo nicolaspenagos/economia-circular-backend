@@ -1,6 +1,7 @@
 package com.icesi.economiacircularicesi.model.Principle;
 
 import com.icesi.economiacircularicesi.model.Activity.Activity;
+import com.icesi.economiacircularicesi.model.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,13 +18,8 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Principle {
+public class Principle extends BaseEntity {
 
-    @Id
-    @Type(type = "org.hibernate.type.PostgresUUIDType")
-    @Column(name = "principle_id")
-    private UUID principleId;
-    //TODO Extends BaseEntity
     @Column(name = "description")
     private String description;
 
@@ -43,5 +39,16 @@ public class Principle {
             inverseJoinColumns = @JoinColumn(name = "activity_id"))
     private Set<Activity> activitySet;
 
+    public Principle(UUID id, String description, String title, String name, double score, Set<Activity> activitySet) {
+        super.setId(id);
+        this.description = description;
+        this.title = title;
+        this.name = name;
+        this.score = score;
+        this.activitySet = activitySet;
+    }
+
+    @PrePersist
+    public void generateId() {super.setId(UUID.randomUUID());}
 
 }

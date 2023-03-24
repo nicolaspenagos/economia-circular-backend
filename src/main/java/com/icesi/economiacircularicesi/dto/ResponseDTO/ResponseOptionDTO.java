@@ -13,7 +13,7 @@ import java.util.UUID;
 public class ResponseOptionDTO {
 
     @NotNull
-    private UUID optionResponseId;
+    private UUID id;
 
     @NotNull
     private UUID questionIdReference;
