@@ -11,6 +11,7 @@ import com.icesi.economiacircularicesi.model.Report.Score;
 import com.icesi.economiacircularicesi.model.Response.Response;
 import com.icesi.economiacircularicesi.model.User.User;
 import com.icesi.economiacircularicesi.service.*;
+import com.icesi.economiacircularicesi.utils.ErrorExceptionUtils;
 import com.icesi.economiacircularicesi.utils.ReportLogic;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,10 @@ public class ReportServiceImpl implements ReportService {
         User user = Optional.ofNullable(userService.getUser(userId)).orElseThrow(()->new CustomException(HttpStatus.NOT_FOUND, new CustomError(ErrorCode.CODE_U05_USER_NOT_FOUND, ErrorCode.CODE_U05_USER_NOT_FOUND.getMessage())));
 
         Response response = Optional.ofNullable(responseService.getResponse(responseId)).orElseThrow(()-> new CustomException(HttpStatus.NOT_FOUND, new CustomError(ErrorCode.CODE_R02_RESPONSE_NOT_FOUND, ErrorCode.CODE_R02_RESPONSE_NOT_FOUND.getMessage())));
+
+        if(!userId.equals(response.getUserId())){
+            ErrorExceptionUtils.throwCustomException(HttpStatus.UNAUTHORIZED, ErrorCode.CODE_A04_UNAUTHORIZED);
+        }
 
         List<Activity> activities = activityService.getActivities();
         List<Question> questions = questionService.getQuestions();

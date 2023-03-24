@@ -16,8 +16,6 @@ import java.util.UUID;
 @NoArgsConstructor
 public class ResponseDTO {
 
-    private UUID responseId;
-
     private LocalDateTime responseDate;
 
     @NotBlank

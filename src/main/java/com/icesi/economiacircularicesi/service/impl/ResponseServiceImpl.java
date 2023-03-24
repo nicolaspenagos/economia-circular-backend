@@ -28,6 +28,7 @@ public class ResponseServiceImpl implements ResponseService {
 
     @Override
     public Response createResponse(Response response) {
+        System.out.println(response);
         Response savedResponse =  responseRepository.save(response);
         saveResponseOptions(savedResponse.getResponseId(), savedResponse.getSelectedOptions());
         return  savedResponse;

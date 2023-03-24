@@ -108,7 +108,6 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-
     private void validateUniqueEmail(String email) {
 
         for (User currentUser : getUsers()) {
