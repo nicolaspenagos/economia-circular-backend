@@ -12,10 +12,12 @@ import com.icesi.economiacircularicesi.utils.ErrorExceptionUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Optional;
@@ -69,7 +71,7 @@ public class UserController implements UserAPI {
     private void validateDate(String date){
         try{
             LocalDateTime localDateTime = LocalDateTime.parse(date);
-            if(localDateTime.isAfter(LocalDateTime.now())){
+            if(localDateTime.isAfter(LocalDateTime.now(ZoneOffset.UTC))){
                 ErrorExceptionUtils.throwCustomException(HttpStatus.BAD_REQUEST, ErrorCode.CODE_U01_IMPOSSIBLE_DATE);
             }
         }catch (DateTimeParseException dateTimeParseException){

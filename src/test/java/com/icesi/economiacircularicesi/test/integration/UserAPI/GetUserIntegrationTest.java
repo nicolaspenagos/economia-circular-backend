@@ -68,7 +68,6 @@ public class GetUserIntegrationTest {
         assertTrue(userDTO instanceof UserNoPassDTO);
         assertThat(userDTO, Matchers.hasProperty("email", is("jhon.doe1@email.com")));
         assertThat(userDTO, Matchers.hasProperty("name", is(BaseUser.NAME.value)));
-        assertThat(userDTO, Matchers.hasProperty("lastname", is(BaseUser.LASTNAME.value)));
         assertThat(userDTO, Matchers.hasProperty("position", is(BaseUser.POSITION.value)));
         assertThat(userDTO, Matchers.hasProperty("sector", is(BaseUser.SECTOR.value)));
         assertThat(userDTO, Matchers.hasProperty("macrosector", is(BaseUser.MACROSECTOR.value)));

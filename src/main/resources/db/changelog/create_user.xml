@@ -12,7 +12,6 @@
             <column name="email" type="varchar(255)" />
             <column name="password" type="varchar(255)" />
             <column name="name" type="varchar(255)" />
-            <column name="lastname" type="varchar(255)" />
             <column name="position" type="varchar(255)" />
             <column name="sector" type="varchar(255)" />
             <column name="macrosector" type="varchar(255)" />

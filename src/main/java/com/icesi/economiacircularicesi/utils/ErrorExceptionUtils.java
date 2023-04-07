@@ -4,9 +4,12 @@ import com.icesi.economiacircularicesi.constant.ErrorCode;
 import com.icesi.economiacircularicesi.error.exception.CustomError.CustomError;
 import com.icesi.economiacircularicesi.error.exception.CustomError.CustomException;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
+@CrossOrigin(origins = "*")
 public class ErrorExceptionUtils {
 
+    @CrossOrigin(origins = "*")
     public static void throwCustomException(HttpStatus httpStatus, ErrorCode code){
         throw new CustomException(httpStatus, new CustomError(code, code.getMessage()));
     }

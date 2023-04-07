@@ -28,15 +28,13 @@ public class PasswordValidator implements ConstraintValidator<CustomAnnotation.P
         MessageResolver resolver = new PropertiesMessageResolver(props);
 
         org.passay.PasswordValidator validator = new org.passay.PasswordValidator(resolver, Arrays.asList(
-                // at least one upper-case character
-                new CharacterRule(EnglishCharacterData.UpperCase, 1),
-                // at least one lower-case character
-                new CharacterRule(EnglishCharacterData.LowerCase, 1),
+
+                // at least one digit letter
+                new CharacterRule(EnglishCharacterData.Alphabetical, 1),
                 // at least one digit character
-                new CharacterRule(EnglishCharacterData.Digit, 1),
-                // at least one symbol (special character)
-                new CharacterRule(EnglishCharacterData.Special, 1))
-        );
+                new CharacterRule(EnglishCharacterData.Digit, 1)
+
+        ));
 
         RuleResult result = validator.validate(new PasswordData(password));
 

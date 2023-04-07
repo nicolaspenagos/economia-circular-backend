@@ -7,7 +7,6 @@ public enum BaseUser {
 
     UUID("f89a5360-39d6-43ad-8798-ef9666666715"),
     NAME("Jhon"),
-    LASTNAME("Doe"),
     EMAIL("jhon.doe2@email.com"),
     PASSWORD("Password123!"),
     POSITION("Student"),

@@ -2,6 +2,7 @@ package com.icesi.economiacircularicesi.utils;
 
 import io.jsonwebtoken.*;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
@@ -11,9 +12,11 @@ import java.util.Map;
 import java.util.Optional;
 
 
+@CrossOrigin(origins = "*")
 public class JWTParser {
     private static String SECRET_KEY = "longenoguhkeytotestthisimplementationsomebytesmore";
 
+    @CrossOrigin(origins = "*")
     public static String createJWT(String id, String issuer, String subject, Map<String, String> claims, long ttlMillis) {
 
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
@@ -40,6 +43,7 @@ public class JWTParser {
         return builder.compact();
     }
 
+    @CrossOrigin(origins = "*")
     public static Claims decodeJWT(String jwt) {
         return Jwts.parserBuilder().setSigningKey(DatatypeConverter.parseBase64Binary(SECRET_KEY)).build().parseClaimsJws(jwt).getBody();
     }

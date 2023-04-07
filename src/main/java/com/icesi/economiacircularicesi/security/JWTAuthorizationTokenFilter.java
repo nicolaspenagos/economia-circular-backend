@@ -1,3 +1,4 @@
+
 package com.icesi.economiacircularicesi.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,6 +18,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -30,6 +32,7 @@ import java.util.UUID;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+
 @Component
 @Order(1)
 public class JWTAuthorizationTokenFilter extends OncePerRequestFilter {
@@ -37,7 +40,9 @@ public class JWTAuthorizationTokenFilter extends OncePerRequestFilter {
     private static final String AUTHORIZATION_HEADER = "Authorization";
     private static final String TOKEN_PREFIX = "Bearer ";
     private static final String USER_ID_CLAIM_NAME = "userId";
-    private static final String[] excludedPaths = {"POST /login","POST /users"};
+    private static final String[] excludedPaths = {"POST /login","POST /users", "OPTIONS /users", "OPTIONS /login", "OPTIONS /questions"};
+
+
 
     @Override
     protected void doFilterInternal(
@@ -88,6 +93,10 @@ public class JWTAuthorizationTokenFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
+        if(request.getMethod().equalsIgnoreCase("OPTIONS")){
+            return true;
+        }
+
         String methodPlusPath = request.getMethod() + " " + request.getRequestURI();
         return Arrays.stream(excludedPaths).anyMatch(path -> path.equalsIgnoreCase(methodPlusPath));
     }
@@ -140,6 +149,7 @@ public class JWTAuthorizationTokenFilter extends OncePerRequestFilter {
         return false;
     }
 
+
     private boolean validateSharedPaths(String permission, String request){
 
         String[] permissionParts = permission.split("/");
@@ -158,7 +168,7 @@ public class JWTAuthorizationTokenFilter extends OncePerRequestFilter {
         return true;
     }
 
-
-
-
 }
+
+
+

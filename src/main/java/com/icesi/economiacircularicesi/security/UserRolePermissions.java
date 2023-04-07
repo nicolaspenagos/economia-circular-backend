@@ -1,6 +1,8 @@
+
 package com.icesi.economiacircularicesi.security;
 
 import lombok.NoArgsConstructor;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.Arrays;
 

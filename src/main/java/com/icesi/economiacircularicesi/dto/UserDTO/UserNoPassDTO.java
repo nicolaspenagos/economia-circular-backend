@@ -18,8 +18,6 @@ public class UserNoPassDTO {
 
     private String name;
 
-    private String lastname;
-
     private String position;
 
     private String sector;

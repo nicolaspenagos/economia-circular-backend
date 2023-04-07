@@ -29,9 +29,6 @@ public class User extends BaseEntity {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "lastname")
-    private String lastname;
-
     @Column(name = "position")
     private String position;
 
@@ -50,13 +47,12 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "user", targetEntity = TermsAndConditions.class)
     private List<TermsAndConditions> termsAndConditionsHistory;
 
-    public User(UUID id, String email, String password, String name, String lastname, String position, String sector, String macrosector, String organization, LocalDateTime registrationDate, List<TermsAndConditions> termsAndConditionsHistory) {
+    public User(UUID id, String email, String password, String name, String position, String sector, String macrosector, String organization, LocalDateTime registrationDate, List<TermsAndConditions> termsAndConditionsHistory) {
 
         super.setId(id);
         this.email = email;
         this.password = password;
         this.name = name;
-        this.lastname = lastname;
         this.position = position;
         this.sector = sector;
         this.macrosector = macrosector;

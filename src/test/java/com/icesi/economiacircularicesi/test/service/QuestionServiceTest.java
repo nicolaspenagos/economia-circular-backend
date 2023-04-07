@@ -68,6 +68,12 @@ public class QuestionServiceTest {
     }
 
     @Test
+    public void getQuestionByActivityTest(){
+        questionService.getQuestionsByActivity("A1");
+        verify(questionRepository, times(1)).findByActivity("A1");
+    }
+
+    @Test
     public void getQuestionsTest(){
         questionService.getQuestions();
         verify(questionRepository, times(1)).findAll();

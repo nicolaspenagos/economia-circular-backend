@@ -40,7 +40,6 @@ public class UserServiceTest {
                 BaseUser.EMAIL.value,
                 BaseUser.PASSWORD.value,
                 BaseUser.NAME.value,
-                BaseUser.LASTNAME.value,
                 BaseUser.POSITION.value,
                 BaseUser.SECTOR.value,
                 BaseUser.MACROSECTOR.value,

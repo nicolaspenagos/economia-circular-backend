@@ -65,7 +65,6 @@ public class GetUsersIntegrationTest {
         assertTrue(jhon instanceof UserNoPassDTO);
         assertThat(jhon, Matchers.hasProperty("email", is("jhon.doe1@email.com")));
         assertThat(jhon, Matchers.hasProperty("name", is(BaseUser.NAME.value)));
-        assertThat(jhon, Matchers.hasProperty("lastname", is(BaseUser.LASTNAME.value)));
         assertThat(jhon, Matchers.hasProperty("position", is(BaseUser.POSITION.value)));
         assertThat(jhon, Matchers.hasProperty("sector", is(BaseUser.SECTOR.value)));
         assertThat(jhon, Matchers.hasProperty("macrosector", is(BaseUser.MACROSECTOR.value)));
@@ -82,7 +81,6 @@ public class GetUsersIntegrationTest {
         assertTrue(nicolas instanceof UserNoPassDTO);
         assertThat(nicolas, Matchers.hasProperty("email", is("nicolas@email.com")));
         assertThat(nicolas, Matchers.hasProperty("name", is("Nicolas")));
-        assertThat(nicolas, Matchers.hasProperty("lastname", is("Penagos")));
         assertThat(nicolas, Matchers.hasProperty("position", is(BaseUser.POSITION.value)));
         assertThat(nicolas, Matchers.hasProperty("sector", is(BaseUser.SECTOR.value)));
         assertThat(nicolas, Matchers.hasProperty("macrosector", is(BaseUser.MACROSECTOR.value)));
