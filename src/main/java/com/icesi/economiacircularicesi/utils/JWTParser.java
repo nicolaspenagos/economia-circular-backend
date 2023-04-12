@@ -12,11 +12,9 @@ import java.util.Map;
 import java.util.Optional;
 
 
-@CrossOrigin(origins = "*")
 public class JWTParser {
     private static String SECRET_KEY = "longenoguhkeytotestthisimplementationsomebytesmore";
 
-    @CrossOrigin(origins = "*")
     public static String createJWT(String id, String issuer, String subject, Map<String, String> claims, long ttlMillis) {
 
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;

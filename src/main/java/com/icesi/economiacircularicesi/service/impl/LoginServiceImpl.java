@@ -18,6 +18,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.StreamSupport;
 
+import static com.icesi.economiacircularicesi.constant.TokenExpTimes.ONE_DAY;
+
 @AllArgsConstructor
 @Service
 public class LoginServiceImpl implements LoginService {
@@ -36,7 +38,7 @@ public class LoginServiceImpl implements LoginService {
         if(encoder.matches(loginDTO.getPassword(),user.getPassword())) {
             Map<String, String> claims = new HashMap<>();
             claims.put("userId", user.getId().toString());
-            return new TokenDTO(JWTParser.createJWT(user.getId().toString(),user.getName(), user.getOrganization(), claims,100000000L));
+            return new TokenDTO(JWTParser.createJWT(user.getId().toString(),user.getName(), user.getOrganization(), claims, ONE_DAY));
         }
         throw new CustomException(HttpStatus.UNAUTHORIZED, new CustomError(ErrorCode.CODE_A03_WRONG_PASSWORD, ErrorCode.CODE_A03_WRONG_PASSWORD.getMessage()));
     }

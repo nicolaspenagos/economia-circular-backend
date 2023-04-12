@@ -23,6 +23,6 @@ public interface ResponseAPI {
    List<ResponseDTO> getActiveUserResponses(@PathVariable UUID userId);
 
    @GetMapping("{responseId}")
-   Response getResponse(@PathVariable UUID userId);
+   ResponseDTO getResponse(@PathVariable UUID responseId);
 
 }

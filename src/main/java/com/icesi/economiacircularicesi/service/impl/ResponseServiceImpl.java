@@ -10,6 +10,7 @@ import com.icesi.economiacircularicesi.repository.ResponseRepository.ResponseOpt
 import com.icesi.economiacircularicesi.repository.ResponseRepository.ResponseRepository;
 //import com.icesi.economiacircularicesi.security.SecurityContextHolder;
 //import com.icesi.economiacircularicesi.security.SecurityContextHolder;
+import com.icesi.economiacircularicesi.security.SecurityContextHolder;
 import com.icesi.economiacircularicesi.service.ResponseService;
 import com.icesi.economiacircularicesi.service.UserService;
 import com.icesi.economiacircularicesi.utils.ErrorExceptionUtils;
@@ -35,7 +36,7 @@ public class ResponseServiceImpl implements ResponseService {
     public Response createResponse(Response response) {
 
         // We do not need to check if the user exists because in the AuthorizationFilter we are doing so (just a user that exists can be logged in)
-       // response.setUserId(SecurityContextHolder.getContext().getUserId());
+        response.setUserId(SecurityContextHolder.getContext().getUserId());
 
         Response savedResponse =  responseRepository.save(response);
         saveResponseOptions(savedResponse.getId(), savedResponse.getSelectedOptions());
@@ -59,10 +60,10 @@ public class ResponseServiceImpl implements ResponseService {
 
         Response response = responseRepository.findById(responseId).orElseThrow(()-> new CustomException(HttpStatus.BAD_REQUEST, new CustomError(ErrorCode.CODE_R02_RESPONSE_NOT_FOUND, ErrorCode.CODE_R02_RESPONSE_NOT_FOUND.getMessage())));
 
-/*
+
         if(!response.getUserId().equals(SecurityContextHolder.getContext().getUserId()))
             ErrorExceptionUtils.throwCustomException(HttpStatus.UNAUTHORIZED, ErrorCode.CODE_A04_UNAUTHORIZED);
-*/
+
         if(responseUpdate.getSelectedOptions()!= null && !responseUpdate.getSelectedOptions().isEmpty())
             deleteResponseRelations(response.getSelectedOptions());
 

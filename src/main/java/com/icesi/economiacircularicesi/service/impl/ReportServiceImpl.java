@@ -51,12 +51,13 @@ public class ReportServiceImpl implements ReportService {
         List<Principle> principles = principleService.getPrinciples();
 
         List<Score> reportByActivities = reportLogic.getActivitiesScore(activities, response, questions);
-        //List<Score> reportByPrinciples = reportServiceUtils
+        List<Score> reportByPrinciples = reportLogic.getPrinciplesScore(principles, activities, reportByActivities);
 
         // Building the report
         Report report = new Report();
         report.setDate(LocalDateTime.now());
         report.setReportByActivities(reportByActivities);
+        report.setReportByPrinciples(reportByPrinciples);
 
         return report;
     }

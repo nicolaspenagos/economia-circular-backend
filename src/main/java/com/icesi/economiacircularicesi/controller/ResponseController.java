@@ -40,7 +40,7 @@ public class ResponseController implements ResponseAPI {
     }
 
     @Override
-    public Response getResponse(UUID userId) {
-        return null;
+    public ResponseDTO getResponse(UUID responseId) {
+        return responseMapper.fromResponse(responseService.getResponse(responseId));
     }
 }
