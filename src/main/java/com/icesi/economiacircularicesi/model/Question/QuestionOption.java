@@ -23,6 +23,9 @@ public class QuestionOption extends BaseEntity {
     @Column(name="option_value")
     private String optionValue;
 
+    @Column(name="hint")
+    private String hint;
+
     @Column(name="dependent_question_id")
     private UUID dependentQuestionId;
 

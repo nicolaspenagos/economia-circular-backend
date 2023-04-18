@@ -11,6 +11,7 @@
             </column>
             <column name="option_order" type="int" />
             <column name="option_value" type="varchar(255)" />
+            <column name="hint" type="varchar(1000)" />
             <column name="exclusive" type="boolean" />
             <column name="not_apply" type="boolean" />
             <column name="dependent_question_id" type="UUID" />

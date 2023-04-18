@@ -14,7 +14,7 @@
             <column name="mandatory" type="boolean" />
             <column name="justify" type="boolean" />
             <column name="type" type="varchar(255)" />
-            <column name="hint" type="varchar(255)" />
+            <column name="hint" type="varchar(1000)" />
             <column name="activity_id" type="UUID" />
         </createTable>
     </changeSet>

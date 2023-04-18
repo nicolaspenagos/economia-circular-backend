@@ -19,7 +19,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class QuestionDTO {
 
-    private UUID questionId;
+    private UUID id;
 
     @NotNull
     @Min(value = 1, message = "Order must be positive integers")

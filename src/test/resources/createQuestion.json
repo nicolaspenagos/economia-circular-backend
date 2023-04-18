@@ -10,6 +10,7 @@
     {
       "optionOrder":0,
       "optionValue":"Exclusive option.",
+      "hint": "",
       "exclusive":true,
       "notApply": false,
       "dependentQuestionId": "39b4542c-b630-43d5-80a0-050b348b08c7"
@@ -17,6 +18,7 @@
     {
       "optionOrder":1,
       "optionValue":"First option.",
+      "hint": "",
       "exclusive":false,
       "notApply": false,
       "dependentQuestionId": "39b4542c-b630-43d5-80a0-050b348b08c7"

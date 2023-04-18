@@ -14,7 +14,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class QuestionOptionDTO {
 
-    private UUID questionOptionId;
+    private UUID id;
 
     @NotNull
     @Min(value = 0, message = "Order must non negative integers")
@@ -22,6 +22,8 @@ public class QuestionOptionDTO {
 
     @NotBlank(message = "Option value may not be blank")
     private String optionValue;
+
+    private String hint;
 
     @NotNull(message = "Exclusive must not be null")
     private boolean exclusive;
