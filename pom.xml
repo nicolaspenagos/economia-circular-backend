@@ -53,8 +53,11 @@
 			<artifactId>spring-security-rsa</artifactId>
 			<version>1.0.10.RELEASE</version>
 		</dependency>
-
-
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.6.4</version>
+		</dependency>
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-api</artifactId>

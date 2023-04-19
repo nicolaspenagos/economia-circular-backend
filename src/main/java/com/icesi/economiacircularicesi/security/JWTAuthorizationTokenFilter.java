@@ -40,7 +40,11 @@ public class JWTAuthorizationTokenFilter extends OncePerRequestFilter {
     private static final String AUTHORIZATION_HEADER = "Authorization";
     private static final String TOKEN_PREFIX = "Bearer ";
     private static final String USER_ID_CLAIM_NAME = "userId";
+    private static final String OPTIONS = "OPTIONS";
+    private static final String API_DOCS_PATH = "api-docs";
+    private static final String SWAGGER_UI_PATH = "swagger-ui";
     private static final String[] excludedPaths = {"POST /login","POST /users", "OPTIONS /users", "OPTIONS /login", "OPTIONS /questions"};
+
 
 
 
@@ -93,11 +97,19 @@ public class JWTAuthorizationTokenFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
-        if(request.getMethod().equalsIgnoreCase("OPTIONS")){
+
+        String method = request.getMethod();
+        String uriPath = request.getRequestURI();
+
+        if(method.equalsIgnoreCase(OPTIONS)){
             return true;
         }
 
-        String methodPlusPath = request.getMethod() + " " + request.getRequestURI();
+        if(getMainPath(uriPath).equals(SWAGGER_UI_PATH)||getMainPath(uriPath).equals(API_DOCS_PATH))
+            return true;
+
+        String methodPlusPath = method + " " + uriPath;
+
         return Arrays.stream(excludedPaths).anyMatch(path -> path.equalsIgnoreCase(methodPlusPath));
     }
 
@@ -166,6 +178,10 @@ public class JWTAuthorizationTokenFilter extends OncePerRequestFilter {
         }
 
         return true;
+    }
+
+    private String getMainPath(String path){
+        return path.split("/")[1];
     }
 
 }
