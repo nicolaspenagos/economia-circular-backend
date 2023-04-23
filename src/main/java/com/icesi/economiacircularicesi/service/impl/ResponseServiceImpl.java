@@ -5,7 +5,9 @@ import com.icesi.economiacircularicesi.error.exception.CustomError.CustomError;
 import com.icesi.economiacircularicesi.error.exception.CustomError.CustomException;
 import com.icesi.economiacircularicesi.mapper.ResponseMapper;
 import com.icesi.economiacircularicesi.model.Response.Response;
+import com.icesi.economiacircularicesi.model.Response.ResponseJustify;
 import com.icesi.economiacircularicesi.model.Response.ResponseOption;
+import com.icesi.economiacircularicesi.repository.ResponseRepository.ResponseJustifyRepository;
 import com.icesi.economiacircularicesi.repository.ResponseRepository.ResponseOptionRepository;
 import com.icesi.economiacircularicesi.repository.ResponseRepository.ResponseRepository;
 //import com.icesi.economiacircularicesi.security.SecurityContextHolder;
@@ -28,6 +30,8 @@ public class ResponseServiceImpl implements ResponseService {
 
     private ResponseRepository responseRepository;
     private ResponseOptionRepository responseOptionRepository;
+
+    private ResponseJustifyRepository responseJustifyRepository;
     private UserService userService;
 
     private ResponseMapper responseMapper;
@@ -39,7 +43,10 @@ public class ResponseServiceImpl implements ResponseService {
         response.setUserId(SecurityContextHolder.getContext().getUserId());
 
         Response savedResponse =  responseRepository.save(response);
+
         saveResponseOptions(savedResponse.getId(), savedResponse.getSelectedOptions());
+        saveResponsesJustifies(savedResponse.getId(),savedResponse.getJustifyList());
+
         return  savedResponse;
     }
 
@@ -55,6 +62,15 @@ public class ResponseServiceImpl implements ResponseService {
         }
     }
 
+    private void saveResponsesJustifies(UUID responseId, List<ResponseJustify> responseJustifies){
+        for(ResponseJustify currentJustify:responseJustifies){
+            Response responseRef = new Response();
+            responseRef.setId(responseId);
+            currentJustify.setResponse(responseRef);
+            responseJustifyRepository.save(currentJustify);
+        }
+    }
+
     @Override
     public Response updateResponse(UUID responseId, Response responseUpdate) {
 
@@ -64,8 +80,8 @@ public class ResponseServiceImpl implements ResponseService {
         if(!response.getUserId().equals(SecurityContextHolder.getContext().getUserId()))
             ErrorExceptionUtils.throwCustomException(HttpStatus.UNAUTHORIZED, ErrorCode.CODE_A04_UNAUTHORIZED);
 
-        if(responseUpdate.getSelectedOptions()!= null && !responseUpdate.getSelectedOptions().isEmpty())
-            deleteResponseRelations(response.getSelectedOptions());
+        if((responseUpdate.getSelectedOptions()!= null && !responseUpdate.getSelectedOptions().isEmpty())&&responseUpdate.getJustifyList()!=null)
+            deleteResponseRelations(response.getSelectedOptions(), responseUpdate.getJustifyList());
 
         responseMapper.updateResponseFromResponse(responseUpdate, response);
 
@@ -90,9 +106,12 @@ public class ResponseServiceImpl implements ResponseService {
         return responseRepository.findById(responseId).orElse(null);
     }
 
-    private void deleteResponseRelations(List<ResponseOption> selectedOptions){
+    private void deleteResponseRelations(List<ResponseOption> selectedOptions, List<ResponseJustify> justifyList){
         for(ResponseOption currentOpt: selectedOptions){
             responseOptionRepository.delete(currentOpt);
+        }
+        for(ResponseJustify currentJustify : justifyList){
+            responseJustifyRepository.delete(currentJustify);
         }
     }
 

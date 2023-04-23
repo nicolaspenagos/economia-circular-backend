@@ -33,12 +33,16 @@ public class Response extends BaseEntity {
     @OneToMany(mappedBy = "response", targetEntity = ResponseOption.class)
     private List<ResponseOption> selectedOptions;
 
-    public Response(UUID id, LocalDateTime responseDate, UUID userId, boolean complete, List<ResponseOption> selectedOptions) {
+    @OneToMany(mappedBy = "response", targetEntity = ResponseJustify.class)
+    private List<ResponseJustify> justifyList;
+
+    public Response(UUID id, LocalDateTime responseDate, UUID userId, boolean complete, List<ResponseOption> selectedOptions, List<ResponseJustify> justifyList) {
         super.setId(id);
         this.responseDate = responseDate;
         this.userId = userId;
         this.complete = complete;
         this.selectedOptions = selectedOptions;
+        this.justifyList = justifyList;
     }
     @PrePersist
     public void generateId() {

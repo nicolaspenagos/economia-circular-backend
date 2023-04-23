@@ -29,4 +29,6 @@ public class ResponseDTO {
     @NotEmpty(message = "Options may not be empty")
     private List<ResponseOptionDTO> selectedOptions;
 
+    private List<ResponseJustifyDTO> justifyList;
+
 }
