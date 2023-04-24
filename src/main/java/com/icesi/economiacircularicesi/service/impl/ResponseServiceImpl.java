@@ -17,10 +17,12 @@ import com.icesi.economiacircularicesi.service.ResponseService;
 import com.icesi.economiacircularicesi.service.UserService;
 import com.icesi.economiacircularicesi.utils.ErrorExceptionUtils;
 import lombok.AllArgsConstructor;
+import org.hibernate.mapping.Array;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -64,6 +66,7 @@ public class ResponseServiceImpl implements ResponseService {
 
     private void saveResponsesJustifies(UUID responseId, List<ResponseJustify> responseJustifies){
         for(ResponseJustify currentJustify:responseJustifies){
+            System.out.println(currentJustify.getJustify());
             Response responseRef = new Response();
             responseRef.setId(responseId);
             currentJustify.setResponse(responseRef);
@@ -74,18 +77,25 @@ public class ResponseServiceImpl implements ResponseService {
     @Override
     public Response updateResponse(UUID responseId, Response responseUpdate) {
 
+
         Response response = responseRepository.findById(responseId).orElseThrow(()-> new CustomException(HttpStatus.BAD_REQUEST, new CustomError(ErrorCode.CODE_R02_RESPONSE_NOT_FOUND, ErrorCode.CODE_R02_RESPONSE_NOT_FOUND.getMessage())));
+
 
 
         if(!response.getUserId().equals(SecurityContextHolder.getContext().getUserId()))
             ErrorExceptionUtils.throwCustomException(HttpStatus.UNAUTHORIZED, ErrorCode.CODE_A04_UNAUTHORIZED);
 
-        if((responseUpdate.getSelectedOptions()!= null && !responseUpdate.getSelectedOptions().isEmpty())&&responseUpdate.getJustifyList()!=null)
+        if((responseUpdate.getSelectedOptions()!= null && !responseUpdate.getSelectedOptions().isEmpty())&&responseUpdate.getJustifyList()!=null){
             deleteResponseRelations(response.getSelectedOptions(), responseUpdate.getJustifyList());
 
-        responseMapper.updateResponseFromResponse(responseUpdate, response);
+        }
 
+        System.out.println(responseUpdate.getJustifyList().get(0).getJustify());
+
+        responseMapper.updateResponseFromResponse(responseUpdate, response);
+        System.out.println(response.getJustifyList().get(0).getJustify());
         saveResponseOptions(response.getId(), response.getSelectedOptions());
+        saveResponsesJustifies(response.getId(), response.getJustifyList());
 
         return responseRepository.save(response);
 

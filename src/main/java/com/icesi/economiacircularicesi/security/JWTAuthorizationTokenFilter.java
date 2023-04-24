@@ -43,9 +43,7 @@ public class JWTAuthorizationTokenFilter extends OncePerRequestFilter {
     private static final String OPTIONS = "OPTIONS";
     private static final String API_DOCS_PATH = "api-docs";
     private static final String SWAGGER_UI_PATH = "swagger-ui";
-    private static final String[] excludedPaths = {"POST /login","POST /users", "OPTIONS /users", "OPTIONS /login", "OPTIONS /questions"};
-
-
+    private static final String[] excludedPaths = {"POST /login","POST /users", "OPTIONS /users", "OPTIONS /login", "OPTIONS /questions", "OPTIONS /response"};
 
 
     @Override
@@ -100,6 +98,9 @@ public class JWTAuthorizationTokenFilter extends OncePerRequestFilter {
 
         String method = request.getMethod();
         String uriPath = request.getRequestURI();
+        String methodPlusPath = method + " " + uriPath;
+
+        System.out.println(methodPlusPath);
 
         if(method.equalsIgnoreCase(OPTIONS)){
             return true;
@@ -108,7 +109,7 @@ public class JWTAuthorizationTokenFilter extends OncePerRequestFilter {
         if(getMainPath(uriPath).equals(SWAGGER_UI_PATH)||getMainPath(uriPath).equals(API_DOCS_PATH))
             return true;
 
-        String methodPlusPath = method + " " + uriPath;
+
 
         return Arrays.stream(excludedPaths).anyMatch(path -> path.equalsIgnoreCase(methodPlusPath));
     }
@@ -135,7 +136,7 @@ public class JWTAuthorizationTokenFilter extends OncePerRequestFilter {
 
     private void isAuthorized(HttpServletRequest request, SecurityContext context, HttpServletResponse response){
 
-        System.out.println();
+  ;
         String[] usersPermissions = new UserRolePermissions().getUserRolePermissionsList(context.getUserId().toString());
 
         boolean authorizedFlag = searchPermission(usersPermissions, request);
@@ -150,12 +151,15 @@ public class JWTAuthorizationTokenFilter extends OncePerRequestFilter {
 
 
         for(String permission:permissions){
+
             if(permission.endsWith("*") && validateSharedPaths(permission, requestToString)){
               return true;
             }
 
             if(permission.equals(requestToString))
                 return true;
+
+
         }
 
         return false;
