@@ -66,7 +66,7 @@ public class ResponseServiceImpl implements ResponseService {
 
     private void saveResponsesJustifies(UUID responseId, List<ResponseJustify> responseJustifies){
         for(ResponseJustify currentJustify:responseJustifies){
-            System.out.println(currentJustify.getJustify());
+
             Response responseRef = new Response();
             responseRef.setId(responseId);
             currentJustify.setResponse(responseRef);
@@ -80,22 +80,36 @@ public class ResponseServiceImpl implements ResponseService {
 
         Response response = responseRepository.findById(responseId).orElseThrow(()-> new CustomException(HttpStatus.BAD_REQUEST, new CustomError(ErrorCode.CODE_R02_RESPONSE_NOT_FOUND, ErrorCode.CODE_R02_RESPONSE_NOT_FOUND.getMessage())));
 
+        System.out.println("new response Justify size");
+        System.out.println(responseUpdate.getJustifyList().size());
+        System.out.println("old response Justify size");
+        System.out.println(response.getJustifyList().size());
+        System.out.println("old id");
+        System.out.println(response.getId());
 
 
         if(!response.getUserId().equals(SecurityContextHolder.getContext().getUserId()))
             ErrorExceptionUtils.throwCustomException(HttpStatus.UNAUTHORIZED, ErrorCode.CODE_A04_UNAUTHORIZED);
 
         if((responseUpdate.getSelectedOptions()!= null && !responseUpdate.getSelectedOptions().isEmpty())&&responseUpdate.getJustifyList()!=null){
-            deleteResponseRelations(response.getSelectedOptions(), responseUpdate.getJustifyList());
+            deleteResponseRelations(response.getSelectedOptions(), response.getJustifyList());
 
         }
 
-        System.out.println(responseUpdate.getJustifyList().get(0).getJustify());
+
 
         responseMapper.updateResponseFromResponse(responseUpdate, response);
-        System.out.println(response.getJustifyList().get(0).getJustify());
+        System.out.println("Mapper");
+
         saveResponseOptions(response.getId(), response.getSelectedOptions());
         saveResponsesJustifies(response.getId(), response.getJustifyList());
+
+
+        System.out.println("old response Justify size");
+        System.out.println(response.getJustifyList().size());
+        System.out.println("old id");
+        System.out.println(response.getId());
+
 
         return responseRepository.save(response);
 
@@ -118,9 +132,12 @@ public class ResponseServiceImpl implements ResponseService {
 
     private void deleteResponseRelations(List<ResponseOption> selectedOptions, List<ResponseJustify> justifyList){
         for(ResponseOption currentOpt: selectedOptions){
+
             responseOptionRepository.delete(currentOpt);
         }
         for(ResponseJustify currentJustify : justifyList){
+
+
             responseJustifyRepository.delete(currentJustify);
         }
     }
