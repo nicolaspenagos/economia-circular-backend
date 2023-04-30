@@ -100,7 +100,6 @@ public class JWTAuthorizationTokenFilter extends OncePerRequestFilter {
         String uriPath = request.getRequestURI();
         String methodPlusPath = method + " " + uriPath;
 
-        System.out.println(methodPlusPath);
 
         if(method.equalsIgnoreCase(OPTIONS)){
             return true;

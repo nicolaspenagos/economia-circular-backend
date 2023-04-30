@@ -77,16 +77,7 @@ public class ResponseServiceImpl implements ResponseService {
     @Override
     public Response updateResponse(UUID responseId, Response responseUpdate) {
 
-
         Response response = responseRepository.findById(responseId).orElseThrow(()-> new CustomException(HttpStatus.BAD_REQUEST, new CustomError(ErrorCode.CODE_R02_RESPONSE_NOT_FOUND, ErrorCode.CODE_R02_RESPONSE_NOT_FOUND.getMessage())));
-
-        System.out.println("new response Justify size");
-        System.out.println(responseUpdate.getJustifyList().size());
-        System.out.println("old response Justify size");
-        System.out.println(response.getJustifyList().size());
-        System.out.println("old id");
-        System.out.println(response.getId());
-
 
         if(!response.getUserId().equals(SecurityContextHolder.getContext().getUserId()))
             ErrorExceptionUtils.throwCustomException(HttpStatus.UNAUTHORIZED, ErrorCode.CODE_A04_UNAUTHORIZED);
@@ -96,20 +87,10 @@ public class ResponseServiceImpl implements ResponseService {
 
         }
 
-
-
         responseMapper.updateResponseFromResponse(responseUpdate, response);
-        System.out.println("Mapper");
 
         saveResponseOptions(response.getId(), response.getSelectedOptions());
         saveResponsesJustifies(response.getId(), response.getJustifyList());
-
-
-        System.out.println("old response Justify size");
-        System.out.println(response.getJustifyList().size());
-        System.out.println("old id");
-        System.out.println(response.getId());
-
 
         return responseRepository.save(response);
 
