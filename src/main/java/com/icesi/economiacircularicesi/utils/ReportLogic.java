@@ -61,9 +61,12 @@ public class ReportLogic {
         Double activityObtainedScore = 0.0;
 
         for(Question currentQuestion: activityQuestions){
+            //Not all the questions have selected options since not all the questions are mandatory
+            if(responseOptionsByQuestions.get(currentQuestion.getId())!=null){
+                Double questionTotalScore = activity.getScore()/(activityQuestions.size()-dependentExcludingOptsCounter);
+                activityObtainedScore += scoreQuestion(currentQuestion, responseOptionsByQuestions.get(currentQuestion.getId()), questionTotalScore);
+            }
 
-            Double questionTotalScore = activity.getScore()/(activityQuestions.size()-dependentExcludingOptsCounter);
-            activityObtainedScore += scoreQuestion(currentQuestion, responseOptionsByQuestions.get(currentQuestion.getId()), questionTotalScore);
         }
         return new Score(activity.getId(),activity.getName(), activity.getTitle(), activity.getScore(), activityObtainedScore, activityObtainedScore/activity.getScore()*100.0);
     }
@@ -88,7 +91,10 @@ public class ReportLogic {
 
     public List<Score> getActivitiesScore(List<Activity> activities, Response response, List<Question> questions){
 
+
         Map<UUID, Map<UUID, List<ResponseOption>>> optionsByActivityAndQuestion = getResponseOptionsMappedByActivityAndQuestion(response.getSelectedOptions(), activities, questions);
+
+
 
         List<Score> activitiesScore = new ArrayList<>();
 

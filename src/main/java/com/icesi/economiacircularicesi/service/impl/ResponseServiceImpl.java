@@ -21,6 +21,7 @@ import org.hibernate.mapping.Array;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -43,6 +44,7 @@ public class ResponseServiceImpl implements ResponseService {
 
         // We do not need to check if the user exists because in the AuthorizationFilter we are doing so (just a user that exists can be logged in)
         response.setUserId(SecurityContextHolder.getContext().getUserId());
+        response.setResponseDate(LocalDateTime.now());
 
         Response savedResponse =  responseRepository.save(response);
 
