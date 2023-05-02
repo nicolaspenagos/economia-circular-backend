@@ -1,5 +1,6 @@
 package com.icesi.economiacircularicesi.utils;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.icesi.economiacircularicesi.model.Activity.Activity;
 import com.icesi.economiacircularicesi.model.BaseEntity;
 import com.icesi.economiacircularicesi.model.Principle.Principle;
@@ -64,6 +65,7 @@ public class ReportLogic {
             //Not all the questions have selected options since not all the questions are mandatory
             if(responseOptionsByQuestions.get(currentQuestion.getId())!=null){
                 Double questionTotalScore = activity.getScore()/(activityQuestions.size()-dependentExcludingOptsCounter);
+
                 activityObtainedScore += scoreQuestion(currentQuestion, responseOptionsByQuestions.get(currentQuestion.getId()), questionTotalScore);
             }
 
@@ -198,7 +200,7 @@ public class ReportLogic {
 
         QuestionOption selectedOpt = questionOptions.get(ReportLogic.getIndexOf(questionOptions, selectedOption.getOptionIdReference()));
 
-        if(selectedOpt.isExclusive()){
+        if(selectedOpt.isExclusive()||selectedOpt.isNotApply()){
             return 0.0;
         }
 
