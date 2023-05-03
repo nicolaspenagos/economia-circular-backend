@@ -297,7 +297,7 @@ public class ReportLogicTest {
         setUpSelectedOptions2();
         setUpScenery3();
 
-        Response response = new Response(UUID.randomUUID(), LocalDateTime.now(), UUID.randomUUID() ,true, selectedOptions2);
+        Response response = new Response(UUID.randomUUID(), LocalDateTime.now(), UUID.randomUUID() ,true, selectedOptions2, new ArrayList<>());
 
         List<Score> activitiesScore = reportLogic.getActivitiesScore(activities, response, questions);
 

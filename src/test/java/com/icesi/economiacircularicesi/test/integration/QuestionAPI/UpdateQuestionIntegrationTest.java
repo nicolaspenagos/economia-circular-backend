@@ -60,7 +60,7 @@ public class UpdateQuestionIntegrationTest {
 
         //So this test check if all last question data is replaced by base question data
         QuestionDTO question = deserializeFromJsonFile(FilePaths.QUESTION_JSON, QuestionDTO.class, objectMapper);
-        question.setQuestionId(UUID.fromString(savedQuestionId ));
+        question.setId(UUID.fromString(savedQuestionId ));
         String body = objectMapper.writeValueAsString(question);
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.patch(savedQuestionPath)
