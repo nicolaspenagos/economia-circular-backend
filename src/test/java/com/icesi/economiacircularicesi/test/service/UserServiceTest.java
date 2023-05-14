@@ -2,7 +2,7 @@ package com.icesi.economiacircularicesi.test.service;
 
 import com.icesi.economiacircularicesi.constant.ErrorCode;
 import com.icesi.economiacircularicesi.constant.User.BaseUser;
-import com.icesi.economiacircularicesi.error.exception.CustomError.CustomException;
+import com.icesi.economiacircularicesi.error.exception.custom_error.CustomException;
 import com.icesi.economiacircularicesi.mapper.UserMapper;
 import com.icesi.economiacircularicesi.model.user.TermsAndConditions;
 import com.icesi.economiacircularicesi.model.user.User;

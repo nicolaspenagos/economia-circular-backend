@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.icesi.economiacircularicesi.constant.ErrorCode;
 import com.icesi.economiacircularicesi.dto.question.QuestionDTO;
 import com.icesi.economiacircularicesi.dto.question.QuestionOptionDTO;
-import com.icesi.economiacircularicesi.error.exception.CustomError.CustomError;
+import com.icesi.economiacircularicesi.error.exception.custom_error.CustomError;
 import com.icesi.economiacircularicesi.model.question.QuestionType;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;

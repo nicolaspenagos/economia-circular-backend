@@ -3,7 +3,7 @@ package com.icesi.economiacircularicesi.test.service;
 import com.icesi.economiacircularicesi.constant.ErrorCode;
 import com.icesi.economiacircularicesi.constant.Question.BaseQuestion;
 import com.icesi.economiacircularicesi.constant.Question.BaseQuestionOption;
-import com.icesi.economiacircularicesi.error.exception.CustomError.CustomException;
+import com.icesi.economiacircularicesi.error.exception.custom_error.CustomException;
 import com.icesi.economiacircularicesi.mapper.QuestionMapper;
 import com.icesi.economiacircularicesi.model.question.Question;
 import com.icesi.economiacircularicesi.model.question.QuestionOption;

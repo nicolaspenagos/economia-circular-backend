@@ -1,8 +1,8 @@
 package com.icesi.economiacircularicesi.utils;
 
 import com.icesi.economiacircularicesi.constant.ErrorCode;
-import com.icesi.economiacircularicesi.error.exception.CustomError.CustomError;
-import com.icesi.economiacircularicesi.error.exception.CustomError.CustomException;
+import com.icesi.economiacircularicesi.error.exception.custom_error.CustomError;
+import com.icesi.economiacircularicesi.error.exception.custom_error.CustomException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 

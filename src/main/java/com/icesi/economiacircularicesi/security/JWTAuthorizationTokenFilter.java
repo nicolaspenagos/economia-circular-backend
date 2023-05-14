@@ -3,8 +3,8 @@ package com.icesi.economiacircularicesi.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.icesi.economiacircularicesi.constant.ErrorCode;
-import com.icesi.economiacircularicesi.error.exception.CustomError.CustomError;
-import com.icesi.economiacircularicesi.error.exception.CustomError.CustomException;
+import com.icesi.economiacircularicesi.error.exception.custom_error.CustomError;
+import com.icesi.economiacircularicesi.error.exception.custom_error.CustomException;
 
 import com.icesi.economiacircularicesi.utils.ErrorExceptionUtils;
 import com.icesi.economiacircularicesi.utils.JWTParser;
@@ -18,7 +18,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;

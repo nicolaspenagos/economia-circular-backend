@@ -3,7 +3,7 @@ package com.icesi.economiacircularicesi.test.integration.user_api;
 import com.icesi.economiacircularicesi.constant.ErrorCode;
 import com.icesi.economiacircularicesi.constant.FilePaths;
 import com.icesi.economiacircularicesi.dto.user.TermsAndConditionsDTO;
-import com.icesi.economiacircularicesi.error.exception.CustomError.CustomError;
+import com.icesi.economiacircularicesi.error.exception.custom_error.CustomError;
 import com.icesi.economiacircularicesi.constant.User.BaseTermsAndCondsAcceptance;
 import com.icesi.economiacircularicesi.mapper.UserMapper;
 import com.icesi.economiacircularicesi.mapper.UserMapperImpl;

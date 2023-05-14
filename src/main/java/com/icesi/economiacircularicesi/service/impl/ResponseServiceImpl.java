@@ -1,8 +1,8 @@
 package com.icesi.economiacircularicesi.service.impl;
 
 import com.icesi.economiacircularicesi.constant.ErrorCode;
-import com.icesi.economiacircularicesi.error.exception.CustomError.CustomError;
-import com.icesi.economiacircularicesi.error.exception.CustomError.CustomException;
+import com.icesi.economiacircularicesi.error.exception.custom_error.CustomError;
+import com.icesi.economiacircularicesi.error.exception.custom_error.CustomException;
 import com.icesi.economiacircularicesi.mapper.ResponseMapper;
 import com.icesi.economiacircularicesi.model.response.Response;
 import com.icesi.economiacircularicesi.model.response.ResponseJustify;
