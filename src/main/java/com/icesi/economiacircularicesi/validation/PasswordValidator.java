@@ -16,6 +16,7 @@ public class PasswordValidator implements ConstraintValidator<CustomAnnotation.P
 
     @Override
     public void initialize(CustomAnnotation.PasswordValidation passwordValidation) {
+        // Do nothing because of is autowired
     }
 
     @SneakyThrows
