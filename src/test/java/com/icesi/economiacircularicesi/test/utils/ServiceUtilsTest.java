@@ -76,10 +76,9 @@ class  ServiceUtilsTest {
         questionsList.get(2).setId(id);
 
         int index = ReportLogic.getIndexOf(questionsList, id);
-        assertTrue(index == 2);
-        assertTrue(questionsList.get(index).getQuestionText().equals("Txt3"));
-
-        assertTrue(ReportLogic.getIndexOf(questionsList, UUID.randomUUID())==-1);
+        assertEquals(index, 2);
+        assertEquals(questionsList.get(index).getQuestionText(),"Txt3" );
+        assertEquals(ReportLogic.getIndexOf(questionsList, UUID.randomUUID()), -1);
 
     }
 

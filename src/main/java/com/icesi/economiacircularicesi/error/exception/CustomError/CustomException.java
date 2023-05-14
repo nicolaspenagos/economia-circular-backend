@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 public class CustomException extends RuntimeException{
 
-    private HttpStatus httpStatus;
-    private CustomError error;
+    private final HttpStatus httpStatus;
+    private final CustomError error;
 
 }

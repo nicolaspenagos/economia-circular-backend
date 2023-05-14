@@ -4,7 +4,6 @@ package com.icesi.economiacircularicesi.security;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.springframework.core.NamedInheritableThreadLocal;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class SecurityContextHolder {

@@ -14,6 +14,8 @@ import java.util.Map;
 public class JWTParser {
     private static String SECRET_KEY = "longenoguhkeytotestthisimplementationsomebytesmore";
 
+    private JWTParser(){}
+
     public static String createJWT(String id, String issuer, String subject, Map<String, String> claims, long ttlMillis) {
 
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;

@@ -135,7 +135,7 @@ public class JWTAuthorizationTokenFilter extends OncePerRequestFilter {
 
     private void isAuthorized(HttpServletRequest request, SecurityContext context, HttpServletResponse response){
 
-  ;
+
         String[] usersPermissions = new UserRolePermissions().getUserRolePermissionsList(context.getUserId().toString());
 
         boolean authorizedFlag = searchPermission(usersPermissions, request);
