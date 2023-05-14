@@ -62,10 +62,10 @@ class  ServiceUtilsTest {
         usersList.get(0).setId(id);
 
         int index = ReportLogic.getIndexOf(usersList, id);
-        assertTrue(index == 0);
-        assertTrue(usersList.get(index).getName().equals("Nicolas"));
+        assertEquals(0, index );
+        assertEquals("Nicolas", usersList.get(index).getName());
+        assertEquals(-1, ReportLogic.getIndexOf(usersList, UUID.randomUUID()));
 
-        assertTrue(ReportLogic.getIndexOf(usersList, UUID.randomUUID())==-1);
 
     }
 

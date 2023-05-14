@@ -60,7 +60,6 @@ class GetQuestionsIntegrationTest {
         QuestionDTO firstQuestion = questionDTOS[0];
 
         assertNotNull(firstQuestion);
-        assertTrue(firstQuestion instanceof QuestionDTO);
         assertThat(firstQuestion, hasProperty("questionText", is("First question statement")));
         assertThat(firstQuestion, hasProperty("mandatory", is(true)));
         assertThat(firstQuestion, hasProperty("justify", is(true)));
@@ -68,21 +67,18 @@ class GetQuestionsIntegrationTest {
         assertThat(firstQuestion, hasProperty("type", is(QuestionType.INCREMENTAL_SINGLE_CHOICE)));
         assertThat(firstQuestion, hasProperty("activityId", is(UUID.fromString("1ac711f2-682c-46e3-83aa-7fecf28f1082"))));
 
-        assertNotNull(firstQuestion.getQuestionOptions());
+
         assertTrue(firstQuestion.getQuestionOptions().size() == 1);
 
         QuestionOptionDTO firstOption = firstQuestion.getQuestionOptions().get(0);
 
         assertNotNull(firstOption);
-        assertTrue(firstOption instanceof QuestionOptionDTO);
         assertThat(firstOption, hasProperty("optionOrder", is(1)));
         assertThat(firstOption, hasProperty("optionValue", is("First option.")));
 
         //Second question in the list validations
         QuestionDTO secondQuestion = questionDTOS[1];
 
-        assertNotNull(secondQuestion);
-        assertTrue(secondQuestion instanceof QuestionDTO);
         assertThat(secondQuestion, hasProperty("questionText", is("Second question statement")));
         assertThat(secondQuestion, hasProperty("mandatory", is(true)));
         assertThat(secondQuestion, hasProperty("justify", is(true)));
@@ -91,7 +87,6 @@ class GetQuestionsIntegrationTest {
         assertThat(secondQuestion, hasProperty("activityId", is(UUID.fromString("200176e0-2600-40e4-87ee-1b832a425caf"))));
 
         assertNotNull(secondQuestion.getQuestionOptions());
-        assertTrue(secondQuestion.getQuestionOptions().size() == 1);
 
         QuestionOptionDTO secondOption = firstQuestion.getQuestionOptions().get(0);
 
