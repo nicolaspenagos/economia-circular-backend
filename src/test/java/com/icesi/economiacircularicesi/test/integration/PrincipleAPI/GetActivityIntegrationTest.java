@@ -1,7 +1,7 @@
 package com.icesi.economiacircularicesi.test.integration.PrincipleAPI;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.icesi.economiacircularicesi.dto.ActivityDTO.ActivityDTO;
+import com.icesi.economiacircularicesi.dto.activity.ActivityDTO;
 
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,4 +1,4 @@
-package com.icesi.economiacircularicesi.dto.LoginDTO;
+package com.icesi.economiacircularicesi.dto.login;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

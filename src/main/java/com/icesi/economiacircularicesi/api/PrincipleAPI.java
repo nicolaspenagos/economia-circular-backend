@@ -1,6 +1,6 @@
 package com.icesi.economiacircularicesi.api;
 
-import com.icesi.economiacircularicesi.dto.PrincipleDTO.PrincipleDTO;
+import com.icesi.economiacircularicesi.dto.principle.PrincipleDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

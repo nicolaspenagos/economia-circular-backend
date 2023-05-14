@@ -1,6 +1,6 @@
 package com.icesi.economiacircularicesi.mapper;
 
-import com.icesi.economiacircularicesi.dto.ResponseDTO.ResponseDTO;
+import com.icesi.economiacircularicesi.dto.response.ResponseDTO;
 import com.icesi.economiacircularicesi.model.Response.Response;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;

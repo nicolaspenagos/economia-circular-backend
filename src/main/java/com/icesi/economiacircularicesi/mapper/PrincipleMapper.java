@@ -1,6 +1,6 @@
 package com.icesi.economiacircularicesi.mapper;
 
-import com.icesi.economiacircularicesi.dto.PrincipleDTO.PrincipleDTO;
+import com.icesi.economiacircularicesi.dto.principle.PrincipleDTO;
 import com.icesi.economiacircularicesi.model.Principle.Principle;
 import org.mapstruct.Mapper;
 

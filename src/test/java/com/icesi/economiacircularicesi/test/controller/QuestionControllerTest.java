@@ -3,7 +3,7 @@ package com.icesi.economiacircularicesi.test.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.icesi.economiacircularicesi.constant.Question.BaseQuestion;
 import com.icesi.economiacircularicesi.controller.QuestionController;
-import com.icesi.economiacircularicesi.dto.QuestionDTO.QuestionDTO;
+import com.icesi.economiacircularicesi.dto.question.QuestionDTO;
 import com.icesi.economiacircularicesi.mapper.QuestionMapper;
 import com.icesi.economiacircularicesi.mapper.QuestionMapperImpl;
 import com.icesi.economiacircularicesi.service.QuestionService;

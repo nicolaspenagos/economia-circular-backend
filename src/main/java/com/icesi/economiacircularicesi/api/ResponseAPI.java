@@ -1,6 +1,6 @@
 package com.icesi.economiacircularicesi.api;
 
-import com.icesi.economiacircularicesi.dto.ResponseDTO.ResponseDTO;
+import com.icesi.economiacircularicesi.dto.response.ResponseDTO;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

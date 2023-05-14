@@ -2,7 +2,7 @@ package com.icesi.economiacircularicesi.test.integration.UserAPI;
 
 import com.icesi.economiacircularicesi.constant.ErrorCode;
 import com.icesi.economiacircularicesi.constant.FilePaths;
-import com.icesi.economiacircularicesi.dto.UserDTO.TermsAndConditionsDTO;
+import com.icesi.economiacircularicesi.dto.user.TermsAndConditionsDTO;
 import com.icesi.economiacircularicesi.error.exception.CustomError.CustomError;
 import com.icesi.economiacircularicesi.constant.User.BaseTermsAndCondsAcceptance;
 import com.icesi.economiacircularicesi.mapper.UserMapper;
@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -28,7 +27,7 @@ import org.springframework.web.context.WebApplicationContext;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.icesi.economiacircularicesi.dto.UserDTO.UserDTO;
+import com.icesi.economiacircularicesi.dto.user.UserDTO;
 import com.icesi.economiacircularicesi.constant.User.BaseUser;
 
 import static com.icesi.economiacircularicesi.utils.TestUtils.*;

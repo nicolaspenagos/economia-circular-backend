@@ -1,6 +1,6 @@
 package com.icesi.economiacircularicesi.api;
 
-import com.icesi.economiacircularicesi.dto.QuestionDTO.QuestionDTO;
+import com.icesi.economiacircularicesi.dto.question.QuestionDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

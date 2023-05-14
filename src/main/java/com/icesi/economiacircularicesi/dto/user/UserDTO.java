@@ -1,4 +1,4 @@
-package com.icesi.economiacircularicesi.dto.UserDTO;
+package com.icesi.economiacircularicesi.dto.user;
 
 import com.icesi.economiacircularicesi.validation.CustomAnnotation;
 import lombok.AllArgsConstructor;

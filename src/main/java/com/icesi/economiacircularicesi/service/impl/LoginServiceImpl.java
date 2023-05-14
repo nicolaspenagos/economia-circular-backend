@@ -1,8 +1,8 @@
 package com.icesi.economiacircularicesi.service.impl;
 
 import com.icesi.economiacircularicesi.constant.ErrorCode;
-import com.icesi.economiacircularicesi.dto.LoginDTO.LoginDTO;
-import com.icesi.economiacircularicesi.dto.LoginDTO.TokenDTO;
+import com.icesi.economiacircularicesi.dto.login.LoginDTO;
+import com.icesi.economiacircularicesi.dto.login.TokenDTO;
 import com.icesi.economiacircularicesi.error.exception.CustomError.CustomError;
 import com.icesi.economiacircularicesi.error.exception.CustomError.CustomException;
 import com.icesi.economiacircularicesi.model.User.User;

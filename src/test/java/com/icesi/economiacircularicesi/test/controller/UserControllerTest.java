@@ -2,8 +2,8 @@ package com.icesi.economiacircularicesi.test.controller;
 
 import com.icesi.economiacircularicesi.constant.ErrorCode;
 import com.icesi.economiacircularicesi.controller.UserController;
-import com.icesi.economiacircularicesi.dto.UserDTO.TermsAndConditionsDTO;
-import com.icesi.economiacircularicesi.dto.UserDTO.UserDTO;
+import com.icesi.economiacircularicesi.dto.user.TermsAndConditionsDTO;
+import com.icesi.economiacircularicesi.dto.user.UserDTO;
 import com.icesi.economiacircularicesi.error.exception.CustomError.CustomException;
 import com.icesi.economiacircularicesi.mapper.UserMapper;
 import com.icesi.economiacircularicesi.mapper.UserMapperImpl;

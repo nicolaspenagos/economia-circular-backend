@@ -1,6 +1,6 @@
 package com.icesi.economiacircularicesi.mapper;
 
-import com.icesi.economiacircularicesi.dto.QuestionDTO.QuestionDTO;
+import com.icesi.economiacircularicesi.dto.question.QuestionDTO;
 import com.icesi.economiacircularicesi.model.Question.Question;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;

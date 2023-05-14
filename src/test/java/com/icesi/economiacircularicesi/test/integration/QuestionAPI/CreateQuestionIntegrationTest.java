@@ -2,8 +2,8 @@ package com.icesi.economiacircularicesi.test.integration.QuestionAPI;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.icesi.economiacircularicesi.constant.ErrorCode;
-import com.icesi.economiacircularicesi.dto.QuestionDTO.QuestionDTO;
-import com.icesi.economiacircularicesi.dto.QuestionDTO.QuestionOptionDTO;
+import com.icesi.economiacircularicesi.dto.question.QuestionDTO;
+import com.icesi.economiacircularicesi.dto.question.QuestionOptionDTO;
 import com.icesi.economiacircularicesi.error.exception.CustomError.CustomError;
 import com.icesi.economiacircularicesi.model.Question.QuestionType;
 import lombok.SneakyThrows;

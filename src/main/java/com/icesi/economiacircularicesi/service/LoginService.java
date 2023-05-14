@@ -1,7 +1,7 @@
 package com.icesi.economiacircularicesi.service;
 
-import com.icesi.economiacircularicesi.dto.LoginDTO.LoginDTO;
-import com.icesi.economiacircularicesi.dto.LoginDTO.TokenDTO;
+import com.icesi.economiacircularicesi.dto.login.LoginDTO;
+import com.icesi.economiacircularicesi.dto.login.TokenDTO;
 
 public interface LoginService {
 

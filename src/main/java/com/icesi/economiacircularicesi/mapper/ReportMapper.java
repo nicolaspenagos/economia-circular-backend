@@ -1,6 +1,6 @@
 package com.icesi.economiacircularicesi.mapper;
 
-import com.icesi.economiacircularicesi.dto.ReportDTO.ReportDTO;
+import com.icesi.economiacircularicesi.dto.report.ReportDTO;
 import com.icesi.economiacircularicesi.model.Report.Report;
 import org.mapstruct.Mapper;
 

@@ -1,7 +1,7 @@
 package com.icesi.economiacircularicesi.controller;
 
 import com.icesi.economiacircularicesi.api.PrincipleAPI;
-import com.icesi.economiacircularicesi.dto.PrincipleDTO.PrincipleDTO;
+import com.icesi.economiacircularicesi.dto.principle.PrincipleDTO;
 import com.icesi.economiacircularicesi.mapper.PrincipleMapper;
 import com.icesi.economiacircularicesi.service.PrincipleService;
 import lombok.AllArgsConstructor;

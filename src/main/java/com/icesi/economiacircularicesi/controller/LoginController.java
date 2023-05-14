@@ -1,8 +1,8 @@
 package com.icesi.economiacircularicesi.controller;
 
 import com.icesi.economiacircularicesi.api.LoginAPI;
-import com.icesi.economiacircularicesi.dto.LoginDTO.LoginDTO;
-import com.icesi.economiacircularicesi.dto.LoginDTO.TokenDTO;
+import com.icesi.economiacircularicesi.dto.login.LoginDTO;
+import com.icesi.economiacircularicesi.dto.login.TokenDTO;
 import com.icesi.economiacircularicesi.service.LoginService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;

@@ -1,15 +1,17 @@
-package com.icesi.economiacircularicesi.dto.ActivityDTO;
+package com.icesi.economiacircularicesi.dto.principle;
 
+import com.icesi.economiacircularicesi.model.Activity.Activity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
 import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ActivityDTO {
+public class PrincipleDTO {
 
     private UUID id;
 
@@ -21,6 +23,7 @@ public class ActivityDTO {
 
     private double score;
 
-    private boolean containsDependentScoreQuestions;
+    private Set<Activity> activitySet;
+
 
 }

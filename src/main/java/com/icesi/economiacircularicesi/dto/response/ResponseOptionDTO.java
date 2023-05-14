@@ -1,4 +1,4 @@
-package com.icesi.economiacircularicesi.dto.ResponseDTO;
+package com.icesi.economiacircularicesi.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
