@@ -57,7 +57,7 @@ public class JWTAuthorizationTokenFilter extends OncePerRequestFilter {
                 String jwtToken = request.getHeader(AUTHORIZATION_HEADER).replace(TOKEN_PREFIX, StringUtils.EMPTY);
                 Claims claims = JWTParser.decodeJWT(jwtToken);
                 SecurityContext context = parseClaims(jwtToken, claims);
-                isAuthorized(request, context, response);
+                isAuthorized(request, context);
                 SecurityContextHolder.setUserContext(context);
                 filterChain.doFilter(request, response);
             } else {
@@ -132,7 +132,7 @@ public class JWTAuthorizationTokenFilter extends OncePerRequestFilter {
         response.getWriter().flush();
     }
 
-    private void isAuthorized(HttpServletRequest request, SecurityContext context, HttpServletResponse response){
+    private void isAuthorized(HttpServletRequest request, SecurityContext context){
 
 
         String[] usersPermissions = new UserRolePermissions().getUserRolePermissionsList(context.getUserId().toString());

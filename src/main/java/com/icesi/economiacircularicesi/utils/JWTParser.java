@@ -12,7 +12,7 @@ import java.util.Map;
 
 
 public class JWTParser {
-    private final static String SECRET_KEY = "longenoguhkeytotestthisimplementationsomebytesmore";
+    private static final String SECRET_KEY = "longenoguhkeytotestthisimplementationsomebytesmore";
 
     private JWTParser(){}
 
