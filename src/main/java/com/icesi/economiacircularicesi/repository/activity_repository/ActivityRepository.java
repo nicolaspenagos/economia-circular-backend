@@ -1,4 +1,4 @@
-package com.icesi.economiacircularicesi.repository.ActivityRepository;
+package com.icesi.economiacircularicesi.repository.activity_repository;
 
 import com.icesi.economiacircularicesi.model.activity.Activity;
 import org.springframework.data.jpa.repository.Query;

@@ -8,8 +8,8 @@ import com.icesi.economiacircularicesi.error.exception.custom_error.CustomExcept
 import com.icesi.economiacircularicesi.mapper.QuestionMapper;
 import com.icesi.economiacircularicesi.model.question.Question;
 import com.icesi.economiacircularicesi.model.question.QuestionOption;
-import com.icesi.economiacircularicesi.repository.QuestionRepository.QuestionOptionRepository;
-import com.icesi.economiacircularicesi.repository.QuestionRepository.QuestionRepository;
+import com.icesi.economiacircularicesi.repository.question_repository.QuestionOptionRepository;
+import com.icesi.economiacircularicesi.repository.question_repository.QuestionRepository;
 import com.icesi.economiacircularicesi.service.QuestionService;
 import com.icesi.economiacircularicesi.utils.ErrorExceptionUtils;
 import lombok.AllArgsConstructor;

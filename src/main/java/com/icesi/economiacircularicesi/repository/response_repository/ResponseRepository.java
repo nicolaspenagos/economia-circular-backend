@@ -1,4 +1,4 @@
-package com.icesi.economiacircularicesi.repository.ResponseRepository;
+package com.icesi.economiacircularicesi.repository.response_repository;
 
 import com.icesi.economiacircularicesi.model.response.Response;
 import org.springframework.data.jpa.repository.Query;

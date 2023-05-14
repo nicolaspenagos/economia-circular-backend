@@ -1,6 +1,6 @@
 package com.icesi.economiacircularicesi.test.service;
 
-import com.icesi.economiacircularicesi.repository.PrincipleRepository.PrincipleRepository;
+import com.icesi.economiacircularicesi.repository.principle_repository.PrincipleRepository;
 import com.icesi.economiacircularicesi.service.impl.PrincipleServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -6,7 +6,7 @@ import com.icesi.economiacircularicesi.dto.login.TokenDTO;
 import com.icesi.economiacircularicesi.error.exception.custom_error.CustomError;
 import com.icesi.economiacircularicesi.error.exception.custom_error.CustomException;
 import com.icesi.economiacircularicesi.model.user.User;
-import com.icesi.economiacircularicesi.repository.UserRepository.UserRepository;
+import com.icesi.economiacircularicesi.repository.user_repository.UserRepository;
 import com.icesi.economiacircularicesi.service.LoginService;
 import com.icesi.economiacircularicesi.utils.JWTParser;
 import lombok.AllArgsConstructor;

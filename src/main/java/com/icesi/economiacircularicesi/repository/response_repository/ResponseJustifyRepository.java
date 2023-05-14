@@ -1,4 +1,4 @@
-package com.icesi.economiacircularicesi.repository.ResponseRepository;
+package com.icesi.economiacircularicesi.repository.response_repository;
 
 import com.icesi.economiacircularicesi.model.response.ResponseJustify;
 import org.springframework.data.repository.CrudRepository;

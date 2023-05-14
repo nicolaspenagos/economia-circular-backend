@@ -1,7 +1,7 @@
 package com.icesi.economiacircularicesi.service.impl;
 
 import com.icesi.economiacircularicesi.model.principle.Principle;
-import com.icesi.economiacircularicesi.repository.PrincipleRepository.PrincipleRepository;
+import com.icesi.economiacircularicesi.repository.principle_repository.PrincipleRepository;
 import com.icesi.economiacircularicesi.service.PrincipleService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.icesi.economiacircularicesi.repository.PrincipleRepository;
+package com.icesi.economiacircularicesi.repository.principle_repository;
 
 import com.icesi.economiacircularicesi.model.principle.Principle;
 import org.springframework.data.repository.CrudRepository;

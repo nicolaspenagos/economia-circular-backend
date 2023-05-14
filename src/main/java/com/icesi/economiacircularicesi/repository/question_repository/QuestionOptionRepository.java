@@ -1,4 +1,4 @@
-package com.icesi.economiacircularicesi.repository.QuestionRepository;
+package com.icesi.economiacircularicesi.repository.question_repository;
 
 import com.icesi.economiacircularicesi.model.question.QuestionOption;
 import org.springframework.data.repository.CrudRepository;

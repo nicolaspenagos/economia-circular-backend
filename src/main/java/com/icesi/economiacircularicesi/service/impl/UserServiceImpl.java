@@ -6,8 +6,8 @@ import com.icesi.economiacircularicesi.error.exception.custom_error.CustomExcept
 import com.icesi.economiacircularicesi.mapper.UserMapper;
 import com.icesi.economiacircularicesi.model.user.TermsAndConditions;
 import com.icesi.economiacircularicesi.model.user.User;
-import com.icesi.economiacircularicesi.repository.UserRepository.TermsAndConditionsRepository;
-import com.icesi.economiacircularicesi.repository.UserRepository.UserRepository;
+import com.icesi.economiacircularicesi.repository.user_repository.TermsAndConditionsRepository;
+import com.icesi.economiacircularicesi.repository.user_repository.UserRepository;
 import com.icesi.economiacircularicesi.service.UserService;
 import com.icesi.economiacircularicesi.utils.ErrorExceptionUtils;
 import lombok.AllArgsConstructor;
