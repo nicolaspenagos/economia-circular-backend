@@ -2,7 +2,7 @@ package com.icesi.economiacircularicesi.mapper;
 
 import com.icesi.economiacircularicesi.dto.user.UserDTO;
 import com.icesi.economiacircularicesi.dto.user.UserNoPassDTO;
-import com.icesi.economiacircularicesi.model.User.User;
+import com.icesi.economiacircularicesi.model.user.User;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;

@@ -1,7 +1,7 @@
 package com.icesi.economiacircularicesi.mapper;
 
 import com.icesi.economiacircularicesi.dto.report.ReportDTO;
-import com.icesi.economiacircularicesi.model.Report.Report;
+import com.icesi.economiacircularicesi.model.report.Report;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

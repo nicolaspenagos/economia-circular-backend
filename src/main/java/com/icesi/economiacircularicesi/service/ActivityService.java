@@ -1,6 +1,6 @@
 package com.icesi.economiacircularicesi.service;
 
-import com.icesi.economiacircularicesi.model.Activity.Activity;
+import com.icesi.economiacircularicesi.model.activity.Activity;
 
 import java.util.List;
 import java.util.UUID;

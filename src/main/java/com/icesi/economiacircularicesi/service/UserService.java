@@ -1,6 +1,6 @@
 package com.icesi.economiacircularicesi.service;
 
-import com.icesi.economiacircularicesi.model.User.User;
+import com.icesi.economiacircularicesi.model.user.User;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;

@@ -1,13 +1,13 @@
 package com.icesi.economiacircularicesi.test.utils;
 
-import com.icesi.economiacircularicesi.model.Activity.Activity;
-import com.icesi.economiacircularicesi.model.Principle.Principle;
-import com.icesi.economiacircularicesi.model.Question.Question;
-import com.icesi.economiacircularicesi.model.Question.QuestionOption;
-import com.icesi.economiacircularicesi.model.Question.QuestionType;
-import com.icesi.economiacircularicesi.model.Report.Score;
-import com.icesi.economiacircularicesi.model.Response.Response;
-import com.icesi.economiacircularicesi.model.Response.ResponseOption;
+import com.icesi.economiacircularicesi.model.activity.Activity;
+import com.icesi.economiacircularicesi.model.principle.Principle;
+import com.icesi.economiacircularicesi.model.question.Question;
+import com.icesi.economiacircularicesi.model.question.QuestionOption;
+import com.icesi.economiacircularicesi.model.question.QuestionType;
+import com.icesi.economiacircularicesi.model.report.Score;
+import com.icesi.economiacircularicesi.model.response.Response;
+import com.icesi.economiacircularicesi.model.response.ResponseOption;
 import com.icesi.economiacircularicesi.utils.ReportLogic;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

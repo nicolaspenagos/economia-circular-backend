@@ -1,6 +1,6 @@
 package com.icesi.economiacircularicesi.repository.QuestionRepository;
 
-import com.icesi.economiacircularicesi.model.Question.QuestionOption;
+import com.icesi.economiacircularicesi.model.question.QuestionOption;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.UUID;

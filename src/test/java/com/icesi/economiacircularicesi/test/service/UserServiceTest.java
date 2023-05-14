@@ -4,15 +4,14 @@ import com.icesi.economiacircularicesi.constant.ErrorCode;
 import com.icesi.economiacircularicesi.constant.User.BaseUser;
 import com.icesi.economiacircularicesi.error.exception.CustomError.CustomException;
 import com.icesi.economiacircularicesi.mapper.UserMapper;
-import com.icesi.economiacircularicesi.model.User.TermsAndConditions;
-import com.icesi.economiacircularicesi.model.User.User;
+import com.icesi.economiacircularicesi.model.user.TermsAndConditions;
+import com.icesi.economiacircularicesi.model.user.User;
 import com.icesi.economiacircularicesi.repository.UserRepository.TermsAndConditionsRepository;
 import com.icesi.economiacircularicesi.repository.UserRepository.UserRepository;
 import com.icesi.economiacircularicesi.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

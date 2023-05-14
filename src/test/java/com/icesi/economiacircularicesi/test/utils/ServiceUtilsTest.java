@@ -1,7 +1,7 @@
 package com.icesi.economiacircularicesi.test.utils;
 
-import com.icesi.economiacircularicesi.model.Question.Question;
-import com.icesi.economiacircularicesi.model.User.User;
+import com.icesi.economiacircularicesi.model.question.Question;
+import com.icesi.economiacircularicesi.model.user.User;
 import com.icesi.economiacircularicesi.utils.ReportLogic;
 import org.junit.jupiter.api.Test;
 

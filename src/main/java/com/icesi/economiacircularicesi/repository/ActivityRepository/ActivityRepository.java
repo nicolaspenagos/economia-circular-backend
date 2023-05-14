@@ -1,6 +1,6 @@
 package com.icesi.economiacircularicesi.repository.ActivityRepository;
 
-import com.icesi.economiacircularicesi.model.Activity.Activity;
+import com.icesi.economiacircularicesi.model.activity.Activity;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 

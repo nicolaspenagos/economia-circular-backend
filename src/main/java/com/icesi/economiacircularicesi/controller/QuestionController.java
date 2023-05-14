@@ -6,7 +6,7 @@ import com.icesi.economiacircularicesi.constant.ErrorCode;
 import com.icesi.economiacircularicesi.dto.question.QuestionDTO;
 import com.icesi.economiacircularicesi.dto.question.QuestionOptionDTO;
 import com.icesi.economiacircularicesi.mapper.QuestionMapper;
-import com.icesi.economiacircularicesi.model.Question.QuestionType;
+import com.icesi.economiacircularicesi.model.question.QuestionType;
 import com.icesi.economiacircularicesi.service.QuestionService;
 import com.icesi.economiacircularicesi.utils.ErrorExceptionUtils;
 import lombok.AllArgsConstructor;

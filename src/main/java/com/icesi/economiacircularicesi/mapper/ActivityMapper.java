@@ -1,7 +1,7 @@
 package com.icesi.economiacircularicesi.mapper;
 
 import com.icesi.economiacircularicesi.dto.activity.ActivityDTO;
-import com.icesi.economiacircularicesi.model.Activity.Activity;
+import com.icesi.economiacircularicesi.model.activity.Activity;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

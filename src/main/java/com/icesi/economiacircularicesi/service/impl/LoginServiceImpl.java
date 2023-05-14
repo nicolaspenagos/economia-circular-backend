@@ -5,7 +5,7 @@ import com.icesi.economiacircularicesi.dto.login.LoginDTO;
 import com.icesi.economiacircularicesi.dto.login.TokenDTO;
 import com.icesi.economiacircularicesi.error.exception.CustomError.CustomError;
 import com.icesi.economiacircularicesi.error.exception.CustomError.CustomException;
-import com.icesi.economiacircularicesi.model.User.User;
+import com.icesi.economiacircularicesi.model.user.User;
 import com.icesi.economiacircularicesi.repository.UserRepository.UserRepository;
 import com.icesi.economiacircularicesi.service.LoginService;
 import com.icesi.economiacircularicesi.utils.JWTParser;

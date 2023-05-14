@@ -1,6 +1,6 @@
 package com.icesi.economiacircularicesi.repository.ResponseRepository;
 
-import com.icesi.economiacircularicesi.model.Response.ResponseOption;
+import com.icesi.economiacircularicesi.model.response.ResponseOption;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.UUID;

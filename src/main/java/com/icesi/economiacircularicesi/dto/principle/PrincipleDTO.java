@@ -1,6 +1,6 @@
 package com.icesi.economiacircularicesi.dto.principle;
 
-import com.icesi.economiacircularicesi.model.Activity.Activity;
+import com.icesi.economiacircularicesi.model.activity.Activity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

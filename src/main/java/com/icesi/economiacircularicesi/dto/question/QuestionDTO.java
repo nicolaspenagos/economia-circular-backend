@@ -1,6 +1,6 @@
 package com.icesi.economiacircularicesi.dto.question;
 
-import com.icesi.economiacircularicesi.model.Question.QuestionType;
+import com.icesi.economiacircularicesi.model.question.QuestionType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

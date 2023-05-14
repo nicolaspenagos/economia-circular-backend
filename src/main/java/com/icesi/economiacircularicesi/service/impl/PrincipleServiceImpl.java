@@ -1,6 +1,6 @@
 package com.icesi.economiacircularicesi.service.impl;
 
-import com.icesi.economiacircularicesi.model.Principle.Principle;
+import com.icesi.economiacircularicesi.model.principle.Principle;
 import com.icesi.economiacircularicesi.repository.PrincipleRepository.PrincipleRepository;
 import com.icesi.economiacircularicesi.service.PrincipleService;
 import lombok.AllArgsConstructor;

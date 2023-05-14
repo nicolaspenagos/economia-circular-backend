@@ -1,7 +1,6 @@
 package com.icesi.economiacircularicesi.repository.QuestionRepository;
 
-import com.icesi.economiacircularicesi.model.Question.Question;
-import com.icesi.economiacircularicesi.model.Response.Response;
+import com.icesi.economiacircularicesi.model.question.Question;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
