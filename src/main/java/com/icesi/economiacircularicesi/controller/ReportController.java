@@ -13,8 +13,8 @@ import java.util.UUID;
 @AllArgsConstructor
 public class ReportController implements ReportAPI {
 
-    public ReportService reportService;
-    public ReportMapper reportMapper;
+    private ReportService reportService;
+    private ReportMapper reportMapper;
 
     @Override
     public ReportDTO getUserReport(UUID userId, UUID responseId) {

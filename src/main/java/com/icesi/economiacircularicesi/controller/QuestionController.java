@@ -25,8 +25,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class QuestionController implements QuestionAPI {
 
-    public final QuestionService questionService;
-    public final QuestionMapper questionMapper;
+    private final QuestionService questionService;
+    private final QuestionMapper questionMapper;
 
     @Override
     public QuestionDTO createQuestion(@Valid QuestionDTO questionDTO) {

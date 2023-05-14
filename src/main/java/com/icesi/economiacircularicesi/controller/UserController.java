@@ -27,8 +27,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class UserController implements UserAPI {
 
-    public final UserService userService;
-    public final UserMapper userMapper;
+    private final UserService userService;
+    private final UserMapper userMapper;
 
     @Override
     public UserDTO createUser(@Valid UserDTO userDTO) {

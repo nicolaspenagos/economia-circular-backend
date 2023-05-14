@@ -27,9 +27,9 @@ import java.util.stream.StreamSupport;
 @Service
 public class UserServiceImpl implements UserService {
 
-    public final UserRepository userRepository;
-    public final TermsAndConditionsRepository termsAndConditionsRepository;
-    public final UserMapper userMapper;
+    private final UserRepository userRepository;
+    private final TermsAndConditionsRepository termsAndConditionsRepository;
+    private final UserMapper userMapper;
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @Override

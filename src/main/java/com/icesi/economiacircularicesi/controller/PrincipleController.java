@@ -15,9 +15,9 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class PrincipleController implements PrincipleAPI {
 
-    public PrincipleMapper principleMapper;
+    private PrincipleMapper principleMapper;
 
-    public PrincipleService principleService;
+    private PrincipleService principleService;
 
     @Override
     public List<PrincipleDTO> getPrinciples() {

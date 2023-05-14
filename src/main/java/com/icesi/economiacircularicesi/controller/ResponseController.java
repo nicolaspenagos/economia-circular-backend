@@ -15,8 +15,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class ResponseController implements ResponseAPI {
 
-    public final ResponseMapper responseMapper;
-    public final ResponseService responseService;
+    private final ResponseMapper responseMapper;
+    private final ResponseService responseService;
 
     @Override
     public ResponseDTO createResponse(ResponseDTO responseDTO) {

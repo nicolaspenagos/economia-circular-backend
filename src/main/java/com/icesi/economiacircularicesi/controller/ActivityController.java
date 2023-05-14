@@ -15,8 +15,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class ActivityController implements ActivityAPI {
 
-    public ActivityService activityService;
-    public ActivityMapper activityMapper;
+    private ActivityService activityService;
+    private ActivityMapper activityMapper;
 
 
     @Override

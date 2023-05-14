@@ -24,7 +24,7 @@ import static com.icesi.economiacircularicesi.constant.TokenExpTimes.ONE_DAY;
 @Service
 public class LoginServiceImpl implements LoginService {
 
-    public final UserRepository userRepository;
+    private final UserRepository userRepository;
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @Override
