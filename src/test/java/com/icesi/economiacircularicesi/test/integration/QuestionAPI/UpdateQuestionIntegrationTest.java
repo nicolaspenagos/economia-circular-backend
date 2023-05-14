@@ -34,7 +34,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration
 @SpringBootTest
-public class UpdateQuestionIntegrationTest {
+class UpdateQuestionIntegrationTest {
 
     private MockMvc mockMvc;
     @Autowired
@@ -45,7 +45,7 @@ public class UpdateQuestionIntegrationTest {
     private final String savedQuestionPath = "/questions/98af9133-409b-41ad-a7f8-3f0f7f3b92f1";
 
     @BeforeEach
-    public void init(){
+    void init() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
         objectMapper = new ObjectMapper();
         objectMapper.findAndRegisterModules();
@@ -53,14 +53,14 @@ public class UpdateQuestionIntegrationTest {
 
     @SneakyThrows
     @Test
-    public void updateQuestionIntegrationTest(){
+    void updateQuestionIntegrationTest() {
 
         // Getting the id from the path
         String savedQuestionId = savedQuestionPath.split("/")[2];
 
         //So this test check if all last question data is replaced by base question data
         QuestionDTO question = deserializeFromJsonFile(FilePaths.QUESTION_JSON, QuestionDTO.class, objectMapper);
-        question.setId(UUID.fromString(savedQuestionId ));
+        question.setId(UUID.fromString(savedQuestionId));
         String body = objectMapper.writeValueAsString(question);
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.patch(savedQuestionPath)
@@ -82,7 +82,7 @@ public class UpdateQuestionIntegrationTest {
         assertThat(questionDTO, hasProperty("activityId", is(UUID.fromString("7c1e1808-2ad9-46c4-bd69-aff6c3fa111d"))));
 
         assertNotNull(questionDTO.getQuestionOptions());
-        assertTrue(questionDTO.getQuestionOptions().size()==2);
+        assertTrue(questionDTO.getQuestionOptions().size() == 2);
 
         assertNotNull(optionDTO);
         assertTrue(optionDTO instanceof QuestionOptionDTO);
@@ -94,7 +94,7 @@ public class UpdateQuestionIntegrationTest {
 
     @SneakyThrows
     @Test
-    public void updateQuestionByAttributesTest(){
+    void updateQuestionByAttributesTest() {
 
         String body = "{ \"questionText\": \"Updated text\", \"justify\": \"false\" }";
 

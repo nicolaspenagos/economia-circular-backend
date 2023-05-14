@@ -41,7 +41,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration
 @SpringBootTest
-public class CreateUserIntegrationTest {
+class CreateUserIntegrationTest {
 
     private MockMvc mockMvc;
     @Autowired
@@ -53,7 +53,7 @@ public class CreateUserIntegrationTest {
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();;
 
     @BeforeEach
-    public void init() {
+    void init() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
         objectMapper = new ObjectMapper();
         objectMapper.findAndRegisterModules();
@@ -62,7 +62,7 @@ public class CreateUserIntegrationTest {
 
     @SneakyThrows
     @Test
-    public void createValidUserIntegrationTest() {
+    void createValidUserIntegrationTest() {
 
         UserDTO user = deserializeFromJsonFile(FilePaths.USER_JSON, UserDTO.class, objectMapper);
         user.setEmail("test@email.com");//A different email of the base user is set to avoid conflicts with the data inserted in the db by other integration tests
@@ -94,7 +94,7 @@ public class CreateUserIntegrationTest {
      */
     @SneakyThrows
     @Test
-    public void invalidEmailNoAtIntegrationTest() {
+    void invalidEmailNoAtIntegrationTest() {
 
         UserDTO baseUserDTO = deserializeFromJsonFile(FilePaths.USER_JSON, UserDTO.class, objectMapper);
         baseUserDTO.setEmail("jhon.doeemail.com");
@@ -109,7 +109,7 @@ public class CreateUserIntegrationTest {
 
     @SneakyThrows
     @Test
-    public void invalidEmailNoLocalPartIntegrationTest() {
+    void invalidEmailNoLocalPartIntegrationTest() {
 
         UserDTO baseUserDTO = deserializeFromJsonFile(FilePaths.USER_JSON, UserDTO.class, objectMapper);
         baseUserDTO.setEmail("@email.com");
@@ -125,7 +125,7 @@ public class CreateUserIntegrationTest {
 
     @SneakyThrows
     @Test
-    public void invalidEmailNoDomainIntegrationTest(){
+    void invalidEmailNoDomainIntegrationTest(){
 
         UserDTO baseUserDTO = deserializeFromJsonFile(FilePaths.USER_JSON, UserDTO.class, objectMapper);
         baseUserDTO.setEmail("jhon.doe@");
@@ -140,7 +140,7 @@ public class CreateUserIntegrationTest {
 
     @SneakyThrows
     @Test
-    public void impossibleRegistrationDateTest(){
+    void impossibleRegistrationDateTest(){
 
         UserDTO baseUserDTO = deserializeFromJsonFile(FilePaths.USER_JSON, UserDTO.class, objectMapper);
         baseUserDTO.setRegistrationDate(LocalDateTime.now().plusDays(1).toString());
@@ -155,7 +155,7 @@ public class CreateUserIntegrationTest {
 
     @SneakyThrows
     @Test
-    public void wrongRegistrationDateIntegrationTest(){
+    void wrongRegistrationDateIntegrationTest(){
 
         UserDTO baseUserDTO = deserializeFromJsonFile(FilePaths.USER_JSON, UserDTO.class, objectMapper);
         baseUserDTO.setRegistrationDate("Tuesday, January 10, 2023");
@@ -170,7 +170,7 @@ public class CreateUserIntegrationTest {
 
     @SneakyThrows
     @Test
-    public void impossibleTAndCAcceptanceIntegrationTest(){
+    void impossibleTAndCAcceptanceIntegrationTest(){
 
         UserDTO baseUserDTO = deserializeFromJsonFile(FilePaths.USER_JSON, UserDTO.class, objectMapper);
         baseUserDTO.getTermsAndConditionsHistory().get(0).setAcceptanceDate(LocalDateTime.now().plusDays(1).toString());
@@ -184,7 +184,7 @@ public class CreateUserIntegrationTest {
 
     @SneakyThrows
     @Test
-    public void wrongTAndCAcceptanceFormatIntegrationTest(){
+    void wrongTAndCAcceptanceFormatIntegrationTest(){
 
         UserDTO baseUserDTO = deserializeFromJsonFile(FilePaths.USER_JSON, UserDTO.class, objectMapper);
         baseUserDTO.getTermsAndConditionsHistory().get(0).setAcceptanceDate("Tuesday, January 10, 2023");
@@ -201,7 +201,7 @@ public class CreateUserIntegrationTest {
      */
     @SneakyThrows
     @Test
-    public void duplicatedEmailIntegrationTest(){
+    void duplicatedEmailIntegrationTest(){
 
         UserDTO baseUserDTO = deserializeFromJsonFile(FilePaths.USER_JSON, UserDTO.class, objectMapper);
         baseUserDTO.setEmail("jhon.doe1@email.com");

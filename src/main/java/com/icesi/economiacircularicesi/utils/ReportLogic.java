@@ -1,6 +1,5 @@
 package com.icesi.economiacircularicesi.utils;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
 import com.icesi.economiacircularicesi.model.Activity.Activity;
 import com.icesi.economiacircularicesi.model.BaseEntity;
 import com.icesi.economiacircularicesi.model.Principle.Principle;

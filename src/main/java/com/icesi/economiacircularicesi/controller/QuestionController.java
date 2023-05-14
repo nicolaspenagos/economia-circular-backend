@@ -6,7 +6,6 @@ import com.icesi.economiacircularicesi.constant.ErrorCode;
 import com.icesi.economiacircularicesi.dto.QuestionDTO.QuestionDTO;
 import com.icesi.economiacircularicesi.dto.QuestionDTO.QuestionOptionDTO;
 import com.icesi.economiacircularicesi.mapper.QuestionMapper;
-import com.icesi.economiacircularicesi.model.Question.QuestionOption;
 import com.icesi.economiacircularicesi.model.Question.QuestionType;
 import com.icesi.economiacircularicesi.service.QuestionService;
 import com.icesi.economiacircularicesi.utils.ErrorExceptionUtils;

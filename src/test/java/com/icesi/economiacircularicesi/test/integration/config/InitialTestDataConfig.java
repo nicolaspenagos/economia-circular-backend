@@ -10,10 +10,10 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import javax.sql.DataSource;
 
 @Configuration
-public class InitialTestDataConfig {
+class InitialTestDataConfig {
 
     @Autowired
-    public void configureInitialData(DataSource dataSource, SpringLiquibase liquibase){
+    void configureInitialData(DataSource dataSource, SpringLiquibase liquibase) {
         ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator();
         resourceDatabasePopulator.addScript(new ClassPathResource("/testdata.sql"));
         DatabasePopulatorUtils.execute(resourceDatabasePopulator, dataSource);

@@ -35,7 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration
 @SpringBootTest
-public class CreateQuestionIntegrationTest {
+class CreateQuestionIntegrationTest {
 
     private MockMvc mockMvc;
     @Autowired
@@ -44,7 +44,7 @@ public class CreateQuestionIntegrationTest {
 
 
     @BeforeEach
-    public void init(){
+    void init() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
         objectMapper = new ObjectMapper();
         objectMapper.findAndRegisterModules();
@@ -53,7 +53,7 @@ public class CreateQuestionIntegrationTest {
 
     @SneakyThrows
     @Test
-    public void createValidQuestionIntegrationTest() {
+    void createValidQuestionIntegrationTest() {
 
         QuestionDTO baseQuestionDTO = deserializeFromJsonFile("createQuestion.json", QuestionDTO.class, objectMapper);
 
@@ -76,7 +76,7 @@ public class CreateQuestionIntegrationTest {
         assertThat(questionDTO, hasProperty("activityId", is(UUID.fromString("7c1e1808-2ad9-46c4-bd69-aff6c3fa111d"))));
 
         assertNotNull(questionDTO.getQuestionOptions());
-        assertTrue(questionDTO.getQuestionOptions().size()==2);
+        assertTrue(questionDTO.getQuestionOptions().size() == 2);
 
         assertNotNull(optionDTO);
         assertTrue(optionDTO instanceof QuestionOptionDTO);
@@ -89,7 +89,7 @@ public class CreateQuestionIntegrationTest {
 
     @SneakyThrows
     @Test
-    public void createInvalidIncrementalQuestionIntegrationTest() {
+    void createInvalidIncrementalQuestionIntegrationTest() {
 
         QuestionDTO baseQuestionDTO = deserializeFromJsonFile("createQuestion.json", QuestionDTO.class, objectMapper);
 
@@ -106,7 +106,7 @@ public class CreateQuestionIntegrationTest {
 
     @SneakyThrows
     @Test
-    public void createInvalidMultipleChoiceQuestionIntegrationTest() {
+    void createInvalidMultipleChoiceQuestionIntegrationTest() {
 
         QuestionDTO baseQuestionDTO = deserializeFromJsonFile("createQuestion.json", QuestionDTO.class, objectMapper);
 
@@ -123,7 +123,7 @@ public class CreateQuestionIntegrationTest {
 
     @SneakyThrows
     @Test
-    public void createInvalidSingleChoiceQuestionIntegrationTest() {
+    void createInvalidSingleChoiceQuestionIntegrationTest() {
 
         QuestionDTO baseQuestionDTO = deserializeFromJsonFile("createQuestion.json", QuestionDTO.class, objectMapper);
 

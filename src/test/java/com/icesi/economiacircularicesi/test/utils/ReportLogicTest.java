@@ -19,29 +19,29 @@ import static org.hamcrest.Matchers.is;
 import java.time.LocalDateTime;
 import java.util.*;
 
-public class ReportLogicTest {
+class ReportLogicTest {
 
-    public final static UUID QUESTION_OPT0_ID = UUID.randomUUID();
-    public final static UUID QUESTION_OPT1_ID = UUID.randomUUID();
-    public final static UUID QUESTION_OPT2_ID = UUID.randomUUID();
-    public final static UUID QUESTION_OPT3_ID = UUID.randomUUID();
-    public final static UUID QUESTION_OPT4_ID = UUID.randomUUID();
+    final static UUID QUESTION_OPT0_ID = UUID.randomUUID();
+    final static UUID QUESTION_OPT1_ID = UUID.randomUUID();
+    final static UUID QUESTION_OPT2_ID = UUID.randomUUID();
+    final static UUID QUESTION_OPT3_ID = UUID.randomUUID();
+    final static UUID QUESTION_OPT4_ID = UUID.randomUUID();
 
-    public final static UUID SELECTED_OPT0_ID = UUID.randomUUID();
-    public final static UUID SELECTED_1PT0_ID = UUID.randomUUID();
-    public final static UUID SELECTED_2PT0_ID = UUID.randomUUID();
+    final static UUID SELECTED_OPT0_ID = UUID.randomUUID();
+    final static UUID SELECTED_1PT0_ID = UUID.randomUUID();
+    final static UUID SELECTED_2PT0_ID = UUID.randomUUID();
 
-    public final static UUID ACTIVITY_1_ID = UUID.randomUUID();
-    public final static UUID ACTIVITY_2_ID = UUID.randomUUID();
-    public final static UUID ACTIVITY_3_ID = UUID.randomUUID();
+    final static UUID ACTIVITY_1_ID = UUID.randomUUID();
+    final static UUID ACTIVITY_2_ID = UUID.randomUUID();
+    final static UUID ACTIVITY_3_ID = UUID.randomUUID();
 
-    public final static UUID QUESTION_1_ID = UUID.randomUUID();
-    public final static UUID QUESTION_2_ID = UUID.randomUUID();
-    public final static UUID QUESTION_3_ID = UUID.randomUUID();
-    public final static UUID QUESTION_4_ID = UUID.randomUUID();
-    public final static UUID QUESTION_5_ID = UUID.randomUUID();
-    public final static UUID QUESTION_6_ID = UUID.randomUUID();
-    public final static UUID QUESTION_7_ID = UUID.randomUUID();
+    final static UUID QUESTION_1_ID = UUID.randomUUID();
+    final static UUID QUESTION_2_ID = UUID.randomUUID();
+    final static UUID QUESTION_3_ID = UUID.randomUUID();
+    final static UUID QUESTION_4_ID = UUID.randomUUID();
+    final static UUID QUESTION_5_ID = UUID.randomUUID();
+    final static UUID QUESTION_6_ID = UUID.randomUUID();
+    final static UUID QUESTION_7_ID = UUID.randomUUID();
 
     private ReportLogic reportLogic;
     private List<QuestionOption> questionOptions;
@@ -53,11 +53,11 @@ public class ReportLogicTest {
 
 
     @BeforeEach
-    public void init(){
+    void init(){
         reportLogic = new ReportLogic();
     }
 
-    public void setupOptsAndResponses(){
+    void setupOptsAndResponses(){
 
         questionOptions = new ArrayList<>();
 
@@ -78,7 +78,7 @@ public class ReportLogicTest {
 
     }
 
-    public void setupActivities(){
+    void setupActivities(){
 
         activities = new ArrayList<>();
 
@@ -88,7 +88,7 @@ public class ReportLogicTest {
 
     }
 
-    public void setupPrinciples(){
+    void setupPrinciples(){
 
         principles = new ArrayList<>();
 
@@ -105,7 +105,7 @@ public class ReportLogicTest {
 
     }
 
-    public void setupQuestions(){
+    void setupQuestions(){
 
         questions = new ArrayList<>();
         questions.add(new Question(QUESTION_1_ID, 0, "Question text 1",true, false, QuestionType.SINGLE_CHOICE, "",ACTIVITY_1_ID, questionOptions));
@@ -115,7 +115,7 @@ public class ReportLogicTest {
 
     }
 
-    public void setUpSelectedOptions2(){
+    void setUpSelectedOptions2(){
 
         selectedOptions2 = new ArrayList<>();
 
@@ -128,7 +128,7 @@ public class ReportLogicTest {
 
     }
 
-    public void setUpScenery3(){
+    void setUpScenery3(){
 
         ArrayList<QuestionOption> dependentQuestionOptions = new ArrayList<>();
 
@@ -151,7 +151,7 @@ public class ReportLogicTest {
 
 
     @Test
-    public void scoreMultipleChoiceTest(){
+    void scoreMultipleChoiceTest(){
 
         setupOptsAndResponses();
         // expected: 0 = selected exclusive
@@ -163,7 +163,7 @@ public class ReportLogicTest {
     }
 
     @Test
-    public void scoreIncrementalSingleChoiceTest(){
+    void scoreIncrementalSingleChoiceTest(){
 
         setupOptsAndResponses();
 
@@ -176,7 +176,7 @@ public class ReportLogicTest {
     }
 
     @Test
-    public void scoreSingleChoiceTest(){
+    void scoreSingleChoiceTest(){
         setupOptsAndResponses();
         assertEquals(0.0, reportLogic.scoreSingleChoice(400.0, questionOptions, selectedOptions.get(0)));
 
@@ -185,7 +185,7 @@ public class ReportLogicTest {
 
 
     @Test
-    public void scoreQuestionTest(){
+    void scoreQuestionTest(){
 
         setupOptsAndResponses();
         setupActivities();
@@ -231,7 +231,7 @@ public class ReportLogicTest {
     }
 
     @Test
-    public void getResponseOptionsMappedByActivityAndQuestionTest(){
+    void getResponseOptionsMappedByActivityAndQuestionTest(){
 
         setupOptsAndResponses();
         setupActivities();
@@ -259,7 +259,7 @@ public class ReportLogicTest {
     }
 
     @Test
-    public void rateActivityTest(){
+    void rateActivityTest(){
 
         setupOptsAndResponses();
         setupActivities();
@@ -289,7 +289,7 @@ public class ReportLogicTest {
     }
 
     @Test
-    public void getActivitiesScoreTest(){
+    void getActivitiesScoreTest(){
 
         setupOptsAndResponses();
         setupActivities();
@@ -328,7 +328,7 @@ public class ReportLogicTest {
     }
 
     @Test
-    public void getActivityWeighingTest(){
+    void getActivityWeighingTest(){
 
         setupActivities();
         setupPrinciples();
@@ -340,7 +340,7 @@ public class ReportLogicTest {
     }
 
     @Test
-    public void getGetScoreByPrinciples(){
+    void getGetScoreByPrinciples(){
 
         setupActivities();
         setupPrinciples();

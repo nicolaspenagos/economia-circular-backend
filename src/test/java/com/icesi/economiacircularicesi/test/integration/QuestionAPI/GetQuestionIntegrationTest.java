@@ -33,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration
 @SpringBootTest
-public class GetQuestionIntegrationTest {
+class GetQuestionIntegrationTest {
 
     private MockMvc mockMvc;
     @Autowired
@@ -42,7 +42,7 @@ public class GetQuestionIntegrationTest {
 
 
     @BeforeEach
-    public void init() {
+    void init() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
         objectMapper = new ObjectMapper();
         objectMapper.findAndRegisterModules();
@@ -51,7 +51,7 @@ public class GetQuestionIntegrationTest {
 
     @SneakyThrows
     @Test
-    public void getQuestionIntegrationTest(){
+    void getQuestionIntegrationTest() {
 
         // Path of a previously inserted question in the db
         String path = "/questions/8090410a-0f48-462a-a1d3-e002a2a5ca1f";
@@ -75,7 +75,7 @@ public class GetQuestionIntegrationTest {
         assertThat(questionDTO, hasProperty("activityId", is(UUID.fromString("1ac711f2-682c-46e3-83aa-7fecf28f1082"))));
 
         assertNotNull(questionDTO.getQuestionOptions());
-        assertTrue(questionDTO.getQuestionOptions().size()==1);
+        assertTrue(questionDTO.getQuestionOptions().size() == 1);
 
         assertNotNull(optionDTO);
         assertTrue(optionDTO instanceof QuestionOptionDTO);

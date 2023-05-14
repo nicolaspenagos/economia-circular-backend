@@ -10,7 +10,7 @@ import java.util.UUID;
 
 import static org.mockito.Mockito.*;
 
-public class PrincipleServiceTest {
+class PrincipleServiceTest {
 
 
     private PrincipleRepository principleRepository;
@@ -25,13 +25,13 @@ public class PrincipleServiceTest {
     }
 
     @Test
-    public void getPrinciplesTest(){
+    void getPrinciplesTest(){
         principleService.getPrinciples();
         verify(principleRepository, times(1)).findAll();
     }
 
     @Test
-    public void getPrincipleTest(){
+    void getPrincipleTest(){
         final UUID uuid = UUID.randomUUID();
         principleService.getPrinciple(uuid);
         verify(principleRepository, times(1)).findById(uuid);

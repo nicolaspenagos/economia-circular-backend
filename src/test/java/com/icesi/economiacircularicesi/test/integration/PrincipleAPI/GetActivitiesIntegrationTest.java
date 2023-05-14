@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration
 @SpringBootTest
-public class GetActivitiesIntegrationTest {
+class GetActivitiesIntegrationTest {
 
 
     private MockMvc mockMvc;
@@ -38,14 +38,10 @@ public class GetActivitiesIntegrationTest {
     private ObjectMapper objectMapper;
 
     @BeforeEach
-    public void init() {
+    void init() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
         objectMapper = new ObjectMapper();
         objectMapper.findAndRegisterModules();
     }
-    @SneakyThrows
-    @Test
-    private void getActivitiesIntegrationTest(){
 
-    }
 }

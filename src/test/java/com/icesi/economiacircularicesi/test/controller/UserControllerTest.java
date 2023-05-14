@@ -22,14 +22,14 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class UserControllerTest {
+class UserControllerTest {
 
     private UserController userController;
     private UserMapper userMapper;
     private UserService userService;
     private UserDTO baseUserDTO;
 
-    public void setupScenary(){
+    void setupScenary() {
 
         TermsAndConditionsDTO termsAndConditionsDTO = new TermsAndConditionsDTO(UUID.fromString(BaseTermsAndCondsAcceptance.UUID.value), BaseTermsAndCondsAcceptance.DATE.value, BaseTermsAndCondsAcceptance.LINK.value);
         List<TermsAndConditionsDTO> termsAndCondsList = new ArrayList<>();
@@ -51,88 +51,90 @@ public class UserControllerTest {
     }
 
     @BeforeEach
-    public void init(){
+    void init() {
         userMapper = new UserMapperImpl();
         userService = mock(UserService.class);
         userController = new UserController(userService, userMapper);
     }
 
     @Test
-    public void createUserTest(){
+    void createUserTest() {
         setupScenary();
         userController.createUser(baseUserDTO);
         verify(userService, times(1)).createUser(userMapper.fromDTO(baseUserDTO));
     }
 
     @Test
-    public void invalidEmailTestNoAt(){
+    void invalidEmailTestNoAt() {
         setupScenary();
         baseUserDTO.setEmail("jhon.doeemail.com");
         verifyCreateUserExceptionThrown(ErrorCode.CODE_U03_INVALID_EMAIL, baseUserDTO);
     }
 
     @Test
-    public void invalidEmailTestNoLocalPart(){
+    void invalidEmailTestNoLocalPart() {
         setupScenary();
         baseUserDTO.setEmail("@email.com");
         verifyCreateUserExceptionThrown(ErrorCode.CODE_U03_INVALID_EMAIL, baseUserDTO);
     }
+
     @Test
-    public void invalidEmailTestNoDomain(){
+    void invalidEmailTestNoDomain() {
         setupScenary();
         baseUserDTO.setEmail("jhon.doe@");
         verifyCreateUserExceptionThrown(ErrorCode.CODE_U03_INVALID_EMAIL, baseUserDTO);
     }
 
     @Test
-    public void impossibleRegistrationDateTest(){
+    void impossibleRegistrationDateTest() {
         setupScenary();
         baseUserDTO.setRegistrationDate(LocalDateTime.now().plusDays(1).toString());
         verifyCreateUserExceptionThrown(ErrorCode.CODE_U01_IMPOSSIBLE_DATE, baseUserDTO);
     }
 
     @Test
-    public void wrongRegistrationDateFormatTest(){
+    void wrongRegistrationDateFormatTest() {
         setupScenary();
         baseUserDTO.setRegistrationDate("Tuesday, January 10, 2023");
         verifyCreateUserExceptionThrown(ErrorCode.CODE_U02_WRONG_DATE_FORMAT, baseUserDTO);
     }
+
     @Test
-    public void impossibleTAndCAcceptanceTest(){
+    void impossibleTAndCAcceptanceTest() {
         setupScenary();
         baseUserDTO.getTermsAndConditionsHistory().get(0).setAcceptanceDate(LocalDateTime.now().plusDays(1).toString());
         verifyCreateUserExceptionThrown(ErrorCode.CODE_U01_IMPOSSIBLE_DATE, baseUserDTO);
     }
 
     @Test
-    public void wrongTAndCAcceptanceFormatTest(){
+    void wrongTAndCAcceptanceFormatTest() {
         setupScenary();
         baseUserDTO.getTermsAndConditionsHistory().get(0).setAcceptanceDate("Tuesday, January 10, 2023");
         verifyCreateUserExceptionThrown(ErrorCode.CODE_U02_WRONG_DATE_FORMAT, baseUserDTO);
     }
 
     @Test
-    public void getUsersTest(){
+    void getUsersTest() {
         userController.getUsers();
         verify(userService, times(1)).getUsers();
     }
 
     @Test
-    public void getUserTest(){
+    void getUserTest() {
         userController.getUser(UUID.fromString(BaseUser.UUID.value));
         verify(userService, times(1)).getUser(UUID.fromString(BaseUser.UUID.value));
     }
 
     @Test
-    public void deleteUserTest(){
+    void deleteUserTest() {
         userController.deleteUser(UUID.fromString(BaseUser.UUID.value));
         verify(userService, times(1)).deleteUser(UUID.fromString(BaseUser.UUID.value));
     }
 
     @Test
-    public void updateUserTest(){
+    void updateUserTest() {
         setupScenary();
-        userController.updateUser(baseUserDTO.getId(),baseUserDTO);
+        userController.updateUser(baseUserDTO.getId(), baseUserDTO);
         verify(userService, times(1)).updateUser(baseUserDTO.getId(), userMapper.fromDTO(baseUserDTO));
     }
 

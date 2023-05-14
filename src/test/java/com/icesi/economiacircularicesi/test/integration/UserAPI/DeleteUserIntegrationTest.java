@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration
 @SpringBootTest
-public class DeleteUserIntegrationTest {
+class DeleteUserIntegrationTest {
 
     private MockMvc mockMvc;
     @Autowired
@@ -38,7 +38,7 @@ public class DeleteUserIntegrationTest {
     private UserMapper userMapper;
 
     @BeforeEach
-    public void init() {
+    void init() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
         objectMapper = new ObjectMapper();
         objectMapper.findAndRegisterModules();
@@ -47,7 +47,7 @@ public class DeleteUserIntegrationTest {
 
     @SneakyThrows
     @Test
-    public void deleteUserIntegrationTest(){
+    void deleteUserIntegrationTest(){
 
         final String userId = "05e16595-98c5-46c3-80cb-209915e52588";
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.delete("/users/"+userId).contentType(MediaType.APPLICATION_JSON).content("")).andExpect(status().isOk()).andReturn();
@@ -57,7 +57,7 @@ public class DeleteUserIntegrationTest {
 
     @SneakyThrows
     @Test
-    public void deleteNonExistentUserIntegrationTest(){
+    void deleteNonExistentUserIntegrationTest(){
 
         final String userId = UUID.randomUUID().toString();
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.delete("/users/"+userId).contentType(MediaType.APPLICATION_JSON).content("")).andExpect(status().isBadRequest()).andReturn();

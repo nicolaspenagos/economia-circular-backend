@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.mock;
 
-public class ReportServiceTest {
+class ReportServiceTest {
 
     private ReportService reportService;
     private UserService userService;
@@ -28,21 +28,10 @@ public class ReportServiceTest {
         activityService = mock(ActivityService.class);
         reportServiceUtil = mock(ReportLogic.class);
         principleService = mock(PrincipleService.class);
-        reportService = new ReportServiceImpl(userService, responseService, questionService, activityService, principleService,reportServiceUtil);
+        reportService = new ReportServiceImpl(userService, responseService, questionService, activityService,principleService,reportServiceUtil);
 
     }
 
-    @Test
-    public void ScoreMultipleChoiceTest(){
-    }
+
 }
 
-/*
-  public double scoreMultipleChoice(double questionScore, List<QuestionOption> questionOptions){
-
-        double scorePerOption = questionScore/questionOptions.size();
-        int numSelectedOpts = questionOptions.size();
-        return scorePerOption*numSelectedOpts;
-
-    }
- */

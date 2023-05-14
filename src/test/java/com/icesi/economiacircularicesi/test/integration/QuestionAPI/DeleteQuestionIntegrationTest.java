@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration
 @SpringBootTest
-public class DeleteQuestionIntegrationTest {
+class DeleteQuestionIntegrationTest {
 
     private MockMvc mockMvc;
     @Autowired
@@ -37,7 +37,7 @@ public class DeleteQuestionIntegrationTest {
 
 
     @BeforeEach
-    public void init() {
+    void init() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
         objectMapper = new ObjectMapper();
         objectMapper.findAndRegisterModules();
@@ -46,23 +46,23 @@ public class DeleteQuestionIntegrationTest {
 
     @SneakyThrows
     @Test
-    public void deleteQuestionIntegrationTest(){
+    void deleteQuestionIntegrationTest() {
 
         final String idToDelete = "b9589cbf-d309-447d-8b34-0b4d3a890c1f";
 
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.delete("/questions/"+idToDelete).contentType(MediaType.APPLICATION_JSON).content("")).andExpect(status().isOk()).andReturn();
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.delete("/questions/" + idToDelete).contentType(MediaType.APPLICATION_JSON).content("")).andExpect(status().isOk()).andReturn();
 
-        assertEquals("\""+idToDelete+"\"", result.getResponse().getContentAsString());
+        assertEquals("\"" + idToDelete + "\"", result.getResponse().getContentAsString());
 
     }
 
     @SneakyThrows
     @Test
-    public void deleteNonExistentQuestionIntegrationTest(){
+    void deleteNonExistentQuestionIntegrationTest() {
 
         final String randomQuestionId = UUID.randomUUID().toString();
 
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.delete("/questions/"+randomQuestionId).contentType(MediaType.APPLICATION_JSON).content("")).andExpect(status().isBadRequest()).andReturn();
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.delete("/questions/" + randomQuestionId).contentType(MediaType.APPLICATION_JSON).content("")).andExpect(status().isBadRequest()).andReturn();
 
         CustomError customError = objectMapper.readValue(result.getResponse().getContentAsString(), CustomError.class);
         verifyError(ErrorCode.CODE_Q01_QUESTION_NOT_FOUND, customError);

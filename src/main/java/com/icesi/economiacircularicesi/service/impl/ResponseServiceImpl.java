@@ -10,20 +10,16 @@ import com.icesi.economiacircularicesi.model.Response.ResponseOption;
 import com.icesi.economiacircularicesi.repository.ResponseRepository.ResponseJustifyRepository;
 import com.icesi.economiacircularicesi.repository.ResponseRepository.ResponseOptionRepository;
 import com.icesi.economiacircularicesi.repository.ResponseRepository.ResponseRepository;
-//import com.icesi.economiacircularicesi.security.SecurityContextHolder;
-//import com.icesi.economiacircularicesi.security.SecurityContextHolder;
 import com.icesi.economiacircularicesi.security.SecurityContextHolder;
 import com.icesi.economiacircularicesi.service.ResponseService;
 import com.icesi.economiacircularicesi.service.UserService;
 import com.icesi.economiacircularicesi.utils.ErrorExceptionUtils;
 import lombok.AllArgsConstructor;
-import org.hibernate.mapping.Array;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 

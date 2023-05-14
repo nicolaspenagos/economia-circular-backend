@@ -9,7 +9,7 @@ import java.util.UUID;
 
 import static org.mockito.Mockito.*;
 
-public class ActivityServiceTest {
+class ActivityServiceTest {
 
     private ActivityRepository activityRepository;
     private ActivityServiceImpl activityService;
@@ -23,13 +23,13 @@ public class ActivityServiceTest {
     }
 
     @Test
-    public void getActivitiesTest(){
+    void getActivitiesTest(){
         activityService.getActivities();
         verify(activityRepository, times(1)).findAll();
     }
 
     @Test
-    public void getActivityTest(){
+    void getActivityTest(){
         final UUID uuid = UUID.randomUUID();
         activityService.getActivity(uuid);
         verify(activityRepository, times(1)).findById(uuid);

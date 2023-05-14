@@ -1,7 +1,6 @@
 package com.icesi.economiacircularicesi.utils;
 
 import io.jsonwebtoken.*;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.crypto.spec.SecretKeySpec;
@@ -9,7 +8,7 @@ import javax.xml.bind.DatatypeConverter;
 import java.security.Key;
 import java.util.Date;
 import java.util.Map;
-import java.util.Optional;
+
 
 
 public class JWTParser {

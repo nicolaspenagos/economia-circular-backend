@@ -10,14 +10,14 @@ import java.util.List;
 import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class  ServiceUtilsTest {
+class  ServiceUtilsTest {
 
     private UUID id;
     private List<User> usersList;
 
     private List<Question> questionsList;
 
-    public void setupUsersScenery(){
+    void setupUsersScenery(){
 
         id = UUID.randomUUID();
         usersList = new ArrayList<>();
@@ -36,7 +36,7 @@ public class  ServiceUtilsTest {
 
     }
 
-    public void setupQuestionsScenery(){
+    void setupQuestionsScenery(){
 
         id = UUID.randomUUID();
         questionsList = new ArrayList<>();
@@ -56,7 +56,7 @@ public class  ServiceUtilsTest {
     }
 
     @Test
-    public void getIndexOfTestWithUsers(){
+    void getIndexOfTestWithUsers(){
 
         setupUsersScenery();
         usersList.get(0).setId(id);
@@ -70,7 +70,7 @@ public class  ServiceUtilsTest {
     }
 
     @Test
-    public void getIndexOfTestWithQuestions(){
+    void getIndexOfTestWithQuestions(){
 
         setupQuestionsScenery();
         questionsList.get(2).setId(id);

@@ -15,21 +15,21 @@ import java.util.UUID;
 import static com.icesi.economiacircularicesi.utils.TestUtils.deserializeFromJsonFile;
 import static org.mockito.Mockito.*;
 
-public class QuestionControllerTest {
+class QuestionControllerTest {
 
     private QuestionController questionController;
     private QuestionMapper questionMapper;
     private QuestionService questionService;
 
     @BeforeEach
-    public void init(){
+    void init() {
         questionMapper = new QuestionMapperImpl();
         questionService = mock(QuestionService.class);
         questionController = new QuestionController(questionService, questionMapper);
     }
 
     @Test
-    public void createQuestionTest(){
+    void createQuestionTest() {
         QuestionDTO baseQuestionDTO = deserializeFromJsonFile("createQuestion.json", QuestionDTO.class, new ObjectMapper());
 
         questionController.createQuestion(baseQuestionDTO);
@@ -37,27 +37,27 @@ public class QuestionControllerTest {
     }
 
     @Test
-    public void getQuestionTest(){
+    void getQuestionTest() {
         UUID baseId = UUID.fromString(BaseQuestion.UUID.value);
         questionController.getQuestion(baseId);
         verify(questionService, times(1)).getQuestion(baseId);
     }
 
     @Test
-    public void getQuestionsTest(){
+    void getQuestionsTest() {
         questionController.getQuestions();
         verify(questionService, times(1)).getQuestions();
     }
 
     @Test
-    public void deleteQuestionTest(){
+    void deleteQuestionTest() {
         UUID baseId = UUID.fromString(BaseQuestion.UUID.value);
         questionController.deleteQuestion(baseId);
         verify(questionService, times(1)).deleteQuestion(baseId);
     }
 
     @Test
-    public void updateQuestionTest(){
+    void updateQuestionTest() {
         questionController.updateQuestion(any(), any());
         verify(questionService, times(1)).updateQuestion(any(), any());
     }

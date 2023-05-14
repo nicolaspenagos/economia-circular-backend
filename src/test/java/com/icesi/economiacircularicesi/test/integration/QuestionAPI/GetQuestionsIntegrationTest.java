@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration
 @SpringBootTest
-public class GetQuestionsIntegrationTest {
+class GetQuestionsIntegrationTest {
 
     private MockMvc mockMvc;
     @Autowired
@@ -39,7 +39,7 @@ public class GetQuestionsIntegrationTest {
     private ObjectMapper objectMapper;
 
     @BeforeEach
-    public void init() {
+    void init() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
         objectMapper = new ObjectMapper();
         objectMapper.findAndRegisterModules();
@@ -48,7 +48,7 @@ public class GetQuestionsIntegrationTest {
 
     @SneakyThrows
     @Test
-    public void getQuestionsIntegrationTest(){
+    void getQuestionsIntegrationTest() {
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/questions")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -69,7 +69,7 @@ public class GetQuestionsIntegrationTest {
         assertThat(firstQuestion, hasProperty("activityId", is(UUID.fromString("1ac711f2-682c-46e3-83aa-7fecf28f1082"))));
 
         assertNotNull(firstQuestion.getQuestionOptions());
-        assertTrue(firstQuestion.getQuestionOptions().size()==1);
+        assertTrue(firstQuestion.getQuestionOptions().size() == 1);
 
         QuestionOptionDTO firstOption = firstQuestion.getQuestionOptions().get(0);
 
@@ -91,7 +91,7 @@ public class GetQuestionsIntegrationTest {
         assertThat(secondQuestion, hasProperty("activityId", is(UUID.fromString("200176e0-2600-40e4-87ee-1b832a425caf"))));
 
         assertNotNull(secondQuestion.getQuestionOptions());
-        assertTrue(secondQuestion.getQuestionOptions().size()==1);
+        assertTrue(secondQuestion.getQuestionOptions().size() == 1);
 
         QuestionOptionDTO secondOption = firstQuestion.getQuestionOptions().get(0);
 

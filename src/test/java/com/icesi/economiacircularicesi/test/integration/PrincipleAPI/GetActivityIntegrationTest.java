@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration
 @SpringBootTest
-public class GetActivityIntegrationTest {
+class GetActivityIntegrationTest {
 
     private MockMvc mockMvc;
     @Autowired
@@ -36,7 +36,7 @@ public class GetActivityIntegrationTest {
     private ObjectMapper objectMapper;
 
     @BeforeEach
-    public void init() {
+    void init() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
         objectMapper = new ObjectMapper();
         objectMapper.findAndRegisterModules();
@@ -44,7 +44,7 @@ public class GetActivityIntegrationTest {
 
     @SneakyThrows
     @Test
-    public void getActivityIntegrationTest(){
+    void getActivityIntegrationTest() {
 
 
         String path = "/activities/";
@@ -57,7 +57,7 @@ public class GetActivityIntegrationTest {
         ActivityDTO[] activities = objectMapper.readValue(result.getResponse().getContentAsString(), ActivityDTO[].class);
 
         assertNotNull(activities);
-        assertTrue(activities.length==2);
+        assertTrue(activities.length == 2);
 
         ActivityDTO activityDTO = activities[0];
 

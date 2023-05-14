@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-public class QuestionServiceTest {
+class QuestionServiceTest {
 
     private QuestionMapper questionMapper;
     private QuestionRepository questionRepository;
@@ -32,7 +32,7 @@ public class QuestionServiceTest {
     private QuestionServiceImpl questionService;
     private Question baseQuestion;
 
-    public void setupScenery(){
+    void setupScenery(){
 
         baseQuestion = new Question(UUID.fromString(BaseQuestion.UUID.value), Integer.parseInt(BaseQuestion.ORDER.value), BaseQuestion.TEXT.value, Boolean.valueOf(BaseQuestion.IS_MANDOTORY.value), Boolean.valueOf(BaseQuestion.JUSTIFY.value),QuestionType.valueOf(BaseQuestion.TYPE.value),"", UUID.fromString(BaseQuestion.ACTIVITY_ID.value), null);
 
@@ -56,7 +56,7 @@ public class QuestionServiceTest {
     }
 
     @Test
-    public void createQuestionTest(){
+    void createQuestionTest(){
 
         setupScenery();
 
@@ -68,26 +68,26 @@ public class QuestionServiceTest {
     }
 
     @Test
-    public void getQuestionByActivityTest(){
+    void getQuestionByActivityTest(){
         questionService.getQuestionsByActivity("A1");
         verify(questionRepository, times(1)).findByActivity("A1");
     }
 
     @Test
-    public void getQuestionsTest(){
+    void getQuestionsTest(){
         questionService.getQuestions();
         verify(questionRepository, times(1)).findAll();
     }
 
     @Test
-    public void getQuestionTest(){
+    void getQuestionTest(){
         setupScenery();
         questionService.getQuestion(baseQuestion.getId());
         verify(questionRepository, times(1)).findById(baseQuestion.getId());
     }
 
     @Test
-    public void deleteQuestionTest(){
+    void deleteQuestionTest(){
 
         setupScenery();
 
@@ -99,7 +99,7 @@ public class QuestionServiceTest {
     }
 
     @Test
-    public void questionNotFoundDeleteTest(){
+    void questionNotFoundDeleteTest(){
 
         setupScenery();
         when(questionRepository.findById(baseQuestion.getId())).thenReturn(Optional.ofNullable(null));
@@ -120,7 +120,7 @@ public class QuestionServiceTest {
     }
 
     @Test
-    public void updateQuestionTest(){
+    void updateQuestionTest(){
 
         setupScenery();
         when(questionRepository.findById(baseQuestion.getId())).thenReturn(Optional.of(baseQuestion));

@@ -1,6 +1,10 @@
 package com.icesi.economiacircularicesi.constant;
 
 public class TokenExpTimes {
-    public final static long ONE_DAY = 86400000L;
+
+    private TokenExpTimes(){
+
+    }
+    public static final long ONE_DAY = 86400000L;
 
 }

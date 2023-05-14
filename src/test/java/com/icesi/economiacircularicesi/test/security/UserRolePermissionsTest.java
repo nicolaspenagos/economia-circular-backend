@@ -7,24 +7,25 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class UserRolePermissionsTest {
+class UserRolePermissionsTest {
 
     private UserRolePermissions userRolePermissions;
+
     @BeforeEach
-    private void init(){
+    private void init() {
         userRolePermissions = new UserRolePermissions();
 
     }
 
     @Test
-    public void getUserPermissionsListTest(){
+    void getUserPermissionsListTest() {
 
-        String[] expectedUserAPIPermissions = {"GET /users/8c0bce38-2e73-4177-b93b-9c091d6ca2a3", "DELETE /users/8c0bce38-2e73-4177-b93b-9c091d6ca2a3","PATCH /users/8c0bce38-2e73-4177-b93b-9c091d6ca2a3"};
+        String[] expectedUserAPIPermissions = {"GET /users/8c0bce38-2e73-4177-b93b-9c091d6ca2a3", "DELETE /users/8c0bce38-2e73-4177-b93b-9c091d6ca2a3", "PATCH /users/8c0bce38-2e73-4177-b93b-9c091d6ca2a3"};
 
         String[] actualUserAPIPermissions = userRolePermissions.getUserRolePermissionsList("8c0bce38-2e73-4177-b93b-9c091d6ca2a3");
 
-        for(int i=0; i<expectedUserAPIPermissions.length; i++){
-            assertEquals(expectedUserAPIPermissions[i],actualUserAPIPermissions[i]);
+        for (int i = 0; i < expectedUserAPIPermissions.length; i++) {
+            assertEquals(expectedUserAPIPermissions[i], actualUserAPIPermissions[i]);
         }
 
     }

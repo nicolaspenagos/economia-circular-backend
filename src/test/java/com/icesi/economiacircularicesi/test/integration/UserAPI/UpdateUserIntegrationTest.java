@@ -35,7 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration
 @SpringBootTest
-public class UpdateUserIntegrationTest {
+class UpdateUserIntegrationTest {
 
     private MockMvc mockMvc;
     @Autowired
@@ -46,7 +46,7 @@ public class UpdateUserIntegrationTest {
     private final String savedUserPath = "/users/423bba42-3b09-4e70-9c7d-7ee48289a8f6";
 
     @BeforeEach
-    public void init(){
+    void init(){
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
         objectMapper = new ObjectMapper();
         objectMapper.findAndRegisterModules();
@@ -54,7 +54,7 @@ public class UpdateUserIntegrationTest {
 
     @SneakyThrows
     @Test
-    public void updateUserIntegrationTest(){
+    void updateUserIntegrationTest(){
 
 
         // Getting the id from the path
@@ -95,7 +95,7 @@ public class UpdateUserIntegrationTest {
 
     @SneakyThrows
     @Test
-    public void updateUserByAttributesTest(){
+    void updateUserByAttributesTest(){
 
         String body = "{ \"name\": \"Maria Valentina\", \"organization\": \"Icesi\" }";
 

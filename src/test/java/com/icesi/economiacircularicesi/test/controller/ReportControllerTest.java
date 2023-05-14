@@ -11,7 +11,7 @@ import java.util.UUID;
 
 import static org.mockito.Mockito.*;
 
-public class ReportControllerTest {
+class ReportControllerTest {
 
     private ReportService reportService;
     private ReportMapper reportMapper;
@@ -19,14 +19,14 @@ public class ReportControllerTest {
 
 
     @BeforeEach
-    public void init(){
+    void init() {
         reportMapper = new ReportMapperImpl();
         reportService = mock(ReportService.class);
         reportController = new ReportController(reportService, reportMapper);
     }
 
     @Test
-    public void getReportTest(){
+    void getReportTest() {
         UUID userId = UUID.randomUUID();
         UUID responseId = UUID.randomUUID();
 

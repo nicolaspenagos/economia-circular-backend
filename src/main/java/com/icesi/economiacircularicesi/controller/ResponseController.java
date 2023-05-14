@@ -3,10 +3,8 @@ package com.icesi.economiacircularicesi.controller;
 import com.icesi.economiacircularicesi.api.ResponseAPI;
 import com.icesi.economiacircularicesi.dto.ResponseDTO.ResponseDTO;
 import com.icesi.economiacircularicesi.mapper.ResponseMapper;
-import com.icesi.economiacircularicesi.model.Response.Response;
 import com.icesi.economiacircularicesi.service.ResponseService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;

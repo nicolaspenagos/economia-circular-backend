@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.mock;
 
-public class UserServiceTest {
+class UserServiceTest {
 
     private UserMapper userMapper;
     private UserRepository userRepository;
@@ -33,7 +33,7 @@ public class UserServiceTest {
     private UserServiceImpl userService;
     private User baseUser;
 
-    public void setupScenary(){
+    void setupScenary(){
 
         baseUser = new User(
                 UUID.fromString(BaseUser.UUID.value),
@@ -73,7 +73,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void createUserTest(){
+    void createUserTest(){
 
         setupScenary();
         when(userRepository.save(baseUser)).thenReturn(baseUser);
@@ -84,7 +84,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void updateUserTest(){
+    void updateUserTest(){
 
         setupScenary();
         when(userRepository.findById(baseUser.getId())).thenReturn(Optional.of(baseUser));
@@ -99,19 +99,19 @@ public class UserServiceTest {
     }
 
     @Test
-    public void getUsersTest(){
+    void getUsersTest(){
         userService.getUsers();
         verify(userRepository, times(1)).findAll();
     }
 
     @Test
-    public void getUserTest(){
+    void getUserTest(){
         userService.getUser(UUID.fromString(BaseUser.UUID.value));
         verify(userRepository, times(1)).findById(UUID.fromString(BaseUser.UUID.value));
     }
 
     @Test
-    public void deleteUserTest(){
+    void deleteUserTest(){
 
         setupScenary();
         when(userRepository.findById(baseUser.getId())).thenReturn(Optional.of(baseUser));
@@ -124,7 +124,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void userNotFoundDeleteTest(){
+    void userNotFoundDeleteTest(){
 
         setupScenary();
         when(userRepository.findById(baseUser.getId())).thenReturn(Optional.ofNullable(null));
@@ -146,7 +146,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void duplicatedEmailTest(){
+    void duplicatedEmailTest(){
 
         setupScenary();
 

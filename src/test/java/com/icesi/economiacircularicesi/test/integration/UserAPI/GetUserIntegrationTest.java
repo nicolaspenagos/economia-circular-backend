@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration
 @SpringBootTest
-public class GetUserIntegrationTest {
+class GetUserIntegrationTest {
     private MockMvc mockMvc;
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -40,7 +40,7 @@ public class GetUserIntegrationTest {
     private UserMapper userMapper;
 
     @BeforeEach
-    public void init() {
+    void init() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
         objectMapper = new ObjectMapper();
         objectMapper.findAndRegisterModules();
@@ -49,7 +49,7 @@ public class GetUserIntegrationTest {
 
     @SneakyThrows
     @Test
-    public void getUserTest(){
+    void getUserTest(){
 
         // Path of a previously inserted user in the db
         String path = "/users/4f4c1918-64d9-4913-a703-69de09073ba3";

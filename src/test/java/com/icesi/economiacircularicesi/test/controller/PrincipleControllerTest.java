@@ -13,7 +13,7 @@ import java.util.UUID;
 
 import static org.mockito.Mockito.*;
 
-public class PrincipleControllerTest {
+class PrincipleControllerTest {
 
     private PrincipleController principleController;
     private PrincipleMapper principleMapper;
@@ -21,20 +21,20 @@ public class PrincipleControllerTest {
     private PrincipleService principleService;
 
     @BeforeEach
-    public void init(){
+    void init(){
         principleMapper = new PrincipleMapperImpl();
         principleService = mock(PrincipleService.class);
         principleController = new PrincipleController(principleMapper, principleService);
     }
 
     @Test
-    public void getPrincipleTest(){
+    void getPrincipleTest(){
         principleController.getPrinciples();
         verify(principleService, times(1)).getPrinciples();
     };
 
     @Test
-    public void getActivityTest(){
+    void getActivityTest(){
         final UUID uuid = UUID.randomUUID();
         principleController.getPrinciple(uuid);
         verify(principleService, times(1)).getPrinciple(uuid);

@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration
 @SpringBootTest
-public class GetUsersIntegrationTest {
+class GetUsersIntegrationTest {
 
     private MockMvc mockMvc;
     @Autowired
@@ -38,7 +38,7 @@ public class GetUsersIntegrationTest {
     private ObjectMapper objectMapper;
 
     @BeforeEach
-    public void init(){
+    void init(){
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
         objectMapper = new ObjectMapper();
         objectMapper.findAndRegisterModules();
@@ -46,7 +46,7 @@ public class GetUsersIntegrationTest {
 
     @SneakyThrows
     @Test
-    public void getUsersIntegrationTest(){
+    void getUsersIntegrationTest(){
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/users")
                         .contentType(MediaType.APPLICATION_JSON)

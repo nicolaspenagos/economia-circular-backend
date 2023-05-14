@@ -13,27 +13,27 @@ import java.util.UUID;
 
 import static org.mockito.Mockito.*;
 
-public class ActivityControllerTest {
+class ActivityControllerTest {
     private ActivityController activityController;
     private ActivityMapper activityMapper;
 
     private ActivityService activityService;
 
     @BeforeEach
-    public void init(){
+    void init(){
         activityMapper = new ActivityMapperImpl();
         activityService = mock(ActivityService.class);
         activityController = new ActivityController(activityService, activityMapper);
     }
 
     @Test
-    public void getActivitiesTest(){
+    void getActivitiesTest(){
         activityController.getActivities();
         verify(activityService, times(1)).getActivities();
     };
 
     @Test
-    public void getActivityTest(){
+    void getActivityTest(){
         final UUID uuid = UUID.randomUUID();
         activityController.getActivity(uuid);
         verify(activityService, times(1)).getActivity(uuid);
