@@ -1,7 +1,6 @@
 package com.icesi.economiacircularicesi.utils;
 
 import io.jsonwebtoken.*;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
