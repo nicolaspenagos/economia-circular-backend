@@ -104,9 +104,10 @@ class QuestionServiceTest {
         setupScenery();
         when(questionRepository.findById(baseQuestion.getId())).thenReturn(Optional.ofNullable(null));
 
+        UUID id = baseQuestion.getId();
         try{
 
-            questionService.deleteQuestion(baseQuestion.getId());
+            questionService.deleteQuestion(id);
             fail();
 
         }catch (CustomException exception){

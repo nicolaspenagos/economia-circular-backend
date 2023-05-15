@@ -56,8 +56,9 @@ public class QuestionServiceImpl implements QuestionService {
         Question question = questionRepository.findById(questionId).orElseThrow(()->new CustomException(HttpStatus.BAD_REQUEST, new CustomError(ErrorCode.CODE_Q01_QUESTION_NOT_FOUND, ErrorCode.CODE_Q01_QUESTION_NOT_FOUND.getMessage())));
 
 
+        // Deleting former options that are no longer used  deleteQuestionRelations(question.getQuestionOptions());
         if (questionUpdate.getQuestionOptions()!=null && !questionUpdate.getQuestionOptions().isEmpty()){
-            deleteQuestionRelations(question.getQuestionOptions());// Deleting former options that are no longer used  deleteQuestionRelations(question.getQuestionOptions());
+            deleteQuestionRelations(question.getQuestionOptions());
         }
 
         questionMapper.updateQuestionFromQuestion(questionUpdate, question);
