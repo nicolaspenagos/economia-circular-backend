@@ -128,9 +128,10 @@ class UserServiceTest {
         setupScenary();
         when(userRepository.findById(baseUser.getId())).thenReturn(Optional.ofNullable(null));
 
+        UUID id = baseUser.getId();
         try{
 
-            userService.deleteUser(baseUser.getId());
+            userService.deleteUser(id);
             fail();
 
         }catch (CustomException exception){
