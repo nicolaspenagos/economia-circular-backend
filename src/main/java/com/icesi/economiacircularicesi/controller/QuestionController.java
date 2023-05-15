@@ -31,7 +31,6 @@ public class QuestionController implements QuestionAPI {
     @Override
     public QuestionDTO createQuestion(@Valid QuestionDTO questionDTO) {
 
-        validateQuestionType(questionDTO.getType(), questionDTO.getQuestionOptions());
         return questionMapper.fromQuestion(questionService.createQuestion(questionMapper.fromDTO(questionDTO)));
     }
 
@@ -53,26 +52,6 @@ public class QuestionController implements QuestionAPI {
     @Override
     public QuestionDTO updateQuestion(UUID questionId, QuestionDTO questionDTO) {
         return questionMapper.fromQuestion(questionService.updateQuestion(questionId, questionMapper.fromDTO(questionDTO)));
-    }
-
-    private void validateQuestionType(QuestionType questionType, List<QuestionOptionDTO> questionOptions){
-
-        Collections.sort(questionOptions, Comparator.comparingInt(QuestionOptionDTO::getOptionOrder));
-        int i = 0;
-
-        if(questionType.equals(QuestionType.MULTIPLE_CHOICE) || questionType.equals(QuestionType.SINGLE_CHOICE)){
-            // Checking if first option is exclusive
-            if(!questionOptions.get(0).isExclusive())
-               ErrorExceptionUtils.throwCustomException(HttpStatus.BAD_REQUEST, ErrorCode.CODE_Q02_INVALID_QUESTION_OPTIONS);
-
-            i=1;
-        }
-
-        for (; i<questionOptions.size(); i++){
-            if(questionOptions.get(i).isExclusive())
-                ErrorExceptionUtils.throwCustomException(HttpStatus.BAD_REQUEST, ErrorCode.CODE_Q02_INVALID_QUESTION_OPTIONS);
-        }
-
     }
 
 

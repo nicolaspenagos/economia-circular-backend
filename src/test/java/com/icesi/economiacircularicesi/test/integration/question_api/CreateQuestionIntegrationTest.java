@@ -86,58 +86,5 @@ class CreateQuestionIntegrationTest {
         assertThat(optionDTO, hasProperty("dependentQuestionId", is(UUID.fromString("39b4542c-b630-43d5-80a0-050b348b08c7"))));
 
     }
-
-    @SneakyThrows
-    @Test
-    void createInvalidIncrementalQuestionIntegrationTest() {
-
-        QuestionDTO baseQuestionDTO = deserializeFromJsonFile("createQuestion.json", QuestionDTO.class, objectMapper);
-
-        baseQuestionDTO.setType(QuestionType.INCREMENTAL_SINGLE_CHOICE);
-
-        String body = objectMapper.writeValueAsString(baseQuestionDTO);
-
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/questions").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isBadRequest()).andReturn();
-
-        CustomError customError = objectMapper.readValue(result.getResponse().getContentAsString(), CustomError.class);
-        verifyError(ErrorCode.CODE_Q02_INVALID_QUESTION_OPTIONS, customError);
-
-    }
-
-    @SneakyThrows
-    @Test
-    void createInvalidMultipleChoiceQuestionIntegrationTest() {
-
-        QuestionDTO baseQuestionDTO = deserializeFromJsonFile("createQuestion.json", QuestionDTO.class, objectMapper);
-
-        baseQuestionDTO.getQuestionOptions().get(1).setExclusive(true);
-
-        String body = objectMapper.writeValueAsString(baseQuestionDTO);
-
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/questions").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isBadRequest()).andReturn();
-
-        CustomError customError = objectMapper.readValue(result.getResponse().getContentAsString(), CustomError.class);
-        verifyError(ErrorCode.CODE_Q02_INVALID_QUESTION_OPTIONS, customError);
-
-    }
-
-    @SneakyThrows
-    @Test
-    void createInvalidSingleChoiceQuestionIntegrationTest() {
-
-        QuestionDTO baseQuestionDTO = deserializeFromJsonFile("createQuestion.json", QuestionDTO.class, objectMapper);
-
-        baseQuestionDTO.setType(QuestionType.SINGLE_CHOICE);
-        baseQuestionDTO.getQuestionOptions().get(1).setExclusive(true);
-
-        String body = objectMapper.writeValueAsString(baseQuestionDTO);
-
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/questions").contentType(MediaType.APPLICATION_JSON).content(body)).andExpect(status().isBadRequest()).andReturn();
-
-        CustomError customError = objectMapper.readValue(result.getResponse().getContentAsString(), CustomError.class);
-        verifyError(ErrorCode.CODE_Q02_INVALID_QUESTION_OPTIONS, customError);
-
-    }
-
-
+    
 }

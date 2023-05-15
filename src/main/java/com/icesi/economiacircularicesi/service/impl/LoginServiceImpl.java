@@ -41,5 +41,6 @@ public class LoginServiceImpl implements LoginService {
             return new TokenDTO(JWTParser.createJWT(user.getId().toString(),user.getName(), user.getOrganization(), claims, ONE_DAY));
         }
         throw new CustomException(HttpStatus.UNAUTHORIZED, new CustomError(ErrorCode.CODE_A03_WRONG_PASSWORD, ErrorCode.CODE_A03_WRONG_PASSWORD.getMessage()));
+
     }
 }

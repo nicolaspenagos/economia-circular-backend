@@ -11,7 +11,4 @@ public interface ActivityService {
 
     Activity getActivity(UUID activityId);
 
-    Activity getActivityByName(String activityName);
-
-
 }

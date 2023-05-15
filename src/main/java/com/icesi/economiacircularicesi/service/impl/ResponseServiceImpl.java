@@ -31,7 +31,6 @@ public class ResponseServiceImpl implements ResponseService {
     private ResponseOptionRepository responseOptionRepository;
 
     private ResponseJustifyRepository responseJustifyRepository;
-    private UserService userService;
 
     private ResponseMapper responseMapper;
 
