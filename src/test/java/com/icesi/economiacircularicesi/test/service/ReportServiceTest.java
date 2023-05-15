@@ -1,7 +1,6 @@
 package com.icesi.economiacircularicesi.test.service;
 
 import com.icesi.economiacircularicesi.constant.ErrorCode;
-import com.icesi.economiacircularicesi.dto.login.LoginDTO;
 import com.icesi.economiacircularicesi.error.exception.custom_error.CustomException;
 import com.icesi.economiacircularicesi.model.response.Response;
 import com.icesi.economiacircularicesi.model.user.User;
