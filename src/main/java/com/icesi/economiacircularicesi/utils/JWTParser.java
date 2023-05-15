@@ -42,7 +42,6 @@ public class JWTParser {
         return builder.compact();
     }
 
-    @CrossOrigin(origins = "*")
     public static Claims decodeJWT(String jwt) {
         return Jwts.parserBuilder().setSigningKey(DatatypeConverter.parseBase64Binary(SECRET_KEY)).build().parseClaimsJws(jwt).getBody();
     }

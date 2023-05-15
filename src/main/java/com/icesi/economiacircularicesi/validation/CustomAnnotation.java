@@ -6,10 +6,8 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;
 
-@CrossOrigin(origins = "*")
 public interface CustomAnnotation {
 
-    @CrossOrigin(origins = "*")
     @Documented
     @Constraint(validatedBy = PasswordValidator.class)
     @Target({ ElementType.METHOD, ElementType.FIELD })
