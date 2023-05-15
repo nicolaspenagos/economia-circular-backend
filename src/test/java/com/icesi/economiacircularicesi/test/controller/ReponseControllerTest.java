@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-public class ReponseControllerTest {
+class ReponseControllerTest {
 
     private ResponseController responseController;
     private ResponseService responseService;

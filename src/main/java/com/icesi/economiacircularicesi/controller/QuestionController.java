@@ -2,15 +2,15 @@ package com.icesi.economiacircularicesi.controller;
 
 
 import com.icesi.economiacircularicesi.api.QuestionAPI;
-import com.icesi.economiacircularicesi.constant.ErrorCode;
+
 import com.icesi.economiacircularicesi.dto.question.QuestionDTO;
-import com.icesi.economiacircularicesi.dto.question.QuestionOptionDTO;
+
 import com.icesi.economiacircularicesi.mapper.QuestionMapper;
-import com.icesi.economiacircularicesi.model.question.QuestionType;
+
 import com.icesi.economiacircularicesi.service.QuestionService;
-import com.icesi.economiacircularicesi.utils.ErrorExceptionUtils;
+
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 

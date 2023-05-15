@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-public class LoginControllerTest {
+class LoginControllerTest {
 
     private LoginController loginController;
     private LoginService loginService;
